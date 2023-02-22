@@ -1,0 +1,22 @@
+.over-parent{
+    position: absolute!important;
+    z-index: 1;
+}
+
+.image_icon{
+    height:100px;
+    width: 100px;
+}
+
+.fa-trash{
+    z-index: 2;
+    color: rgb(255, 0, 21);
+    cursor: pointer;
+}
+
+.image-editor-grid{
+    /* height:400px; */
+    overflow:auto;
+    scroll-behavior: smooth;
+    position: relative;
+}
