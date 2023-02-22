@@ -8,7 +8,7 @@ const defaultState = {
 
 
 
-
+var userData = {};
 const countReducer = function (state = defaultState, action) {
     switch (action.type) {
       case "INCREMENT":
@@ -32,8 +32,12 @@ const countReducer = function (state = defaultState, action) {
         data[action.id] = action.value;
         return {...state, ...data}
       case "USER_INFO":
-        let userData = {};
+        userData = {};
         userData[action.id] = action.data;
+        return {...state, ...userData}
+      case "REMOVE_USER":
+        userData = {};
+        userData[action.id] = "";
         return {...state, ...userData}
       default:
         return state;

@@ -16,20 +16,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //const user = authenticate();
-    //alert(JSON.stringify(user.data));
-    const { addUserInfo } = this.props;
-    //addUserInfo("userInfo",user.data);
+    // //const user = authenticate();
+    // //alert(JSON.stringify(user.data));
+    // const { addUserInfo } = this.props;
+    // //addUserInfo("userInfo",user.data);
 
-    axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
-      auth: {
-        username: "nprasath",
-        password: "password234"
-      }
-    })
-      //.then(response => console.log(response))
-      .then(response => addUserInfo("userInfo",response.data))
-      .catch(error => console.log(error));
+    // axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
+    //   auth: {
+    //     username: "nprasath",
+    //     password: "password234"
+    //   }
+    // })
+    //   //.then(response => console.log(response))
+    //   .then(response => addUserInfo("userInfo",response.data))
+    //   .catch(error => console.log(error));
 
 
   }

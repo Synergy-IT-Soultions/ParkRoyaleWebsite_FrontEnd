@@ -1,4 +1,5 @@
 import logoImage from '../../assets/ParkRoyale_Logo.png'
+import LoginComponent from '../LoginComponent/LoginComponent';
 
 function NavBarComponent() {
     return (<header id="header" className="fixed-top ">
@@ -33,6 +34,7 @@ function NavBarComponent() {
                     </li>
                     <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
                     <li><a className="getstarted scrollto" href="#about">Get Started</a></li>
+                    <LoginComponent/>
                 </ul>
                 <i className="bi bi-list mobile-nav-toggle"></i>
             </nav>
