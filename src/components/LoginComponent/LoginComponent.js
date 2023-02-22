@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { FloatingLabel } from 'react-bootstrap';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -79,18 +80,26 @@ class LoginComponent extends React.Component {
                     <Modal.Body>
 
                         <Form>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="User Name"
+                            className="mb-3"
+                        >
+                            <Form.Control type="text" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange}/>
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingPassword" label="Password">
+                        <Form.Control type="password" placeholder="Password" id="password" value={this.state.password} onChange={this.onChange}/>
+                        </FloatingLabel>
+                            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>User Name</Form.Label>
                                 <Form.Control type="text" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange}/>
-                                <Form.Text className="text-muted">
-                                    We'll never share your email with anyone else.
-                                </Form.Text>
+                                
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" placeholder="Password" id="password" value={this.state.password} onChange={this.onChange}/>
-                            </Form.Group>
+                            </Form.Group> */}
                             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Check me out" />
             </Form.Group> */}
