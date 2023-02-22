@@ -7,11 +7,12 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FloatingLabel } from 'react-bootstrap';
+import _ from "lodash";
 
 class LoginComponent extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { show: false, loggedin: false , user_name:"", password:""}
+        this.state = { show: false, loggedin: false, user_name: "", password: "", validated: false }
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.validateUser = this.validateUser.bind(this);
@@ -27,11 +28,21 @@ class LoginComponent extends React.Component {
         this.setState({ show: true });
     }
 
-    validateUser() {
+    validateUser(event) {
         //const user = authenticate();
         //alert(JSON.stringify(user.data));
         const { addUserInfo } = this.props;
         //addUserInfo("userInfo",user.data);
+        const form = event.currentTarget;
+        
+        if (form.checkValidity() === false || _.isEmpty(this.state.user_name) || _.isEmpty(this.state.password)) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.setState({ validated: false });
+            toast("Invalid User Credentials");
+            return;
+        }
+        this.setState({ validated: true });
 
         axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
             auth: {
@@ -48,10 +59,10 @@ class LoginComponent extends React.Component {
                 console.log(error);
                 toast("Invalid User Credentials");
             });
-        
+
     }
 
-    onChange(e){
+    onChange(e) {
         let key = e.target.id;
         let data = {};
         data[key] = e.target.value;
@@ -62,7 +73,7 @@ class LoginComponent extends React.Component {
     logoutUser() {
         const { removeUserInfo } = this.props;
         removeUserInfo("userInfo");
-        this.setState({ loggedin: false ,user_name:"", password:""});
+        this.setState({ loggedin: false, user_name: "", password: "" });
     }
 
     render() {
@@ -79,17 +90,17 @@ class LoginComponent extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
 
-                        <Form>
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="User Name"
-                            className="mb-3"
-                        >
-                            <Form.Control type="text" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange}/>
-                        </FloatingLabel>
-                        <FloatingLabel controlId="floatingPassword" label="Password">
-                        <Form.Control type="password" placeholder="Password" id="password" value={this.state.password} onChange={this.onChange}/>
-                        </FloatingLabel>
+                        <Form noValidate validated={this.state.validated}>
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="User Name"
+                                className="mb-3"
+                            >
+                                <Form.Control type="text" name="user_name" isValid={!_.isEmpty(this.state.user_name)} isInvalid={ _.isEmpty(this.state.user_name)} placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
+                            </FloatingLabel>
+                            <FloatingLabel controlId="floatingPassword" label="Password">
+                                <Form.Control type="password" isValid={!_.isEmpty(this.state.password)} isInvalid={ _.isEmpty(this.state.password)} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
+                            </FloatingLabel>
                             {/* <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>User Name</Form.Label>
                                 <Form.Control type="text" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange}/>
@@ -126,7 +137,7 @@ const mapStateToPros = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addUserInfo: (id, data) => dispatch({ type: 'USER_INFO', id, data }),
-        removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id})
+        removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id })
     }
 };
 
