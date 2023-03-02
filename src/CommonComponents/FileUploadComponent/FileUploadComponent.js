@@ -134,7 +134,7 @@ function FileUploadComponent(props) {
             <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom01">
                     
-                    <Form.Control required type="file" id="new_image_file" accept="image/png" onChange={onFileChange}/>
+                    <Form.Control required type="file" id="new_image_file" accept="image/png,image/webp" onChange={onFileChange}/>
                 </Form.Group>
                 
             </Row>

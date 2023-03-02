@@ -3,7 +3,8 @@ import { ON_CHANGE } from "../utils/ActionTypes";
 const defaultState = {
     user : {},
     todos:[],
-    showLogin: false
+    showLogin: false,
+    userInfo:{}
 }
 
 

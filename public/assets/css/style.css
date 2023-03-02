@@ -911,6 +911,11 @@ section {
   box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
+.swiper-slide .box img{
+  height: 300px;
+  width: 300px;
+}
+
 .testimonials .swiper-pagination {
   margin-top: 20px;
   position: relative;

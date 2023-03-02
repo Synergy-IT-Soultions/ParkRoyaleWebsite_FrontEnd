@@ -16,7 +16,8 @@ class CarouselComponent extends Component {
         super(props);
         this.state = {
             show:false,
-            data:[]
+            data:[],
+            isLoading:true
         }
 
         this.handleClose = this.handleClose.bind(this);
@@ -38,12 +39,12 @@ class CarouselComponent extends Component {
     fetchImages() {
         const {id} = this.props;
 
-        const user = authenticate();
-        this.setState({user: user.data});
+        // const user = authenticate();
+        // this.setState({user: user.data});
 
         axios.get('http://10.10.10.32/ContentManagement/content/get/container/images/'+id)
             //.then(response => console.log(response))
-            .then(response => this.setState({ data: response.data }))
+            .then(response => this.setState({ data: response.data , isLoading:false}))
             .catch(error => console.log(error));
     }
 
@@ -59,10 +60,12 @@ class CarouselComponent extends Component {
     }
 
     uploadImage(formData) {
+        const {token} = this.props;
+        const auth = "Bearer "+token;
         axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
             headers: {
               'Content-Type': 'multipart/form-data;boundary=',
-              'Authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibnByYXNhdGgiLCJleHAiOjE2NzcwMTM4ODksImlhdCI6MTY3Njk5OTQ4OSwic2NvcGUiOiJBZG1pbiJ9.X-6khriPu_G0RLByhWmSO0VGfrYRlvLo4tdKONvoXGzhCARoNQFUtSuw2s3XB-pFYFL3poKgRAcyLrgoYprW071mPWg44rEkf9GccvcudWS2JD-OItCg17V4QEE-KzUXCPVMjCYz5cU6yTM0Z2-ZC7RATRq0IWekjex36q8hZcNKoMEdjC7XLTtWTKiGcvJ_IeiUWU5EO9cRhfjTjgjwoOyDUjk3t09DEgv0EVRkaR_iOKLnsW95DU4jGbh5m2dm3H6fZSO7cIOmy1zFNJ_lZYBP8b8mwl8vLUKC1_PKJGHA0PLbbfb01BtVhxzRli6xcFRumhrU_cU3JKgFy1TwtA'
+              'Authorization': auth
             }
           })
           .then(response => {
@@ -125,7 +128,7 @@ class CarouselComponent extends Component {
                     _.map(activeImages, (image) => {
 
                         let imageId = image.imageInfo.imageInfoId;
-                        return (<Carousel.Item>
+                        return (<Carousel.Item key={imageId}>
                             <img
                                 className="d-block w-100"
                                 src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
@@ -205,7 +208,8 @@ class CarouselComponent extends Component {
 
 const mapStateToPros = state => {
     return {
-        isAdmin: _.isEqual(state?.userInfo?.role, "Admin")
+        isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
+        token: state.userInfo.token
     };
 };
 const mapDispatchToProps = dispatch => {
