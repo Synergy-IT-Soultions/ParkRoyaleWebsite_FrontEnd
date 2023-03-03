@@ -1,6 +1,8 @@
 import { Component } from "react";
 import _ from "lodash";
 import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
+import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
+import { connect } from "react-redux";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
@@ -12,14 +14,15 @@ class RoomPricingSwiperComponent extends Component {
     }
 
     createSlide(slide) {
+        const { isAdmin } = this.props;
         return <div key={slide.containerDivId} className="swiper-slide">
         <div className="box">
-            <h3>{slide.containerHeader}</h3>
+            <h3>{slide.containerHeader}{isAdmin?<ContainerEditComponent data={slide}/>:""}</h3>
             <img src={slide.containerImageInfo[0].imageInfo.imageURL}/>
             <div>
                 <ul>
                     <li>{slide.containerTextInfo[0].containerTextLabelName +":"+slide.containerTextInfo[0].containertextLabelValue}</li>
-                    <li>{slide.containerTextInfo[0].containertextLabelValue}</li>
+                    <li>{slide.containerTextInfo[1].containertextLabelValue}</li>
                 </ul>
             </div>
             {/* <div className="btn-wrap">
@@ -77,5 +80,17 @@ class RoomPricingSwiperComponent extends Component {
         );
     }
 }
+const mapStateToPros = state => {
+    return {
+        isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
+        token: state.userInfo.token
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        handleIncrementClick: () => dispatch({ type: 'INCREMENT' }),
+        handleDecrementClick: () => dispatch({ type: 'DECREMENT' })
+    }
+};
 
-export default RoomPricingSwiperComponent;
+export default connect(mapStateToPros, undefined)(RoomPricingSwiperComponent);
