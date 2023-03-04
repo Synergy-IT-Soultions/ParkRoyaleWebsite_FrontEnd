@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Image } from "react-bootstrap";
 import _ from 'lodash'
 import axios from "axios";
 import { connect } from "react-redux";
@@ -15,35 +15,46 @@ class InputComponent extends Component {
 
     componentDidMount() {
 
-        const { select, onChange , id, value} = this.props;
+        const { select, onChange , id, value, fetchOptions} = this.props;
         let data={};
         _.set(data, "id", id);
         _.set(data, "value", value);
         onChange(data);
 
+        if(_.isFunction(fetchOptions)){
+            let options = fetchOptions();
+            this.setState({options:options});
+        }
+        
+
         if(!select) return;
 
-        axios.get('http://10.10.10.32/ContentManagement/content/get/image/list/SUITSANDROOMS')
-            //.then(response => console.log(response))
-            .then(response => this.setState({ options: response.data}))
-            .catch(error => console.log(error));
+    }
+
+    componentWillUnmount() {
 
     }
 
     onValueChange = (event)=>{
         const { onChange , id} = this.props;
         let data={};
+        let value = event.target.value;
         _.set(data, "id", id);
-        _.set(data, "value", event.target.value);
+        _.set(data, "value", value);
         onChange(data);
+
+        const {options} = this.state;
+        let imageInfo = _.filter(options, option=>{ return option.imageInfoId==value})[0]
+        this.setState({imageInfo});
 
     }
 
     render() {
-        const { id, label, type, select, formData } = this.props;
-        const { options } = this.state;
+        const { id, label, type, select, formData ,showSelectedImage} = this.props;
+        const { options, imageInfo } = this.state;
 
         return (
+            <div>
             <Form.Group>
                 <Form.Label>{label}</Form.Label>
                 {!select ?
@@ -62,8 +73,12 @@ class InputComponent extends Component {
                                 return <option value={option.imageInfoId}>{option.imageName}</option>
                             })
                         }
-                    </Form.Select>}
+                    </Form.Select>
+                    
+                }
             </Form.Group>
+            {showSelectedImage && imageInfo?<Image src={imageInfo.thumbnailURL} thumbnail={true}/>:""}
+            </div>
         );
     }
 }

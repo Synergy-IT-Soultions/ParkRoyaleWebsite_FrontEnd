@@ -48,6 +48,8 @@ class ContainerEditComponent extends Component {
 
     handlSave = (event)=>{
         this.setState({formChanged:false});
+        const { handleSave, data } = this.props;
+        handleSave(data);
     }
 
     createComponent = (uiData, uiComponents)=>{
@@ -67,7 +69,7 @@ class ContainerEditComponent extends Component {
 
             }
             else if(_.isEqual(uiData.editType, "Image")){
-                comp = <InputComponent id={uiData.containerImageInfoId+""} value={uiData.imageInfo.imageName} label={uiData.containerTextLabelName} select={true}/>
+                comp = <InputComponent id={uiData.containerImageInfoId+""} value={uiData.imageInfo.imageInfoId} label={uiData.containerTextLabelName} select={true} fetchOptions={this.props.fetchOptions} showSelectedImage={true}/>
             }
             uiComponents.push(comp);
 

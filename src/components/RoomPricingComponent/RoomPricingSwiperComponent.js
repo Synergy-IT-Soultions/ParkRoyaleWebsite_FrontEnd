@@ -3,21 +3,61 @@ import _ from "lodash";
 import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import { connect } from "react-redux";
+import axios from "axios";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:[]
+            data:[],
+            options:[]
         }
         this.createSlide = this.createSlide.bind(this);
+    }
+
+    handleSave = (data)=>{
+        const {formData} = this.props;
+        const {token} = this.props;
+        const auth = "Bearer "+token;
+
+        let requestData = _.cloneDeep(data);
+        requestData.containerHeader=_.get(formData, data.pageContainerInfoId+"")
+        //requestData.containerTextInfo[0].containertextLabelValue=_.get(formData, data.containerTextInfo[0].containerTextInfoId+"");
+        _.forEach(requestData.containerTextInfo, (containerTextInfoItem)=>{
+            containerTextInfoItem.containertextLabelValue = _.get(formData, containerTextInfoItem.containerTextInfoId+"");
+        });
+
+        _.forEach(requestData.containerImageInfo, (containerImageInfoItem)=>{
+             let containerImageInfoId = _.get(formData, containerImageInfoItem.containerImageInfoId+"");
+             let options = this.state.options;
+             let selectedImageInfo = _.filter(options, (option)=>{return option.imageInfoId == containerImageInfoId})
+             containerImageInfoItem.imageInfo=selectedImageInfo;
+        });
+
+        console.log("requestData======================>");
+        console.log(requestData);
+        //return;
+
+        axios.post('http://10.10.10.32/ContentManagement/content/save/container', requestData, {
+            headers: {
+              'Authorization': auth
+            }
+          })
+          .then(response => {
+            console.log("record saved successfully");
+            console.log(response.data);
+          })
+            .catch(error => console.log(error));
+
+
+
     }
 
     createSlide(slide) {
         const { isAdmin } = this.props;
         return <div key={slide.containerDivId} className="swiper-slide">
         <div className="box">
-            <h3>{slide.containerHeader}{isAdmin?<ContainerEditComponent data={slide}/>:""}</h3>
+            <h3>{slide.containerHeader}{isAdmin?<ContainerEditComponent data={slide}  handleSave={this.handleSave} fetchOptions={this.fetchOptions}/>:""}</h3>
             <img src={slide.containerImageInfo[0].imageInfo.imageURL}/>
             <div>
                 <ul>
@@ -59,6 +99,15 @@ class RoomPricingSwiperComponent extends Component {
               }
             }
           });
+
+          axios.get('http://10.10.10.32/ContentManagement/content/get/image/list/SUITSANDROOMS')
+          //.then(response => console.log(response))
+          .then(response => this.setState({ options: response.data}))
+          .catch(error => console.log(error));
+    }
+
+    fetchOptions = ()=>{
+        return this.state.options;
     }
 
     render() {
@@ -83,7 +132,9 @@ class RoomPricingSwiperComponent extends Component {
 const mapStateToPros = state => {
     return {
         isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
-        token: state.userInfo.token
+        // isAdmin:true,
+        token: state.userInfo.token,
+        formData: state.formData,
     };
 };
 const mapDispatchToProps = dispatch => {
