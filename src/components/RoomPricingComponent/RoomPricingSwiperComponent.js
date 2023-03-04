@@ -31,10 +31,11 @@ class RoomPricingSwiperComponent extends Component {
              let containerImageInfoId = _.get(formData, containerImageInfoItem.containerImageInfoId+"");
              let options = this.state.options;
              let selectedImageInfo = _.filter(options, (option)=>{return option.imageInfoId == containerImageInfoId})
-             containerImageInfoItem.imageInfo=selectedImageInfo;
+             containerImageInfoItem.imageInfo=selectedImageInfo[0];
         });
 
         console.log("requestData======================>");
+        console.log(JSON.stringify(requestData));
         console.log(requestData);
         //return;
 
@@ -46,6 +47,7 @@ class RoomPricingSwiperComponent extends Component {
           .then(response => {
             console.log("record saved successfully");
             console.log(response.data);
+            this.props.loadData();
           })
             .catch(error => console.log(error));
 

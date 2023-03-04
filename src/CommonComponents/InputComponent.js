@@ -32,6 +32,11 @@ class InputComponent extends Component {
     }
 
     componentWillUnmount() {
+        const {onChange, id} = this.props;
+        let data={};
+        _.set(data, "id", id);
+        _.set(data, "value", "");
+        onChange(data);
 
     }
 

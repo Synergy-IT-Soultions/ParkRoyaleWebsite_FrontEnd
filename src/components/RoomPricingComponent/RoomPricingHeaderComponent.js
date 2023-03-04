@@ -20,6 +20,7 @@ class RoomPricingHeaderComponent extends Component {
         requestData.containerTextInfo[0].containertextLabelValue = _.get(formData, data.containerTextInfo[0].containerTextInfoId);
 
         console.log("requestData======================>");
+        console.log(JSON.stringify(requestData));
         console.log(requestData);
         //return;
 
@@ -31,6 +32,7 @@ class RoomPricingHeaderComponent extends Component {
             .then(response => {
                 console.log("record saved successfully");
                 console.log(response.data);
+                this.props.loadData();
             })
             .catch(error => console.log(error));
 
