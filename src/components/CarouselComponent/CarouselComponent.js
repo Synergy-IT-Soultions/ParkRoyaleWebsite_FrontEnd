@@ -91,7 +91,7 @@ class CarouselComponent extends Component {
 
         return (
             <div>
-            {isAdmin?<Button variant="primary" className="over-parent" onClick={this.handleShow}>Edit Images</Button>:""}
+            {isAdmin?<Button variant="primary" size="sm" className="over-parent" onClick={this.handleShow}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Button>:""}
             <Modal size="lg" show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Image Editor</Modal.Title>

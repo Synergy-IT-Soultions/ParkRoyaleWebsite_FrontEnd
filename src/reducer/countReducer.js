@@ -1,10 +1,12 @@
 import { ON_CHANGE } from "../utils/ActionTypes";
+import _ from 'lodash'
 
 const defaultState = {
     user : {},
     todos:[],
     showLogin: false,
-    userInfo:{}
+    userInfo:{},
+    formData:{}
 }
 
 
@@ -29,9 +31,9 @@ const countReducer = function (state = defaultState, action) {
       case "CLOSE_LOGIN":
         return {...state, showLogin:false}
       case ON_CHANGE:
-        let data = {};
-        data[action.id] = action.value;
-        return {...state, ...data}
+        let formData = {...state.formData};
+        _.set(formData, action.data.id, action.data.value);
+        return {...state, formData:{...formData}}
       case "USER_INFO":
         userData = {};
         userData[action.id] = action.data;

@@ -36,8 +36,8 @@ class RoomPricingComponent extends Component {
             isLoading?<SpinnerComponent/>:
                 <section id="pricing" className="pricing section-bg">
                 <div className="container" data-aos="fade-up">
-                <RoomPricingHeaderComponent data={headerObject}/>
-                <RoomPricingSwiperComponent data={swiperCards}/>
+                <RoomPricingHeaderComponent data={headerObject} loadData={this.loadData}/>
+                <RoomPricingSwiperComponent data={swiperCards} loadData={this.loadData}/>
                 </div>
                 </section>
         
