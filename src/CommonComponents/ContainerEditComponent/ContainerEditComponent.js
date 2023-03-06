@@ -3,6 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import InputComponent from "../InputComponent";
 import SpinnerComponent from "../SpinnerComponent/SpinnerComponent";
 import _ from "lodash";
+import "./ContainerEditComponent.css";
 
 class ContainerEditComponent extends Component {
     constructor(props) {
@@ -95,7 +96,7 @@ class ContainerEditComponent extends Component {
     
     render() { 
         const { uiComponents, isLoading, show, formChanged } = this.state;
-        return ( <span>
+        return ( <span className="editor">
             <Button variant="primary" size="sm" onClick={this.handleShow}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Button>
             <Modal size="lg" show={show} onHide={this.handleClose}>
                     <Modal.Header closeButton>

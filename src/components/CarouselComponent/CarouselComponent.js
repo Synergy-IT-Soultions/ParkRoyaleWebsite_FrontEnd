@@ -6,9 +6,10 @@ import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerCom
 import './CarouselComponent.css'
 import axios from 'axios';
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
-import { authenticate } from "../../utils/APIExecuter";
 import { connect } from "react-redux";
 import _ from "lodash";
+import Card from 'react-bootstrap/Card';
+
 
 
 class CarouselComponent extends Component {
@@ -42,7 +43,7 @@ class CarouselComponent extends Component {
         // const user = authenticate();
         // this.setState({user: user.data});
 
-        axios.get('http://10.10.10.32/ContentManagement/content/get/container/images/'+id)
+        axios.get('http://localhost:8080/content/get/container/images/'+id)
             //.then(response => console.log(response))
             .then(response => this.setState({ data: response.data , isLoading:false}))
             .catch(error => console.log(error));
@@ -50,7 +51,7 @@ class CarouselComponent extends Component {
 
     deleteImage(fileId) {
 
-        axios.post('http://10.10.10.32/ContentManagement/image/delete/'+fileId)
+        axios.post('http://localhost:8080/image/delete/'+fileId)
             //.then(response => console.log(response))
             .then(response => {
                 this.fetchImages();
@@ -62,7 +63,7 @@ class CarouselComponent extends Component {
     uploadImage(formData) {
         const {token} = this.props;
         const auth = "Bearer "+token;
-        axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
+        axios.post('http://localhost:8080/image/upload', formData, {
             headers: {
               'Content-Type': 'multipart/form-data;boundary=',
               'Authorization': auth
@@ -90,22 +91,40 @@ class CarouselComponent extends Component {
         
 
         return (
-            <div>
+            <div id="carousalModal">
             {isAdmin?<Button variant="primary" size="sm" className="over-parent" onClick={this.handleShow}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Button>:""}
-            <Modal size="lg" show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Image Editor</Modal.Title>
+            <Modal show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header className="modalHeader text-white" closeButton>
+                        <Modal.Title >Image Editor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
-                        {activeImages.length == 0 ? <SpinnerComponent/> :""}
-
-                        <div className="image-editor-grid">
+                        {activeImages.length === 0 ? <SpinnerComponent/> :""}
+                        <div >      
                             {
-                                activeImages.map(image => <span><i class="fa fa-fw fa-trash" onClick={this.deleteImage.bind(this, [image.imageInfo.imageInfoId])}></i><img src={"http://10.10.10.32/ContentManagement/image/download/"+image.imageInfo.imageInfoId} className="image_icon" /></span>)
-                                // this.state.images.map(image => <span><i class="fa fa-fw fa-trash" onClick={this.deleteImage.bind(this, [image.id])}></i><img src={image.fileURL} className="image_icon" data-filePath={image.fileURL} /></span>)
-                            }
+                                activeImages.map(image => 
+                                   
+                                        
+                                          <Card className="mx-auto my-3 text-white mb-2 rounded">
 
+                                            <Card.Img variant="top"  src={"http://localhost:8080/image/download/"+image.imageInfo.imageInfoId} className="cover"  />
+                                            <Card.Body>
+                                              <Card.Title>
+                                                    {image.imageInfo.imageName}
+                                                    <i class="fa fa-fw fa-trash" onClick={this.deleteImage.bind(this, [image.imageInfo.imageInfoId])}></i>
+                                              </Card.Title>
+                                              <Card.Text>
+                                                 {image.imageInfo.imageDescription}
+                                              </Card.Text>
+                                            </Card.Body>
+                                            <Card.Footer className="bg-info">
+                                              <small className="text-muted">{"Uploaded Date: "+image.imageInfo.updatedDate}</small>
+                                            </Card.Footer>
+                                          </Card> 
+                                     
+                                      
+                                       
+                              )
+                            }
                         </div>
 
 
@@ -131,13 +150,10 @@ class CarouselComponent extends Component {
                         return (<Carousel.Item key={imageId}>
                             <img
                                 className="d-block w-100"
-                                src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
+                                src={"http://localhost:8080/image/download/" + imageId}
                                 alt="First slide"
                             />
-                            <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>
+                            
                         </Carousel.Item>)
 
                     })
@@ -152,7 +168,7 @@ class CarouselComponent extends Component {
                         //     return (<Carousel.Item>
                         //         <img
                         //             className="d-block w-100"
-                        //             src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
+                        //             src={"http://localhost:8080/image/download/" + imageId}
                         //             alt="First slide"
                         //         />
                         //         <Carousel.Caption>
@@ -212,12 +228,7 @@ const mapStateToPros = state => {
         token: state.userInfo.token
     };
 };
-const mapDispatchToProps = dispatch => {
-    return {
-        handleIncrementClick: () => dispatch({ type: 'INCREMENT' }),
-        handleDecrementClick: () => dispatch({ type: 'DECREMENT' })
-    }
-};
+
 
 
 //export default CarouselComponent;

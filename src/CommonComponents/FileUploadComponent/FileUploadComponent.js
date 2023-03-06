@@ -71,7 +71,7 @@ function FileUploadComponent(props) {
         setShow(false);
 
 
-        // axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
+        // axios.post('http://localhost:8080/image/upload', formData, {
         //     headers: {
         //       'Content-Type': 'multipart/form-data;boundary=',
         //       'Authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibnByYXNhdGgiLCJleHAiOjE2NzcwMTM4ODksImlhdCI6MTY3Njk5OTQ4OSwic2NvcGUiOiJBZG1pbiJ9.X-6khriPu_G0RLByhWmSO0VGfrYRlvLo4tdKONvoXGzhCARoNQFUtSuw2s3XB-pFYFL3poKgRAcyLrgoYprW071mPWg44rEkf9GccvcudWS2JD-OItCg17V4QEE-KzUXCPVMjCYz5cU6yTM0Z2-ZC7RATRq0IWekjex36q8hZcNKoMEdjC7XLTtWTKiGcvJ_IeiUWU5EO9cRhfjTjgjwoOyDUjk3t09DEgv0EVRkaR_iOKLnsW95DU4jGbh5m2dm3H6fZSO7cIOmy1zFNJ_lZYBP8b8mwl8vLUKC1_PKJGHA0PLbbfb01BtVhxzRli6xcFRumhrU_cU3JKgFy1TwtA'
@@ -134,7 +134,7 @@ function FileUploadComponent(props) {
             <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom01">
                     
-                    <Form.Control required type="file" id="new_image_file" accept="image/png,image/webp" onChange={onFileChange}/>
+                    <Form.Control required type="file" id="new_image_file" accept="image/png,image/webp, image/jpg, image/jpeg" onChange={onFileChange}/>
                 </Form.Group>
                 
             </Row>

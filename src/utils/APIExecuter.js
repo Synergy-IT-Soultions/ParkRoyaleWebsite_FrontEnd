@@ -2,7 +2,7 @@ import { CALL_API } from "./ActionTypes";
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: "http://10.10.10.32/ContentManagement" 
+    baseURL: "http://localhost:8080" 
 });
 
 function postCall(action, state){
