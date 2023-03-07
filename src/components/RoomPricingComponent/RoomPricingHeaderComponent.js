@@ -24,7 +24,7 @@ class RoomPricingHeaderComponent extends Component {
         console.log(requestData);
         //return;
 
-        axios.post('http://localhost:8080/content/save/container', requestData, {
+        axios.post('http://10.10.10.32/ContentManagement/content/save/container', requestData, {
             headers: {
                 'Authorization': auth
             }

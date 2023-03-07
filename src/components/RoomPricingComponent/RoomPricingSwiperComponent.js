@@ -39,7 +39,7 @@ class RoomPricingSwiperComponent extends Component {
         console.log(requestData);
         //return;
 
-        axios.post('http://localhost:8080/content/save/container', requestData, {
+        axios.post('http://10.10.10.32/ContentManagement/content/save/container', requestData, {
             headers: {
               'Authorization': auth
             }
@@ -102,7 +102,8 @@ class RoomPricingSwiperComponent extends Component {
             }
           });
 
-          axios.get('http://localhost:8080/content/get/image/list/SUITSANDROOMS')
+          const {imageType} = this.props;
+          axios.get('http://10.10.10.32/ContentManagement/content/get/image/list/'+imageType)
           //.then(response => console.log(response))
           .then(response => this.setState({ options: response.data}))
           .catch(error => console.log(error));

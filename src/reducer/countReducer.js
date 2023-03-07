@@ -1,7 +1,8 @@
-import { ON_CHANGE } from "../utils/ActionTypes";
+import { ON_CHANGE, PAGELOADER } from "../utils/ActionTypes";
 import _ from 'lodash'
 
 const defaultState = {
+    showPageLoader:false,
     user : {},
     todos:[],
     showLogin: false,
@@ -42,6 +43,8 @@ const countReducer = function (state = defaultState, action) {
         userData = {};
         userData[action.id] = "";
         return {...state, ...userData}
+      case PAGELOADER:
+        return {...state, showPageLoader:action.value}
       default:
         return state;
     }
