@@ -96,6 +96,7 @@ class CarouselComponent extends Component {
 
     }
 
+    
     render() {
         const { isAdmin } = this.props;
         let activeImages = _.filter(this.state.data, (item) => {
