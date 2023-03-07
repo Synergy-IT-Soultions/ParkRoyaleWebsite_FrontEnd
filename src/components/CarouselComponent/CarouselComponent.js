@@ -8,7 +8,7 @@ import axios from 'axios';
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
 import { connect } from "react-redux";
 import _ from "lodash";
-import Card from 'react-bootstrap/Card';
+import { CarouselCardComponent } from "./CarouselCardComponent";
 
 
 
@@ -91,43 +91,26 @@ class CarouselComponent extends Component {
         
 
         return (
-            <div id="carousalModal">
+            <div>
             {isAdmin?<Button variant="primary" size="sm" className="over-parent" onClick={this.handleShow}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Button>:""}
-            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal show={this.state.show} onHide={this.handleClose} ariaHidden="true">
                     <Modal.Header className="modalHeader text-white" closeButton>
                         <Modal.Title >Image Editor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {activeImages.length === 0 ? <SpinnerComponent/> :""}
+                        {activeImages.length === 0 ? "Images not added yet, please add images." :""}
                         <div >      
                             {
                                 activeImages.map(image => 
-                                   
-                                        
-                                          <Card className="mx-auto my-3 text-white mb-2 rounded">
-
-                                            <Card.Img variant="top"  src={"http://localhost:8080/image/download/"+image.imageInfo.imageInfoId} className="cover"  />
-                                            <Card.Body>
-                                              <Card.Title>
-                                                    {image.imageInfo.imageName}
-                                                    <i class="fa fa-fw fa-trash" onClick={this.deleteImage.bind(this, [image.imageInfo.imageInfoId])}></i>
-                                              </Card.Title>
-                                              <Card.Text>
-                                                 {image.imageInfo.imageDescription}
-                                              </Card.Text>
-                                            </Card.Body>
-                                            <Card.Footer className="bg-info">
-                                              <small className="text-muted">{"Uploaded Date: "+image.imageInfo.updatedDate}</small>
-                                            </Card.Footer>
-                                          </Card> 
-                                     
-                                      
-                                       
+                                         <CarouselCardComponent 
+                                            id={image.imageInfo.imageInfoId} 
+                                            name={image.imageInfo.imageName} 
+                                            description={image.imageInfo.imageDescription} 
+                                            updatedDate={image.imageInfo.updatedDate} 
+                                            deleteImage={this.deleteImage} />
                               )
                             }
                         </div>
-
-
                     </Modal.Body>
                     <Modal.Footer>
                         {/* <input
@@ -147,20 +130,15 @@ class CarouselComponent extends Component {
                     _.map(activeImages, (image) => {
 
                         let imageId = image.imageInfo.imageInfoId;
-                        return (<Carousel.Item key={imageId}>
+                        return (
+                        <Carousel.Item key={imageId}>
                             <img
                                 className="d-block w-100"
                                 src={"http://localhost:8080/image/download/" + imageId}
-                                alt="First slide"
+                                alt= {image.imageInfo.imageAlt}
                             />
-                            
                         </Carousel.Item>)
-
                     })
-
-                    
-
-                    
 
                         // _.map(this.state.data?.containerImageInfo, (containerImageInfoObject) => {
 
