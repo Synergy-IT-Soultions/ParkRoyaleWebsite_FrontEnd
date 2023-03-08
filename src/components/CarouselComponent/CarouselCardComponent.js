@@ -9,7 +9,7 @@ export const CarouselCardComponent = ({id, name, description, updatedDate, delet
         <Card className="mx-auto my-3 text-white mb-2 rounded">
             <Card.Header>
             <div class="d-flex" >
-                   
+
                     <div >
                           <i class="fa fa-fw fa-trash" onClick={deleteImage.bind(this, [id])}></i>
                     </div>
@@ -18,7 +18,7 @@ export const CarouselCardComponent = ({id, name, description, updatedDate, delet
                     </div>
             </div>
             </Card.Header>
-            <Card.Img variant="top"  src={"http://localhost:8080/image/thumbnail/download/"+id} className="cover"  />
+            <Card.Img variant="top"  src={"http://10.10.10.32/ContentManagement/image/thumbnail/download/"+id} className="cover"  />
             <Card.Body>
                 <Card.Text>
                     {description}
@@ -27,7 +27,7 @@ export const CarouselCardComponent = ({id, name, description, updatedDate, delet
             <Card.Footer className="cardFooter">
                 <small className="text-white">{"Uploaded Date: "+updatedDate}</small>
             </Card.Footer>
-            </Card> 
+            </Card>
 
     </div>
   )

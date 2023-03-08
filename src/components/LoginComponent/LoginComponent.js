@@ -8,6 +8,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FloatingLabel } from 'react-bootstrap';
 import _ from "lodash";
+import { hidePageLoader, showPageLoader } from '../../utils/ReduxActions';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class LoginComponent extends React.Component {
     validateUser(event) {
         //const user = authenticate();
         //alert(JSON.stringify(user.data));
-        const { addUserInfo } = this.props;
+        const { addUserInfo, showPageLoader, hidePageLoader } = this.props;
         //addUserInfo("userInfo",user.data);
         const form = event.currentTarget;
         
@@ -44,7 +45,8 @@ class LoginComponent extends React.Component {
         }
         this.setState({ validated: true });
 
-        axios.post('http://localhost:8080/user/authenticate', {}, {
+        showPageLoader();
+        axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
             auth: {
                 username: this.state.user_name,
                 password: this.state.password
@@ -54,10 +56,12 @@ class LoginComponent extends React.Component {
             .then(response => {
                 addUserInfo("userInfo", response.data)
                 this.setState({ show: false, loggedin: true });
+                hidePageLoader();
             })
             .catch(error => {
                 console.log(error);
                 toast("Invalid User Credentials");
+                hidePageLoader();
             });
 
     }
@@ -137,7 +141,9 @@ const mapStateToPros = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addUserInfo: (id, data) => dispatch({ type: 'USER_INFO', id, data }),
-        removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id })
+        removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id }),
+        showPageLoader:()=>showPageLoader(dispatch),
+        hidePageLoader:()=>hidePageLoader(dispatch),
     }
 };
 
