@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
+import "./CarouselComponent.css"
 
 
 export const CarouselCardComponent = ({id, name, description, updatedDate, deleteImage}) => {
@@ -18,7 +19,7 @@ export const CarouselCardComponent = ({id, name, description, updatedDate, delet
                     </div>
             </div>
             </Card.Header>
-            <Card.Img variant="top"  src={"http://10.10.10.32/ContentManagement/image/thumbnail/download/"+id} className="cover"  />
+            <Card.Img variant="top"  src={"http://localhost:8080/image/thumbnail/download/"+id} className="cover"  />
             <Card.Body>
                 <Card.Text>
                     {description}

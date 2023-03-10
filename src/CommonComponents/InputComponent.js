@@ -4,6 +4,8 @@ import _ from 'lodash'
 import axios from "axios";
 import { connect } from "react-redux";
 import { ON_CHANGE } from "../utils/ActionTypes";
+import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
 
 class InputComponent extends Component {
     constructor(props) {
@@ -60,8 +62,9 @@ class InputComponent extends Component {
 
         return (
             <div>
+                <Row className="mb-3">
             <Form.Group>
-                <Form.Label>{label}</Form.Label>
+                <Form.Label>{!label ? "Image" : label}</Form.Label>
                 {!select ?
                     <Form.Control
                         required
@@ -81,8 +84,20 @@ class InputComponent extends Component {
                     </Form.Select>
                     
                 }
-            </Form.Group>
-            {showSelectedImage && imageInfo?<Image src={imageInfo.thumbnailURL} thumbnail={true}/>:""}
+           
+           
+             </Form.Group>
+            </Row>
+            {showSelectedImage && imageInfo?
+                   
+                   <div>
+                    <Card className="mx-auto my-3 text-white mb-2 rounded">
+                    <Card.Body>
+                    <Card.Img variant="top"  src={imageInfo.imageURL} className="cover"  />
+                    </Card.Body>
+                    </Card>
+                  </div>
+            :""}
             </div>
         );
     }

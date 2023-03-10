@@ -4,6 +4,7 @@ import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import { connect } from "react-redux";
 import axios from "axios";
+import Card from 'react-bootstrap/Card';
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class RoomPricingSwiperComponent extends Component {
         console.log(requestData);
         //return;
 
-        axios.post('http://10.10.10.32/ContentManagement/content/save/container', requestData, {
+        axios.post('http://localhost:8080/content/save/container', requestData, {
             headers: {
               'Authorization': auth
             }
@@ -57,21 +58,43 @@ class RoomPricingSwiperComponent extends Component {
 
     createSlide(slide) {
         const { isAdmin } = this.props;
-        return <div key={slide.containerDivId} className="swiper-slide">
-        <div className="box">
-            <h3>{slide.containerHeader}{isAdmin?<ContainerEditComponent data={slide}  handleSave={this.handleSave} fetchOptions={this.fetchOptions}/>:""}</h3>
-            <img src={slide.containerImageInfo[0].imageInfo.imageURL}/>
-            <div>
-                <ul>
-                    <li>{slide.containerTextInfo[0].containerTextLabelName +":"+slide.containerTextInfo[0].containertextLabelValue}</li>
-                    <li>{slide.containerTextInfo[1].containertextLabelValue}</li>
-                </ul>
+        return <div key={slide.containerDivId} className="swiper-slide mb-2">
+
+        <Card className="mx-auto my-3 text-white mb-2 rounded">
+            <Card.Header  className="cardHeader">
+            <div class="d-flex" >
+
+                    <div className="text">
+                        { 
+                           isAdmin ? 
+                                        <ContainerEditComponent data={slide}  handleSave={this.handleSave} fetchOptions={this.fetchOptions}/>
+                                   : ""
+                        }
+                        {slide.containerHeader}
+                    </div>
+                    
             </div>
-            {/* <div className="btn-wrap">
-                <a href="#" className="btn-buy">Buy Now</a>
-            </div> */}
-        </div>
-    </div>;
+            </Card.Header>
+            <Card.Img variant="top"  src={slide.containerImageInfo[0].imageInfo.imageURL}  />
+            <Card.Body>
+                <Card.Text className="cardDescription">
+                         <div>
+                                
+                                   {slide.containerTextInfo[0].containerTextLabelName +":"+slide.containerTextInfo[0].containertextLabelValue} <br></br>
+                                   {slide.containerTextInfo[1].containertextLabelValue}
+                                
+                            </div>
+                </Card.Text>
+            </Card.Body>
+            {isAdmin?
+            <Card.Footer className="cardFooter">
+                <small className="text-white">{"Updated Date: " + slide.updatedDate}</small>
+            </Card.Footer>
+            :""}
+            </Card>
+            
+            </div>;
+                
     }
 
     componentDidMount(){
@@ -103,7 +126,7 @@ class RoomPricingSwiperComponent extends Component {
           });
 
           const {imageType} = this.props;
-          axios.get('http://10.10.10.32/ContentManagement/content/get/image/list/'+imageType)
+          axios.get('http://localhost:8080/content/get/image/list/'+imageType)
           //.then(response => console.log(response))
           .then(response => this.setState({ options: response.data}))
           .catch(error => console.log(error));

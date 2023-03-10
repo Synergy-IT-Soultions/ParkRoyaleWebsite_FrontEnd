@@ -24,7 +24,7 @@ class RoomPricingHeaderComponent extends Component {
         console.log(requestData);
         //return;
 
-        axios.post('http://10.10.10.32/ContentManagement/content/save/container', requestData, {
+        axios.post('http://localhost:8080/content/save/container', requestData, {
             headers: {
                 'Authorization': auth
             }
@@ -47,7 +47,7 @@ class RoomPricingHeaderComponent extends Component {
 
         return (
             <div className="section-title">
-                <h2>{containerHeader}{isAdmin ? <ContainerEditComponent data={data} handleSave={this.handleSave} /> : ""}</h2>
+                <h2>{isAdmin ? <ContainerEditComponent data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                 <p>{containertextLabelValue}</p>
             </div>
         );

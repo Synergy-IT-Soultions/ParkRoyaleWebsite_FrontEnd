@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import _ from 'lodash';
+
 //import {imageInfo} from '../../assets/image_info.json'
 
 function FileUploadComponent(props) {
@@ -45,6 +46,7 @@ function FileUploadComponent(props) {
             event.preventDefault();
             event.stopPropagation();
             setValidated(true);
+
         }
         else{
             setValidated(true);
@@ -71,7 +73,7 @@ function FileUploadComponent(props) {
         setShow(false);
 
 
-        // axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
+        // axios.post('http://localhost:8080/image/upload', formData, {
         //     headers: {
         //       'Content-Type': 'multipart/form-data;boundary=',
         //       'Authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibnByYXNhdGgiLCJleHAiOjE2NzcwMTM4ODksImlhdCI6MTY3Njk5OTQ4OSwic2NvcGUiOiJBZG1pbiJ9.X-6khriPu_G0RLByhWmSO0VGfrYRlvLo4tdKONvoXGzhCARoNQFUtSuw2s3XB-pFYFL3poKgRAcyLrgoYprW071mPWg44rEkf9GccvcudWS2JD-OItCg17V4QEE-KzUXCPVMjCYz5cU6yTM0Z2-ZC7RATRq0IWekjex36q8hZcNKoMEdjC7XLTtWTKiGcvJ_IeiUWU5EO9cRhfjTjgjwoOyDUjk3t09DEgv0EVRkaR_iOKLnsW95DU4jGbh5m2dm3H6fZSO7cIOmy1zFNJ_lZYBP8b8mwl8vLUKC1_PKJGHA0PLbbfb01BtVhxzRli6xcFRumhrU_cU3JKgFy1TwtA'
@@ -89,57 +91,68 @@ function FileUploadComponent(props) {
             // <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <div>
             <Row className="mb-3">
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
+                <Form.Group as={Col} md="12" controlId="validationCustom01">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         id="imageName"
                         onChange={onChange}
+                        autoComplete="off"
+                        
                     />
                 </Form.Group>
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
+               </Row>
+               <Row className="mb-3"> 
+                <Form.Group as={Col} md="12" controlId="validationCustom01">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         id="imageDescription"
                         onChange={onChange}
+                        autoComplete="off"
                     />
                 </Form.Group>
-
             </Row>
-            <Row className="mb-3">
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
-                    <Form.Label>Type</Form.Label>
+            <Row >
+                <Form.Group as={Col}  controlId="validationCustom01">
                     <Form.Control
                         disabled
-                        type="text"
+                        type="hidden"
                         id="imageType"
                         onChange={onChange}
                         defaultValue="CAROUSEL"
                     />
                 </Form.Group>
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
+                </Row>
+                <Row className="mb-3">
+                <Form.Group as={Col} md="12" controlId="validationCustom01">
                     <Form.Label>Alt Text</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         id="imageAlt"
                         onChange={onChange}
+                        autoComplete="off"
                     />
                 </Form.Group>
-
             </Row>
             <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom01">
-                    
-                    <Form.Control required type="file" id="new_image_file" accept="image/png, image/webp, image/jpg, image/jpeg" onChange={onFileChange}/>
+            <Form.Label>Image File</Form.Label>
+                    <Form.Control 
+                        required type="file" 
+                        id="new_image_file" 
+                        accept="image/png, image/webp, image/jpg, image/jpeg" 
+                        onChange={onFileChange}
+                        autoComplete="off"
+                    />
                 </Form.Group>
                 
             </Row>
-
-            <Button type="submit" onClick={handleSubmit}>Save</Button>
+            
+           
             </div>
         //</Form>
         );
@@ -155,14 +168,16 @@ function FileUploadComponent(props) {
 
     return (<>
         {/* <Button type="text" onClick={handleShow}>Add Image</Button> */}
-        <Modal size="lg" show={props.show} onHide={props.handleCloseUpload}>
-            <Modal.Header closeButton>
+        <Modal size="sm"  show={props.show} onHide={props.handleCloseUpload}>
+            <Modal.Header className="modalHeader text-white" closeButton>
                 <Modal.Title>Upload Image</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {uploadForm()}
             </Modal.Body>
-
+            <Modal.Footer>
+            <Button type="submit" onClick={handleSubmit}>Save</Button>
+            </Modal.Footer>
         </Modal></>
     );
 }

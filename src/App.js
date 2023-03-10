@@ -21,7 +21,7 @@ class App extends Component {
     // const { addUserInfo } = this.props;
     // //addUserInfo("userInfo",user.data);
 
-    // axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
+    // axios.post('http://localhost:8080/user/authenticate', {}, {
     //   auth: {
     //     username: "nprasath",
     //     password: "password234"

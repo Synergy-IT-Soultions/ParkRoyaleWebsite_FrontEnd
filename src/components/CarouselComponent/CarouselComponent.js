@@ -2,15 +2,13 @@ import { React, Component } from "react";
 import { Carousel } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
 import './CarouselComponent.css'
 import axios from 'axios';
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { CarouselCardComponent } from "./CarouselCardComponent";
-
-
+import editImage from '../../assets/edit.png'
 
 class CarouselComponent extends Component {
     constructor(props) {
@@ -57,7 +55,7 @@ class CarouselComponent extends Component {
         // const user = authenticate();
         // this.setState({user: user.data});
 
-        axios.get('http://10.10.10.32/ContentManagement/content/get/container/images/' + id)
+        axios.get('http://localhost:8080/content/get/container/images/' + id)
             //.then(response => console.log(response))
             .then(response => this.setState({ data: response.data, isLoading: false }))
             .catch(error => console.log(error));
@@ -65,7 +63,7 @@ class CarouselComponent extends Component {
 
     deleteImage(fileId) {
 
-        axios.post('http://10.10.10.32/ContentManagement/image/delete/' + fileId)
+        axios.post('http://localhost:8080/image/delete/' + fileId)
             //.then(response => console.log(response))
             .then(response => {
                 this.fetchImages();
@@ -77,7 +75,7 @@ class CarouselComponent extends Component {
     uploadImage(formData) {
         const { token } = this.props;
         const auth = "Bearer " + token;
-        axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
+        axios.post('http://localhost:8080/image/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data;boundary=',
                 'Authorization': auth
@@ -107,7 +105,16 @@ class CarouselComponent extends Component {
 
         return (
             <div>
-            {isAdmin?<Button variant="primary" size="sm" className="over-parent" onClick={this.handleShow}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Button>:""}
+            {
+                isAdmin ?
+                         
+                            <Button variant="primary" size="sm" className="over-parent " onClick={this.handleShow}>
+                                <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>  
+                             
+                            </Button>
+                        
+                        : ""
+            }
             <Modal show={this.state.show} onHide={this.handleClose} >
                     <Modal.Header className="modalHeader text-white" closeButton>
                         <Modal.Title >Image Editor</Modal.Title>
@@ -167,7 +174,7 @@ class CarouselComponent extends Component {
                         //     return (<Carousel.Item>
                         //         <img
                         //             className="d-block w-100"
-                        //             src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
+                        //             src={"http://localhost:8080/image/download/" + imageId}
                         //             alt="First slide"
                         //         />
                         //         <Carousel.Caption>

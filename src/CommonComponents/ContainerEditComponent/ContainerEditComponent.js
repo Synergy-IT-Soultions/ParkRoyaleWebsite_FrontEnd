@@ -5,6 +5,7 @@ import SpinnerComponent from "../SpinnerComponent/SpinnerComponent";
 import _ from "lodash";
 import "./ContainerEditComponent.css";
 
+
 class ContainerEditComponent extends Component {
     constructor(props) {
         super(props);
@@ -97,9 +98,13 @@ class ContainerEditComponent extends Component {
     render() { 
         const { uiComponents, isLoading, show, formChanged } = this.state;
         return ( <span className="editor">
-            <Button variant="primary" size="sm" onClick={this.handleShow}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Button>
-            <Modal size="lg" show={show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
+            
+            <Button  size="sm" onClick={this.handleShow}>
+                <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+            </Button>
+
+            <Modal size="md"  show={show} onHide={this.handleClose}>
+                    <Modal.Header className="modalHeader text-white" closeButton>
                         <Modal.Title>Editor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
