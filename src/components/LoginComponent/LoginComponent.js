@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { FloatingLabel } from 'react-bootstrap';
 import _ from "lodash";
 import { hidePageLoader, showPageLoader } from '../../utils/ReduxActions';
+import cmClient from '../../clients/ContentManagementClient';
 
 class LoginComponent extends React.Component {
     constructor(props) {

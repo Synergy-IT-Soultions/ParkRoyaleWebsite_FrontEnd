@@ -64,14 +64,14 @@ class ContainerEditComponent extends Component {
             let comp;
             if(_.isEqual(uiData.editType, "Header")){
                 
-                comp = <InputComponent id={uiData.pageContainerInfoId+""} value={uiData.containerHeader} label={uiData.editType} type="text"/>
+                comp = <InputComponent key={uiData.pageContainerInfoId+""} id={uiData.pageContainerInfoId+""} value={uiData.containerHeader} label={uiData.editType} type="text"/>
             }
             else if(_.isEqual(uiData.editType, "Text")){
-                comp = <InputComponent id={uiData.containerTextInfoId+""} value={uiData.containertextLabelValue} label={uiData.containerTextLabelName} type="text"/>
+                comp = <InputComponent key={uiData.containerTextInfoId+""}  id={uiData.containerTextInfoId+""} value={uiData.containertextLabelValue} label={uiData.containerTextLabelName} type="text"/>
 
             }
             else if(_.isEqual(uiData.editType, "Image")){
-                comp = <InputComponent id={uiData.containerImageInfoId+""} value={uiData.imageInfo.imageInfoId} label={uiData.containerTextLabelName} select={true} fetchOptions={this.props.fetchOptions} showSelectedImage={true}/>
+                comp = <InputComponent key={uiData.containerImageInfoId+""}  id={uiData.containerImageInfoId+""} value={uiData.imageInfo.imageInfoId} label={uiData.containerTextLabelName} select={true} fetchOptions={this.props.fetchOptions} showSelectedImage={true}/>
             }
             uiComponents.push(comp);
 

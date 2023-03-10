@@ -124,7 +124,7 @@ class CarouselComponent extends Component {
                         <div >
                             {
                                 activeImages.map(image =>
-                                         <CarouselCardComponent
+                                         <CarouselCardComponent key={image.imageInfo.imageInfoId}
                                             id={image.imageInfo.imageInfoId}
                                             name={image.imageInfo.imageName}
                                             description={image.imageInfo.imageDescription}
@@ -158,7 +158,7 @@ class CarouselComponent extends Component {
                             return (<Carousel.Item key={imageId}>
                                 <img
                                     className="d-block w-100"
-                                    src={"http://localhost:8080/image/download/" + imageId}
+                                    src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
                                     alt= {image.imageInfo.imageAlt}
                                 />
 
