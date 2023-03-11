@@ -2,7 +2,7 @@ import { CALL_API } from "./ActionTypes";
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: "http://localhost:8080" 
+    baseURL: "http://10.10.10.32/ContentManagement" 
 });
 
 function postCall(action, state){
@@ -18,8 +18,8 @@ function postCall(action, state){
 export const authenticate = async ()=> {
 
     const user = await client.post("/user/authenticate", {}, { auth:{
-        username:"nprasath",
-        password:"password234"
+        username:"",
+        password:""
     }});
 
     return user;

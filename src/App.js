@@ -21,7 +21,7 @@ class App extends Component {
     // const { addUserInfo } = this.props;
     // //addUserInfo("userInfo",user.data);
 
-    // axios.post('http://localhost:8080/user/authenticate', {}, {
+    // axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
     //   auth: {
     //     username: "nprasath",
     //     password: "password234"
@@ -41,6 +41,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
+              <Route path="/path" element={<NoPageComponent />} />
               <Route path="*" element={<NoPageComponent />} />
             </Route>
           </Routes>

@@ -15,7 +15,7 @@ class RoomPricingComponent extends Component {
     loadData() {
 
         const {id} = this.props;
-        axios.get('http://localhost:8080/content/get/container/group-details/'+id)
+        axios.get('http://10.10.10.32/ContentManagement/content/get/container/group-details/'+id)
             //.then(response => console.log(response))
             .then(response => this.setState({ data: response.data , isLoading:false}))
             .catch(error => console.log(error));

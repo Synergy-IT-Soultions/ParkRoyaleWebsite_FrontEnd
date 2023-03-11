@@ -55,7 +55,7 @@ class CarouselComponent extends Component {
         // const user = authenticate();
         // this.setState({user: user.data});
 
-        axios.get('http://localhost:8080/content/get/container/images/' + id)
+        axios.get('http://10.10.10.32/ContentManagement/content/get/container/images/' + id)
             //.then(response => console.log(response))
             .then(response => this.setState({ data: response.data, isLoading: false }))
             .catch(error => console.log(error));
@@ -63,7 +63,7 @@ class CarouselComponent extends Component {
 
     deleteImage(fileId) {
 
-        axios.post('http://localhost:8080/image/delete/' + fileId)
+        axios.post('http://10.10.10.32/ContentManagement/image/delete/' + fileId)
             //.then(response => console.log(response))
             .then(response => {
                 this.fetchImages();
@@ -75,7 +75,7 @@ class CarouselComponent extends Component {
     uploadImage(formData) {
         const { token } = this.props;
         const auth = "Bearer " + token;
-        axios.post('http://localhost:8080/image/upload', formData, {
+        axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data;boundary=',
                 'Authorization': auth
@@ -174,7 +174,7 @@ class CarouselComponent extends Component {
                         //     return (<Carousel.Item>
                         //         <img
                         //             className="d-block w-100"
-                        //             src={"http://localhost:8080/image/download/" + imageId}
+                        //             src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
                         //             alt="First slide"
                         //         />
                         //         <Carousel.Caption>
