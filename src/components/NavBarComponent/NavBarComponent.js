@@ -11,7 +11,7 @@ function NavBarComponent() {
 
             <nav id="navbar" className="navbar">
                 <ul>
-                    <li><a className="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><Link className="nav-link scrollto active" to="/">Home</Link></li>
                     {/* <li><a className="nav-link scrollto" href="#about">Suits and Rooms</a></li> */}
                     <li><Link className='nav-link scrollto' to="suitsandrooms">Suits and Rooms</Link></li>
                     <li><a className="nav-link scrollto" href="#services">Restaurants</a></li>
