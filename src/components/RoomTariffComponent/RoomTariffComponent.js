@@ -106,8 +106,8 @@ class RoomTariffComponent extends Component {
 
 const mapStateToPros = state => {
     return {
-        // isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
-        isAdmin:true,
+        isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
+        // isAdmin:true,
         token: state.userInfo.token,
     };
 };
