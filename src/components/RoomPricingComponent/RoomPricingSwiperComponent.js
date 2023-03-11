@@ -113,6 +113,10 @@ class RoomPricingSwiperComponent extends Component {
               type: 'bullets',
               clickable: true
             },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
             breakpoints: {
               320: {
                 slidesPerView: 1,
@@ -152,6 +156,9 @@ class RoomPricingSwiperComponent extends Component {
 
                 </div>
                 <div className="swiper-pagination"></div>
+                {/* <!-- If we need navigation buttons --> */}
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
         );
     }
