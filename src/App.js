@@ -8,6 +8,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from './utils/APIExecuter';
 import axios from 'axios';
+import SuitsAndRoomsComponent from './components/SuitsAndRoomsComponent/SuitsAndRoomsComponent';
 
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
     // const { addUserInfo } = this.props;
     // //addUserInfo("userInfo",user.data);
 
-    // axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
+    // cmClient.post('/user/authenticate', {}, {
     //   auth: {
     //     username: "nprasath",
     //     password: "password234"
@@ -41,7 +42,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
-              <Route path="/path" element={<NoPageComponent />} />
+              <Route path="/suitsandrooms" element={<SuitsAndRoomsComponent />} />
               <Route path="*" element={<NoPageComponent />} />
             </Route>
           </Routes>

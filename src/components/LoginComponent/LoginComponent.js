@@ -47,7 +47,7 @@ class LoginComponent extends React.Component {
         this.setState({ validated: true });
 
         showPageLoader();
-        axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
+        cmClient.post('/user/authenticate', {}, {
             auth: {
                 username: this.state.user_name,
                 password: this.state.password

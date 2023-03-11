@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import _ from 'lodash'
 import axios from "axios";
+import cmClient from "../../clients/ContentManagementClient";
 
 class RoomPricingHeaderComponent extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class RoomPricingHeaderComponent extends Component {
         console.log(requestData);
         //return;
 
-        axios.post('http://10.10.10.32/ContentManagement/content/save/container', requestData, {
+        cmClient.post('/content/save/container', requestData, {
             headers: {
                 'Authorization': auth
             }

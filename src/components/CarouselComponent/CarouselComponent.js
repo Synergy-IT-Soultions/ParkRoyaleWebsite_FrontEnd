@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { CarouselCardComponent } from "./CarouselCardComponent";
 import editImage from '../../assets/edit.png'
+import cmClient from "../../clients/ContentManagementClient";
 
 class CarouselComponent extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class CarouselComponent extends Component {
         // const user = authenticate();
         // this.setState({user: user.data});
 
-        axios.get('http://10.10.10.32/ContentManagement/content/get/container/images/' + id)
+        cmClient.get('/content/get/container/images/' + id)
             //.then(response => console.log(response))
             .then(response => this.setState({ data: response.data, isLoading: false }))
             .catch(error => console.log(error));
@@ -63,7 +64,7 @@ class CarouselComponent extends Component {
 
     deleteImage(fileId) {
 
-        axios.post('http://10.10.10.32/ContentManagement/image/delete/' + fileId)
+        cmClient.post('/image/delete/' + fileId)
             //.then(response => console.log(response))
             .then(response => {
                 this.fetchImages();
@@ -75,7 +76,7 @@ class CarouselComponent extends Component {
     uploadImage(formData) {
         const { token } = this.props;
         const auth = "Bearer " + token;
-        axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
+        cmClient.post('/image/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data;boundary=',
                 'Authorization': auth

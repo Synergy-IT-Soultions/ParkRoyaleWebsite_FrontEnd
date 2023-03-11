@@ -5,6 +5,7 @@ import ContainerEditComponent from "../../CommonComponents/ContainerEditComponen
 import { connect } from "react-redux";
 import axios from "axios";
 import Card from 'react-bootstrap/Card';
+import cmClient from "../../clients/ContentManagementClient";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class RoomPricingSwiperComponent extends Component {
         console.log(requestData);
         //return;
 
-        axios.post('http://10.10.10.32/ContentManagement/content/save/container', requestData, {
+        cmClient.post('/content/save/container', requestData, {
             headers: {
               'Authorization': auth
             }
@@ -126,7 +127,7 @@ class RoomPricingSwiperComponent extends Component {
           });
 
           const {imageType} = this.props;
-          axios.get('http://10.10.10.32/ContentManagement/content/get/image/list/'+imageType)
+          cmClient.get('/content/get/image/list/'+imageType)
           //.then(response => console.log(response))
           .then(response => this.setState({ options: response.data}))
           .catch(error => console.log(error));

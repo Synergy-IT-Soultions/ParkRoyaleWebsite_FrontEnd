@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logoImage from '../../assets/ParkRoyale_Logo.png'
 import LoginComponent from '../LoginComponent/LoginComponent';
 
@@ -11,7 +12,8 @@ function NavBarComponent() {
             <nav id="navbar" className="navbar">
                 <ul>
                     <li><a className="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a className="nav-link scrollto" href="#about">Suits and Rooms</a></li>
+                    {/* <li><a className="nav-link scrollto" href="#about">Suits and Rooms</a></li> */}
+                    <li><Link className='nav-link scrollto' to="suitsandrooms">Suits and Rooms</Link></li>
                     <li><a className="nav-link scrollto" href="#services">Restaurants</a></li>
                     <li><a className="nav-link scrollto " href="#portfolio">Recreations</a></li>
                     <li><a className="nav-link scrollto" href="#team">Tours and Travels</a></li>
