@@ -2,9 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FloatingLabel } from 'react-bootstrap';
 import _ from "lodash";
@@ -36,7 +34,7 @@ class LoginComponent extends React.Component {
         const { addUserInfo, showPageLoader, hidePageLoader } = this.props;
         //addUserInfo("userInfo",user.data);
         const form = event.currentTarget;
-        
+
         if (form.checkValidity() === false || _.isEmpty(this.state.user_name) || _.isEmpty(this.state.password)) {
             event.preventDefault();
             event.stopPropagation();
@@ -101,24 +99,12 @@ class LoginComponent extends React.Component {
                                 label="User Name"
                                 className="mb-3"
                             >
-                                <Form.Control type="text" name="user_name" isValid={!_.isEmpty(this.state.user_name)} isInvalid={ _.isEmpty(this.state.user_name)} placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
+                                <Form.Control type="text" name="user_name" isValid={!_.isEmpty(this.state.user_name)} isInvalid={_.isEmpty(this.state.user_name)} placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
                             </FloatingLabel>
                             <FloatingLabel controlId="floatingPassword" label="Password">
-                                <Form.Control type="password" isValid={!_.isEmpty(this.state.password)} isInvalid={ _.isEmpty(this.state.password)} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
+                                <Form.Control type="password" isValid={!_.isEmpty(this.state.password)} isInvalid={_.isEmpty(this.state.password)} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
                             </FloatingLabel>
-                            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>User Name</Form.Label>
-                                <Form.Control type="text" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange}/>
-                                
-                            </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" id="password" value={this.state.password} onChange={this.onChange}/>
-                            </Form.Group> */}
-                            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group> */}
 
                         </Form>
 
@@ -143,8 +129,8 @@ const mapDispatchToProps = dispatch => {
     return {
         addUserInfo: (id, data) => dispatch({ type: 'USER_INFO', id, data }),
         removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id }),
-        showPageLoader:()=>showPageLoader(dispatch),
-        hidePageLoader:()=>hidePageLoader(dispatch),
+        showPageLoader: () => showPageLoader(dispatch),
+        hidePageLoader: () => hidePageLoader(dispatch),
     }
 };
 
