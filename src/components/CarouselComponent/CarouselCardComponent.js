@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import "./CarouselComponent.css"
 
 
-export const CarouselCardComponent = ({id, name, description, updatedDate, deleteImage}) => {
+export const CarouselCardComponent = ({id, name, description, updatedDate, deleteImage, thumbnailURL}) => {
   return (
     <div>
 
@@ -19,7 +19,7 @@ export const CarouselCardComponent = ({id, name, description, updatedDate, delet
                     </div>
             </div>
             </Card.Header>
-            <Card.Img variant="top"  src={"http://10.10.10.32/ContentManagement/image/thumbnail/download/"+id} className="cover"  />
+            <Card.Img variant="top"  src={thumbnailURL} className="cover"  />
             <Card.Body>
                 <Card.Text>
                     {description}

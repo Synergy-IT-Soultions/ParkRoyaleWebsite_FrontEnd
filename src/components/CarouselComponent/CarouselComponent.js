@@ -128,6 +128,7 @@ class CarouselComponent extends Component {
                                          <CarouselCardComponent key={image.imageInfo.imageInfoId}
                                             id={image.imageInfo.imageInfoId}
                                             name={image.imageInfo.imageName}
+                                            thumbnailURL={image.imageInfo.thumbnailURL}
                                             description={image.imageInfo.imageDescription}
                                             updatedDate={image.imageInfo.updatedDate}
                                             deleteImage={this.deleteImage} />
