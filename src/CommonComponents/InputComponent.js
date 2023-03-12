@@ -57,14 +57,14 @@ class InputComponent extends Component {
     }
 
     render() {
-        const { id, label, type, select, formData ,showSelectedImage} = this.props;
+        const { id, label, type, select, formData ,showSelectedImage, noLabel} = this.props;
         const { options, imageInfo } = this.state;
 
         return (
             <div>
                 <Row className="mb-3">
             <Form.Group>
-                <Form.Label>{!label ? "Image" : label}</Form.Label>
+                {noLabel?"":<Form.Label>{!label ? "Image" : label}</Form.Label>}
                 {!select ?
                     <Form.Control
                         required

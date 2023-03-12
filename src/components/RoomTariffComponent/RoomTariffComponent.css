@@ -1,0 +1,10 @@
+.fa-floppy-o{
+   
+    /* color: rgb(242, 232, 233); */
+    cursor: pointer;
+}
+
+.fa-floppy-o:hover{
+    color: rgb(73, 238, 67);
+    cursor: pointer;
+}

@@ -1,56 +1,33 @@
 import { Component } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import cmClient from "../../clients/ContentManagementClient";
 import _ from "lodash";
 import { connect } from "react-redux";
-
-class TableRowComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            rowData: {}
-        }
-    }
-
-    componentDidMount() {
-        this.setState({ rowData: this.props.data});
-    }
-
-    render() {
-        const {roomType, roomPrice, gstPercentage, gstCalculatedPrice, totalPrice} = this.state.rowData;
-        let editable = this.props.editable;
-        return (
-            <tr>
-                <td>{roomType}</td>
-                <td>{roomPrice}</td>
-                {/* <td>{gstPercentage}</td> */}
-                <td>{gstCalculatedPrice}</td>
-                <td>{totalPrice}</td>
-                {editable?<td><i class="fa fa-fw fa-trash"></i> <i class="fa fa-floppy-o"></i></td>:""}
-            </tr>
-
-        );
-    }
-
-}
+import './RoomTariffComponent.css'
+import TableRowComponent from "./TableRowComponent";
+import InputComponent from "../../CommonComponents/InputComponent";
 
 class RoomTariffComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:[],
-            editable:false
+            data: [],
+            editable: false,
+            show: false
         }
         this.loadData = this.loadData.bind(this);
-        this.makeTableEditable = this.makeTableEditable.bind(this);
+        this.toggleTableEditable = this.toggleTableEditable.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handlSave = this.handlSave.bind(this);
+        this.handleShow = this.handleShow.bind(this);
     }
 
     loadData() {
 
-        const {id} = this.props;
-        cmClient.get('/content/get/container/pricing/'+id)
+        const { id } = this.props;
+        cmClient.get('/content/get/container/pricing/' + id)
             //.then(response => console.log(response))
-            .then(response => this.setState({ data: response.data}))
+            .then(response => this.setState({ data: response.data }))
             .catch(error => console.log(error));
 
     }
@@ -59,27 +36,69 @@ class RoomTariffComponent extends Component {
         this.loadData();
     }
 
-    makeTableEditable() {
-        this.setState({editable:true});
+    toggleTableEditable() {
+        this.setState({ editable: !this.state.editable });
+    }
+
+    handleShow() {
+        this.setState({show:true});
+    }
+
+    handleClose() {
+        this.setState({show:false});
+    }
+
+    handlSave() {
+
+        const { token, formData } = this.props;
+        const auth = "Bearer " + token;
+
+        let rowDataCopy = _.cloneDeep(this.state.data[0]);
+        delete rowDataCopy.containerPricingInfoId;
+        rowDataCopy.roomType = _.get(formData, "room_tariff_new_king_suite");
+        rowDataCopy.roomPrice = _.get(formData, "room_tariff_new_rate");
+
+        console.log("rowDataCopy======================>");
+        console.log(JSON.stringify(rowDataCopy));
+        console.log(rowDataCopy);
+        //return;
+
+        cmClient.post('/content/save/container/pricing', rowDataCopy, {
+            headers: {
+                'Authorization': auth
+            }
+        })
+            .then(response => {
+                console.log("record created successfully");
+                console.log(response.data);
+                this.loadData();
+                this.toggleTableEditable();
+                this.handleClose();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
     }
 
     render() {
-        const {isAdmin} = this.props;
+        const { isAdmin } = this.props;
         let editOption;
-        if(isAdmin){
-            editOption = <Button  size="sm" onClick={this.makeTableEditable}>
-                            <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
-                        </Button>;
+        if (isAdmin) {
+            editOption = <Button size="sm" onClick={this.toggleTableEditable}>
+                <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+            </Button>;
         }
 
-        let isEditable = this.state.editable;
+        let { editable, show } = this.state;
+        editable = editable && isAdmin;
 
         return (
             <section id="pricing" className="pricing section-bg">
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
-                        <h2>Room Tariff{isAdmin?editOption:""}</h2>
-                        
+                        <h2>{isAdmin ? editOption : ""}Room Tariff</h2>
+
                     </div>
                     <Table striped bordered hover>
                         <thead>
@@ -88,15 +107,33 @@ class RoomTariffComponent extends Component {
                                 <th>Rate</th>
                                 <th>GST @ 18%</th>
                                 <th>Total</th>
-                                {isEditable?<th>Delete/Save</th>:""}
+                                {editable ? <th>Delete/Save</th> : ""}
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                _.map(this.state.data, (row)=><TableRowComponent data={row} editable={this.state.editable}/>)
+                                _.map(this.state.data, (row) => <TableRowComponent data={row} editable={editable} loadData={this.loadData} />)
                             }
+                            {/* <tr aria-colspan={4}></tr> */}
                         </tbody>
+
                     </Table>
+                    
+                    {editable ? <Button type="text" onClick={this.handleShow}>Add Row</Button> : ""}
+                    
+                    <Modal size="md" show={show} onHide={this.handleClose}>
+                        <Modal.Header className="modalHeader text-white" closeButton>
+                            <Modal.Title>Editor</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <InputComponent label="King Suite" id="room_tariff_new_king_suite"/>
+                            <InputComponent label="Rate" id="room_tariff_new_rate"/>
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button type="submit" onClick={this.handlSave}>Save</Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </section>
 
@@ -109,11 +146,12 @@ const mapStateToPros = state => {
         isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
         // isAdmin:true,
         token: state.userInfo.token,
+        formData: state.formData,
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        
+
     }
 };
 
