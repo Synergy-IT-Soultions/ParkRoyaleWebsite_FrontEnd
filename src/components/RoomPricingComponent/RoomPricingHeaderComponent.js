@@ -1,10 +1,10 @@
 import { Component } from "react";
-import { Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import _ from 'lodash'
-import axios from "axios";
 import cmClient from "../../clients/ContentManagementClient";
+import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
+import { toast } from "react-toastify";
 
 class RoomPricingHeaderComponent extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class RoomPricingHeaderComponent extends Component {
     }
 
     handleSave = (event) => {
-        const { data, formData } = this.props;
+        const { data, formData, showPageLoader, hidePageLoader } = this.props;
         const { token } = this.props;
         const auth = "Bearer " + token;
 
@@ -24,18 +24,20 @@ class RoomPricingHeaderComponent extends Component {
         console.log(JSON.stringify(requestData));
         console.log(requestData);
         //return;
-
+        showPageLoader();
         cmClient.post('/content/save/container', requestData, {
             headers: {
                 'Authorization': auth
             }
         })
             .then(response => {
+                toast.success("Record saved Successfully.");
                 console.log("record saved successfully");
                 console.log(response.data);
                 this.props.loadData();
+                hidePageLoader();
             })
-            .catch(error => console.log(error));
+            .catch(error => {console.log(error);hidePageLoader();});
 
 
 
@@ -66,9 +68,9 @@ const mapStateToPros = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        handleIncrementClick: () => dispatch({ type: 'INCREMENT' }),
-        handleDecrementClick: () => dispatch({ type: 'DECREMENT' })
+        showPageLoader: () => showPageLoader(dispatch),
+        hidePageLoader: () => hidePageLoader(dispatch),
     }
 };
 
-export default connect(mapStateToPros, undefined)(RoomPricingHeaderComponent);
+export default connect(mapStateToPros, mapDispatchToProps)(RoomPricingHeaderComponent);
