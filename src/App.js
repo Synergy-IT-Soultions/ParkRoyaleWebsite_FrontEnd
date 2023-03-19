@@ -6,7 +6,6 @@ import HomePageComponent from './components/HomePageComponent/HomePageComponent'
 import NoPageComponent from './components/NoPageComponent/NoPageComponent';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticate } from './utils/APIExecuter';
 import axios from 'axios';
 import SuitsAndRoomsComponent from './components/SuitsAndRoomsComponent/SuitsAndRoomsComponent';
 

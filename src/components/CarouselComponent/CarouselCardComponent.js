@@ -19,7 +19,7 @@ export const CarouselCardComponent = ({id, name, description, updatedDate, delet
                     </div>
             </div>
             </Card.Header>
-            <Card.Img variant="top"  src={thumbnailURL} className="cover"  />
+            <Card.Img variant="top"  src={thumbnailURL} className="cover"/>
             <Card.Body>
                 <Card.Text>
                     {description}
