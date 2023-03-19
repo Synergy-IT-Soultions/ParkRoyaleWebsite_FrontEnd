@@ -8,3 +8,21 @@
     color: rgb(73, 238, 67);
     cursor: pointer;
 }
+
+  .tablecard {
+    border: 0px solid #ccc;
+    border-radius: 7px;
+    padding: 1px;
+    width: 100%;
+    box-shadow: 0 0 1px #5846f9;
+    
+  }
+
+.tableHeader {
+    background-color: #5846f9;
+    color: white
+}
+
+tr:hover{
+    box-shadow: 0 10px 20px #5846f9, 0 4px 8px rgba(80, 53, 53, 0.06);
+}

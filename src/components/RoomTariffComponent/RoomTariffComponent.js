@@ -108,7 +108,7 @@ class RoomTariffComponent extends Component {
                     </div>
                     <Table striped bordered hover>
                         <thead>
-                            <tr>
+                            <tr class="tableHeader">
                                 <th>King Suite</th>
                                 <th>Rate</th>
                                 <th>GST %</th>
@@ -119,7 +119,7 @@ class RoomTariffComponent extends Component {
                         </thead>
                         <tbody>
                             {
-                                _.map(this.state.data, (row) => <TableRowComponent data={row} editable={editable} loadData={this.loadData} />)
+                                _.map(this.state.data, (row) => <TableRowComponent  data={row} editable={editable} loadData={this.loadData} />)
                             }
                             {/* <tr aria-colspan={4}></tr> */}
                         </tbody>
