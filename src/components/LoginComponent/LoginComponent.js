@@ -53,7 +53,8 @@ class LoginComponent extends React.Component {
         })
             //.then(response => console.log(response))
             .then(response => {
-                addUserInfo("userInfo", response.data)
+                addUserInfo("userInfo", response.data);
+                sessionStorage.setItem('userInfo', JSON.stringify(response.data));
                 this.setState({ show: false, loggedin: true });
                 hidePageLoader();
             })
@@ -63,6 +64,16 @@ class LoginComponent extends React.Component {
                 hidePageLoader();
             });
 
+    }
+
+    componentDidMount() {
+        const { addUserInfo } = this.props;
+        const userInfo = sessionStorage.getItem('userInfo');
+        if(!_.isEmpty(userInfo)){
+            addUserInfo("userInfo", JSON.parse(userInfo));
+            this.setState({ show: false, loggedin: true });
+        }
+        
     }
 
     onChange(e) {
