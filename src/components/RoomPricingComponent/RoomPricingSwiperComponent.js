@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Card from 'react-bootstrap/Card';
 import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
+import { toast } from "react-toastify";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
@@ -48,12 +49,17 @@ class RoomPricingSwiperComponent extends Component {
             }
           })
           .then(response => {
+            toast.success("Record saved successfully")
             console.log("record saved successfully");
             console.log(response.data);
             this.props.loadData();
             hidePageLoader();
           })
-            .catch(error => {console.log(error);hidePageLoader();});
+            .catch(error => {
+                console.log(error);
+                hidePageLoader();
+                toast.error(error.response.data.errorMessage);
+            });
 
 
 

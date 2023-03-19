@@ -60,7 +60,7 @@ class LoginComponent extends React.Component {
             })
             .catch(error => {
                 console.log(error);
-                toast("Invalid User Credentials");
+                toast.error(error.response.data.errorMessage);
                 hidePageLoader();
             });
 

@@ -46,7 +46,11 @@ class TableRowComponent extends Component {
                 this.props.loadData();
                 hidePageLoader();
             })
-            .catch(error => {console.log(error);hidePageLoader();});
+            .catch(error => {
+                console.log(error);
+                hidePageLoader();
+                toast.error(error.response.data.errorMessage);
+            });
 
     }
 
@@ -75,7 +79,11 @@ class TableRowComponent extends Component {
                 this.props.loadData();
                 hidePageLoader();
             })
-            .catch(error => {console.log(error);hidePageLoader();});
+            .catch(error => {
+                console.log(error);
+                hidePageLoader();
+                toast.error(error.response.data.errorMessage);
+            });
     }
 
     static getDerivedStateFromProps(props, state) {
