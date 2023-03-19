@@ -83,6 +83,7 @@ class RoomTariffComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
+                toast.error(error.response.data.errorMessage);
             });
 
     }

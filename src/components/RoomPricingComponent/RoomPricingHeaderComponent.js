@@ -9,6 +9,9 @@ import { toast } from "react-toastify";
 class RoomPricingHeaderComponent extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            showEditPage:true
+        }
     }
 
     handleSave = (event) => {
@@ -36,8 +39,13 @@ class RoomPricingHeaderComponent extends Component {
                 console.log(response.data);
                 this.props.loadData();
                 hidePageLoader();
+                this.setState({showEditPage:false})
             })
-            .catch(error => {console.log(error);hidePageLoader();});
+            .catch(error => {
+                console.log(error);
+                hidePageLoader();
+                toast.error(error.response.data.errorMessage);
+            });
 
 
 
@@ -50,7 +58,7 @@ class RoomPricingHeaderComponent extends Component {
 
         return (
             <div className="section-title">
-                <h2>{isAdmin ? <ContainerEditComponent data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
+                <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                 <p>{containertextLabelValue}</p>
             </div>
         );

@@ -53,16 +53,27 @@ class LoginComponent extends React.Component {
         })
             //.then(response => console.log(response))
             .then(response => {
-                addUserInfo("userInfo", response.data)
+                addUserInfo("userInfo", response.data);
+                sessionStorage.setItem('userInfo', JSON.stringify(response.data));
                 this.setState({ show: false, loggedin: true });
                 hidePageLoader();
             })
             .catch(error => {
                 console.log(error);
-                toast("Invalid User Credentials");
+                toast.error(error.response.data.errorMessage);
                 hidePageLoader();
             });
 
+    }
+
+    componentDidMount() {
+        const { addUserInfo } = this.props;
+        const userInfo = sessionStorage.getItem('userInfo');
+        if(!_.isEmpty(userInfo)){
+            addUserInfo("userInfo", JSON.parse(userInfo));
+            this.setState({ show: false, loggedin: true });
+        }
+        
     }
 
     onChange(e) {
@@ -74,9 +85,14 @@ class LoginComponent extends React.Component {
     }
 
     logoutUser() {
-        const { removeUserInfo } = this.props;
+        const { removeUserInfo, showPageLoader, hidePageLoader } = this.props;
+        showPageLoader();
         removeUserInfo("userInfo");
+        sessionStorage.removeItem('userInfo');
         this.setState({ loggedin: false, user_name: "", password: "" });
+        setTimeout(() => {
+            hidePageLoader();
+        }, 1000);
     }
 
     render() {

@@ -63,10 +63,16 @@ class CarouselComponent extends Component {
         showPageLoader();
         cmClient.post('/image/delete/' + fileId)
             .then(response => {
+                toast.success("Image deleted Successfully.")
                 this.fetchImages();
                 hidePageLoader();
+
             })
-            .catch(error => {console.log(error);hidePageLoader();});
+            .catch(error => {
+                console.log(error);
+                hidePageLoader();
+                toast.error(error.response.data.errorMessage);
+            });
 
     }
 
@@ -84,9 +90,11 @@ class CarouselComponent extends Component {
                 toast.success("Image Uploaded Successfully.");
                 this.fetchImages();
                 hidePageLoader();
+                this.setState({showUpload:false})
             })
             .catch(error => {console.log(error);
                 hidePageLoader();
+                toast.error(error.response.data.errorMessage);
             });
     }
 
