@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import './RoomTariffComponent.css'
 import TableRowComponent from "./TableRowComponent";
 import InputComponent from "../../CommonComponents/InputComponent";
+import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
+import { toast } from "react-toastify";
 
 class RoomTariffComponent extends Component {
     constructor(props) {
@@ -50,7 +52,7 @@ class RoomTariffComponent extends Component {
 
     handlSave() {
 
-        const { token, formData } = this.props;
+        const { token, formData, showPageLoader, hidePageLoader } = this.props;
         const auth = "Bearer " + token;
 
         let rowDataCopy = _.cloneDeep(this.state.data[0]);
@@ -63,20 +65,24 @@ class RoomTariffComponent extends Component {
         console.log(rowDataCopy);
         //return;
 
+        showPageLoader();
         cmClient.post('/content/save/container/pricing', rowDataCopy, {
             headers: {
                 'Authorization': auth
             }
         })
             .then(response => {
+                toast.success("Record created successfully");
                 console.log("record created successfully");
                 console.log(response.data);
                 this.loadData();
                 this.toggleTableEditable();
                 this.handleClose();
+                hidePageLoader();
             })
             .catch(error => {
                 console.log(error);
+                hidePageLoader();
             });
 
     }
@@ -105,7 +111,8 @@ class RoomTariffComponent extends Component {
                             <tr>
                                 <th>King Suite</th>
                                 <th>Rate</th>
-                                <th>GST @ 18%</th>
+                                <th>GST %</th>
+                                <th>GST</th>
                                 <th>Total</th>
                                 {editable ? <th>Delete/Save</th> : ""}
                             </tr>
@@ -151,7 +158,8 @@ const mapStateToPros = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-
+        showPageLoader: () => showPageLoader(dispatch),
+        hidePageLoader: () => hidePageLoader(dispatch),
     }
 };
 

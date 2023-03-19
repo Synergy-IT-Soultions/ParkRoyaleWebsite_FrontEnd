@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { CarouselCardComponent } from "./CarouselCardComponent";
 import cmClient from "../../clients/ContentManagementClient";
+import { toast } from "react-toastify";
+import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 
 class CarouselComponent extends Component {
     constructor(props) {
@@ -57,18 +59,21 @@ class CarouselComponent extends Component {
     }
 
     deleteImage(fileId) {
-
+        const { showPageLoader, hidePageLoader} = this.props;
+        showPageLoader();
         cmClient.post('/image/delete/' + fileId)
             .then(response => {
                 this.fetchImages();
+                hidePageLoader();
             })
-            .catch(error => console.log(error));
+            .catch(error => {console.log(error);hidePageLoader();});
 
     }
 
     uploadImage(formData) {
-        const { token } = this.props;
+        const { token , showPageLoader, hidePageLoader} = this.props;
         const auth = "Bearer " + token;
+        showPageLoader();
         cmClient.post('/image/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data;boundary=',
@@ -76,9 +81,13 @@ class CarouselComponent extends Component {
             }
         })
             .then(response => {
+                toast.success("Image Uploaded Successfully.");
                 this.fetchImages();
+                hidePageLoader();
             })
-            .catch(error => console.log(error));
+            .catch(error => {console.log(error);
+                hidePageLoader();
+            });
     }
 
 
@@ -165,10 +174,17 @@ class CarouselComponent extends Component {
 const mapStateToPros = state => {
     return {
         isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
-        token: state.userInfo.token
+        token: state.userInfo.token,
     };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        showPageLoader: () => showPageLoader(dispatch),
+        hidePageLoader: () => hidePageLoader(dispatch),
+    }
 };
 
 
 
-export default connect(mapStateToPros, undefined)(CarouselComponent);
+export default connect(mapStateToPros, mapDispatchToProps)(CarouselComponent);

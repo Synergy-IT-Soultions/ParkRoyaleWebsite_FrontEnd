@@ -3,9 +3,9 @@ import _ from "lodash";
 import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import { connect } from "react-redux";
-import axios from "axios";
 import Card from 'react-bootstrap/Card';
 import cmClient from "../../clients/ContentManagementClient";
+import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class RoomPricingSwiperComponent extends Component {
     }
 
     handleSave = (data)=>{
-        const {formData} = this.props;
+        const {formData, showPageLoader, hidePageLoader} = this.props;
         const {token} = this.props;
         const auth = "Bearer "+token;
 
@@ -41,6 +41,7 @@ class RoomPricingSwiperComponent extends Component {
         console.log(requestData);
         //return;
 
+        showPageLoader();
         cmClient.post('/content/save/container', requestData, {
             headers: {
               'Authorization': auth
@@ -50,8 +51,9 @@ class RoomPricingSwiperComponent extends Component {
             console.log("record saved successfully");
             console.log(response.data);
             this.props.loadData();
+            hidePageLoader();
           })
-            .catch(error => console.log(error));
+            .catch(error => {console.log(error);hidePageLoader();});
 
 
 
@@ -108,11 +110,11 @@ class RoomPricingSwiperComponent extends Component {
               disableOnInteraction: false
             },
             slidesPerView: 'auto',
-            pagination: {
-              el: '.swiper-pagination',
-              type: 'bullets',
-              clickable: true
-            },
+            // pagination: {
+            //   el: '.swiper-pagination',
+            //   type: 'bullets',
+            //   clickable: true
+            // },
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -173,9 +175,9 @@ const mapStateToPros = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        handleIncrementClick: () => dispatch({ type: 'INCREMENT' }),
-        handleDecrementClick: () => dispatch({ type: 'DECREMENT' })
+        showPageLoader: () => showPageLoader(dispatch),
+        hidePageLoader: () => hidePageLoader(dispatch),
     }
 };
 
-export default connect(mapStateToPros, undefined)(RoomPricingSwiperComponent);
+export default connect(mapStateToPros, mapDispatchToProps)(RoomPricingSwiperComponent);

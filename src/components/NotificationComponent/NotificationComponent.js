@@ -17,7 +17,7 @@ class NotificationComponent extends React.Component {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="light"
+            theme="colored"
             /> 
         );
     }
