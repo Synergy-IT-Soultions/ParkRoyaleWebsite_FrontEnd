@@ -85,9 +85,14 @@ class LoginComponent extends React.Component {
     }
 
     logoutUser() {
-        const { removeUserInfo } = this.props;
+        const { removeUserInfo, showPageLoader, hidePageLoader } = this.props;
+        showPageLoader();
         removeUserInfo("userInfo");
+        sessionStorage.removeItem('userInfo');
         this.setState({ loggedin: false, user_name: "", password: "" });
+        setTimeout(() => {
+            hidePageLoader();
+        }, 1000);
     }
 
     render() {

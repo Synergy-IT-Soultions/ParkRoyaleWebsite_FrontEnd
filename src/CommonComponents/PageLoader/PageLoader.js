@@ -12,7 +12,7 @@ class PageLoader extends Component {
     render() {
         const { showPageLoader } = this.props;
         return (
-            <Modal
+            <Modal className="chandan"
                 size="sm"
                 show={showPageLoader}
                 aria-labelledby="example-modal-sizes-title-sm" centered>
