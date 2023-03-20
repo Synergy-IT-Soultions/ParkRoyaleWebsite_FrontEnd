@@ -16,6 +16,7 @@ class RoomPricingComponent extends Component {
     loadData() {
 
         const {id} = this.props;
+        
         cmClient.get('/content/get/container/group-details/'+id)
             //.then(response => console.log(response))
             .then(response => this.setState({ data: response.data , isLoading:false}))

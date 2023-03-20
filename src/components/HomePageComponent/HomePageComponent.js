@@ -8,7 +8,7 @@ function HomePageComponent() {
         <CarouselComponent id="home-imagecarousel-id"/>
         <RoomPricingComponent id="home-roompricing-id"/>
         <RoomTariffComponent id="home-roompricing-id"/>
-        <WhoWeAreComponent id="home-roompricing-id"/>
+        <WhoWeAreComponent id="home-whoweare-id"/>
     </div> );
 }
 

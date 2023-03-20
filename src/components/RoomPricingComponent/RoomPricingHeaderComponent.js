@@ -46,13 +46,11 @@ class RoomPricingHeaderComponent extends Component {
                 hidePageLoader();
                 toast.error(error.response.data.errorMessage);
             });
-
-
-
     }
 
     render() {
         const { data, isAdmin } = this.props;
+        
         const containerHeader = data.containerHeader;
         const containertextLabelValue = data.containerTextInfo[0].containertextLabelValue;
 

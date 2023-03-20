@@ -107,6 +107,7 @@ class RoomTariffComponent extends Component {
                         <h2>{isAdmin ? editOption : ""}Room Tariff</h2>
 
                     </div>
+                    <div class="tableHolder">
                     <Table striped bordered hover>
                         <thead>
                             <tr class="tableHeader">
@@ -126,7 +127,7 @@ class RoomTariffComponent extends Component {
                         </tbody>
 
                     </Table>
-                    
+                    </div>
                     {editable ? <Button type="text" onClick={this.handleShow}>Add Row</Button> : ""}
                     
                     <Modal size="md" show={show} onHide={this.handleClose}>
