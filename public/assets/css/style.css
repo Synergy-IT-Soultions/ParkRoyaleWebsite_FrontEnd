@@ -567,7 +567,7 @@ h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 100px 0;
+  padding: 50px 0;
   overflow: hidden;
 }
 
@@ -577,15 +577,15 @@ section {
 
 .section-title {
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .section-title h2 {
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
   position: relative;
 }
 
@@ -1133,7 +1133,7 @@ section {
 # Pricing
 --------------------------------------------------------------*/
 .pricing .box {
-  padding: 20px;
+  padding: 10px;
   background: #fff;
   text-align: center;
   border-radius: 5px;

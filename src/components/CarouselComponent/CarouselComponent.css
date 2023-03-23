@@ -35,6 +35,10 @@
   cursor: pointer;
 }
 
+.card img {
+    max-height: 580px;
+    max-width: 100%;  
+}
 .cardHeader {
     font-weight: bold;
 }

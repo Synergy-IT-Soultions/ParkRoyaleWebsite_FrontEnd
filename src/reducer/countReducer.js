@@ -23,9 +23,7 @@ const countReducer = function (state = defaultState, action) {
         //call axios API
         var resp = {data:[]};
         const apiKey = action.key;
-
         return {...state, apiKey:resp.data}
-
       }
       case "PROMPT_LOGIN":
         return {...state, showLogin:true}

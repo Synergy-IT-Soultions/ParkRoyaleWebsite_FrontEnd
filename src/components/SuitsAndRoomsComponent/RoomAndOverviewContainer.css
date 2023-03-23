@@ -1,0 +1,25 @@
+.left {
+    width: 70%;
+    height: 600px;
+    float: left;
+  }
+  
+  .right {
+    width: 28%;
+    height: 600px;
+    float: right;
+  }
+
+  .table-bordered {
+    border: 2px solid black;
+  }
+
+  .tableRow {
+    padding: 10px;
+  }
+
+  .tableCol {
+    border: 0px solid #5846f9;
+    padding: 3px;
+    text-align: left;
+  }

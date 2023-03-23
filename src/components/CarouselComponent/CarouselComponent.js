@@ -152,8 +152,14 @@ class CarouselComponent extends Component {
 
                     </Modal.Footer>
                 </Modal>
-
-                <FileUploadComponent show={this.state.showUpload} uploadImage={this.uploadImage} handleShowUpload={this.handleShowUpload} handleCloseUpload={this.handleCloseUpload} />
+                  
+                <FileUploadComponent 
+                    show={this.state.showUpload} 
+                    uploadImage={this.uploadImage} 
+                    handleShowUpload={this.handleShowUpload} 
+                    handleCloseUpload={this.handleCloseUpload} 
+                    id={this.props.id} 
+                    imageType={this.props.imageType} />
 
                 <Carousel>
                     {

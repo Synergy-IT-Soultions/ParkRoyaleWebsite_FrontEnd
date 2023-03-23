@@ -1,4 +1,7 @@
 import { Component } from "react";
+import CarouselComponent from "../CarouselComponent/CarouselComponent";
+import RoomTariffComponent from "../RoomTariffComponent/RoomTariffComponent";
+import { RoomsAndOverviewContainer } from "./RoomsAndOverviewContainer";
 
 class SuitsAndRoomsComponent extends Component {
     constructor(props) {
@@ -6,7 +9,11 @@ class SuitsAndRoomsComponent extends Component {
     }
     render() { 
         return (<div>
-            {"SuitsAndRoomsComponent under Development. Modify SuitsAndRoomsComponent to change the view."}
+            <CarouselComponent id="sandr-imagebar-id" imageType="IMAGEBAR"/>
+            
+             <RoomsAndOverviewContainer /> 
+             <RoomTariffComponent id="home-roompricing-id"/>
+             <RoomsAndOverviewContainer /> 
         </div>);
     }
 }

@@ -10,15 +10,14 @@
 }
 
   .tablecard {
-    color: rgb(51, 29, 110);
     border: 0px solid #ccc;
     border-radius: 7px;
     padding: 5px;
     width: 100%;
     box-shadow: 0 0 1px #5846f9;
-    
   }
 
+  
 
 .tableHeader {
     background-color: #5846f9;
@@ -27,15 +26,18 @@
 }
 
 tr:hover{
+    
+    border-radius: 5px;
     background: linear-gradient(145deg, #766fa7, #9187ed,  #766fa7);
     box-shadow: 0 10px 20px #5846f9, 0 4px 8px rgba(80, 53, 53, 0.06);
-    color: white;
+    color: white !important;
+    font-weight: 600;
 }
 
 .tableHolder{
     margin-bottom: 5px;
     border-radius: 7px;
-    background: linear-gradient(145deg,  #bbb8d2,  #a49ce8,  #bbbac6);
+    background: linear-gradient(145deg,  #bbb8d2,  #c1bcee,  #bbbac6);
     padding: 0px;
     box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 3px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.7);
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
