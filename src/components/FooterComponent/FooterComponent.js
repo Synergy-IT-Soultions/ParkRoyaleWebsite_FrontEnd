@@ -1,5 +1,3 @@
-import logoImage from '../../assets/ParkRoyale_Logo.png'
-
 function FooterComponent() {
     return (
         <footer id="footer">

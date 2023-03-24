@@ -4,16 +4,13 @@ import _ from "lodash";
 import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { connect } from "react-redux";
-import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
 
-class WhoWeAreComponent extends Component {
+class OverviewContainer extends Component {
     
     constructor(props) {
         super(props);
@@ -50,7 +47,7 @@ class WhoWeAreComponent extends Component {
 
         requestData.containerHeader = _.get(formData, data.pageContainerInfoId + "")
         requestData.containerTextInfo[0].containertextLabelValue = encodedText;
-        requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
+       // requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
 
         console.log("requestData======================>");
         console.log(JSON.stringify(requestData));
@@ -79,42 +76,33 @@ class WhoWeAreComponent extends Component {
     
     render() {
         const { isAdmin } = this.props;
-        const  data  = _.slice(this.state.data,0,1)[0];
+        const  data  = this.state.data && _.slice(this.state.data,0,1)[0];
         const isLoading = this.state.isLoading;
         const containerHeader = data && data.containerHeader;
-        
-        const containertextLabelValue = data && decode(data.containerTextInfo[0].containertextLabelValue);
-        
-        if(containertextLabelValue) {
-          data.containerTextInfo[0].containertextLabelValue = containertextLabelValue ;
-        }
-        const containerVideoURL = data && data.containerTextInfo[1].containertextLabelValue;
+      
+        const displayData = data?.containerTextInfo.map((containerTextInfo) => {
+            return (
+            <tr >
+                 <td className="tableCol" > <div class='tablecard'> {containerTextInfo?.containerTextLabelName}: </div> </td>
+                 <td className="tableCol" > <div class='tablecard' > {decode(containerTextInfo?.containertextLabelValue)}</div></td>
+              </tr>
+            );
+          });
+   
     
         return (
-            
-            isLoading?<SpinnerComponent/>:
-                <section id="who-we-are" className="pricing section-bg">
-                <div className="container" data-aos="fade-up">
-                    <div className="section-title">
-                         <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
-                    </div>
-                <div class="d-flex">
-                <Card className="mx-auto my-3 text-white mb-2 rounded">
-                    <Card.Body>
-                        <Row lg={2}>  
-                            <Col className="d-flex">
-                            <iframe width="100%" height="100%" src={containerVideoURL} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            </Col>
-                            <Col className="d-flex">
-                                    <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
-                            </Col>
-                        </Row>            
-                    </Card.Body>
-                </Card>
-                </div>
-                </div>
-                </section>
-          
+            <Card className='tableHolder'>
+                                   <Card.Header style={{ backgroundColor: '#5846f9', color:'white', fontWeight: 800 }} > 
+                                   {isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} /> : ""}{containerHeader }
+                                   </Card.Header>
+                                   <Card.Body >
+                                        <table>
+                                        {
+                                           displayData
+                                        }    
+                                        </table>
+                                   </Card.Body>
+                              </Card>
         );
     }
 }
@@ -134,4 +122,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToPros, mapDispatchToProps) (WhoWeAreComponent);
+export default connect(mapStateToPros, mapDispatchToProps) (OverviewContainer);

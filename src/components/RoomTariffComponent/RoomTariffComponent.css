@@ -31,7 +31,7 @@ tr:hover{
     background: linear-gradient(145deg, #766fa7, #9187ed,  #766fa7);
     box-shadow: 0 10px 20px #5846f9, 0 4px 8px rgba(80, 53, 53, 0.06);
     color: white !important;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .tableHolder{

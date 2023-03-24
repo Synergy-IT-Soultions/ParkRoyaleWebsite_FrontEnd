@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-
 import Row from 'react-bootstrap/Row';
-import { connect } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
 import _ from 'lodash';
 
 
@@ -18,7 +15,7 @@ function FileUploadComponent(props ) {
     const [validated, setValidated] = useState(false);
     const [show, setShow] = useState(false);
     const [file, setFile] = useState();
-    const [imageInfo, setImageInfo] = useState({imageIsActive:1,updatedBy:3,containerDivId: {id},imageType:{imageType}});
+    const [imageInfo, setImageInfo] = useState({imageIsActive:1,updatedBy:3,containerDivId: id,imageType:imageType});
 
     const onFileChange = e => {
         let uploadedFile = e.target.files[0];
@@ -58,7 +55,6 @@ function FileUploadComponent(props ) {
     };
 
     const uploadFile =  ()=>{
-
         const formData = new FormData();
         formData.append('file', file);
         _.forEach(imageInfo, (value, key)=> formData.append(key, value) );

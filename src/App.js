@@ -6,14 +6,11 @@ import HomePageComponent from './components/HomePageComponent/HomePageComponent'
 import NoPageComponent from './components/NoPageComponent/NoPageComponent';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import SuitsAndRoomsComponent from './components/SuitsAndRoomsComponent/SuitsAndRoomsComponent';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   componentDidMount() {
     // //const user = authenticate();

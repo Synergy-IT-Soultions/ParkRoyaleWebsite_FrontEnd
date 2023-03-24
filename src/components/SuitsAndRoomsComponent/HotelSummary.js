@@ -7,13 +7,11 @@ import { connect } from "react-redux";
 import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
 
-class WhoWeAreComponent extends Component {
+class HotelSummary extends Component {
     
     constructor(props) {
         super(props);
@@ -50,7 +48,7 @@ class WhoWeAreComponent extends Component {
 
         requestData.containerHeader = _.get(formData, data.pageContainerInfoId + "")
         requestData.containerTextInfo[0].containertextLabelValue = encodedText;
-        requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
+       // requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
 
         console.log("requestData======================>");
         console.log(JSON.stringify(requestData));
@@ -88,7 +86,7 @@ class WhoWeAreComponent extends Component {
         if(containertextLabelValue) {
           data.containerTextInfo[0].containertextLabelValue = containertextLabelValue ;
         }
-        const containerVideoURL = data && data.containerTextInfo[1].containertextLabelValue;
+        
     
         return (
             
@@ -101,14 +99,9 @@ class WhoWeAreComponent extends Component {
                 <div class="d-flex">
                 <Card className="mx-auto my-3 text-white mb-2 rounded">
                     <Card.Body>
-                        <Row lg={2}>  
-                            <Col className="d-flex">
-                            <iframe width="100%" height="100%" src={containerVideoURL} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            </Col>
-                            <Col className="d-flex">
-                                    <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
-                            </Col>
-                        </Row>            
+                    <div className="d-flex">
+                        <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
+                    </div>                
                     </Card.Body>
                 </Card>
                 </div>
@@ -134,4 +127,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToPros, mapDispatchToProps) (WhoWeAreComponent);
+export default connect(mapStateToPros, mapDispatchToProps) (HotelSummary);

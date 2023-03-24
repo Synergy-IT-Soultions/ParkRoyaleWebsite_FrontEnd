@@ -20,9 +20,7 @@ const countReducer = function (state = defaultState, action) {
       case "DECREMENT":
         return {...state, count:state.count-1}
       case "callAPI":{
-        //call axios API
         var resp = {data:[]};
-        const apiKey = action.key;
         return {...state, apiKey:resp.data}
       }
       case "PROMPT_LOGIN":

@@ -1,14 +1,25 @@
 .left {
-    width: 70%;
-    height: 600px;
+  width:65%;
     float: left;
   }
   
   .right {
-    width: 28%;
-    height: 600px;
+  width:33%;
+   
     float: right;
   }
+
+  .left1 {
+    width:68%;
+     
+      float: left;
+    }
+    
+    .right1 {
+    width:30%;
+     
+      float: right;
+    }
 
   .table-bordered {
     border: 2px solid black;
@@ -20,6 +31,10 @@
 
   .tableCol {
     border: 0px solid #5846f9;
-    padding: 3px;
+    padding: 5px;
     text-align: left;
+  }
+
+  th, td {
+    padding: 15px;
   }

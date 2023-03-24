@@ -1,13 +1,11 @@
 import { Component } from "react";
-import { Button, Modal } from "react-bootstrap";
+import {  Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import SpinnerComponent from "../SpinnerComponent/SpinnerComponent";
 import './PageLoader.css'
 
 class PageLoader extends Component {
-    constructor(props) {
-        super(props);
-    }
+    
 
     render() {
         const { showPageLoader } = this.props;

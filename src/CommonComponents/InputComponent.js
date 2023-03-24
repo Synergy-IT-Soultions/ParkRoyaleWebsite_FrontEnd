@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { Form, Image } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import _ from 'lodash'
-import axios from "axios";
+
 import { connect } from "react-redux";
 import { ON_CHANGE } from "../utils/ActionTypes";
 import Row from 'react-bootstrap/Row';

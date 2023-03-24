@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Component } from "react";
 import RoomPricingHeaderComponent from "./RoomPricingHeaderComponent";
 import RoomPricingSwiperComponent from "./RoomPricingSwiperComponent";
@@ -29,7 +28,6 @@ class RoomPricingComponent extends Component {
     }
     
     render() {
-        var imageCards = [];
         const isLoading = this.state.isLoading;
         const headerObject = _.slice(this.state.data,0,1)[0];
         const swiperCards = _.slice(this.state.data,1);
