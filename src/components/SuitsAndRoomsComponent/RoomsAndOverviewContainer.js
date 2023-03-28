@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
-import CarouselComponent from '../CarouselComponent/CarouselComponent';
+import  CarouselComponent  from '../CarouselComponent/CarouselComponent';
 import './RoomAndOverviewContainer.css'
 import _ from "lodash";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
-import cmClient from "../../clients/ContentManagementClient";
-import SpinnerComponent from '../../CommonComponents/SpinnerComponent/SpinnerComponent';
-import ContainerEditComponent from '../../CommonComponents/ContainerEditComponent/ContainerEditComponent';
-import xtype from 'xtypejs'
-import OverviewContainer from './OverviewContainer';
+import  OverviewEditContainer  from './OverviewEditContainer';
 
 class RoomsAndOverviewContainer extends Component {
      constructor(props) {
@@ -23,7 +19,7 @@ class RoomsAndOverviewContainer extends Component {
      render() {
          return (
                
-                    <section id="roomImages" >
+                    <section >
                          <div class="container" data-aos="fade-up">
                               <div class="left">
                                    <Card>
@@ -33,7 +29,7 @@ class RoomsAndOverviewContainer extends Component {
                                    </Card>
                               </div>
                               <div class="right">
-                                   <OverviewContainer id="sandr-roomsoverview-id"/>
+                                   <OverviewEditContainer id="sandr-roomsoverview-id"/>
                               </div>
                          </div>
                     </section>
@@ -57,4 +53,4 @@ const mapStateToPros = state => {
      }
  };
  
- export default connect(mapStateToPros, mapDispatchToProps) (RoomsAndOverviewContainer);
+export default connect(mapStateToPros, mapDispatchToProps) (RoomsAndOverviewContainer);

@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import './RoomAndOverviewContainer.css'
 import _ from "lodash";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
-import HotelSummary from './HotelSummary';
-import OverviewContainer from './OverviewContainer';
-
+import  HotelSummary  from './HotelSummary';
+import  OverviewEditContainer  from './OverviewEditContainer';
 
 class HotelAndOverviewContainer extends Component {
      constructor(props) {
@@ -25,7 +24,7 @@ class HotelAndOverviewContainer extends Component {
                                 <HotelSummary id="sandr-roomdescription-id"/>
                             </div>
                             <div class="right1">
-                                <OverviewContainer id="sandr-hoteloverview-id"/>
+                                <OverviewEditContainer id="sandr-hoteloverview-id"/>
                             </div>
                         </div>
                     </section>
@@ -49,4 +48,4 @@ const mapStateToPros = state => {
      }
  };
  
- export default connect(mapStateToPros, mapDispatchToProps) (HotelAndOverviewContainer);
+export default connect(mapStateToPros, mapDispatchToProps) (HotelAndOverviewContainer);

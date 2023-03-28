@@ -6,7 +6,7 @@ import './CarouselComponent.css'
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { CarouselCardComponent } from "./CarouselCardComponent";
+import  CarouselCardComponent  from "./CarouselCardComponent";
 import cmClient from "../../clients/ContentManagementClient";
 import { toast } from "react-toastify";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";

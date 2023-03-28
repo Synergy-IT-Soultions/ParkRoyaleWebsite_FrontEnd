@@ -1,11 +1,11 @@
 import React from "react";
 import { Component } from "react";
 import _ from "lodash";
-import cmClient from "../../clients/ContentManagementClient";
+import  cmClient  from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { connect } from "react-redux";
-import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
-import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
+import  SpinnerComponent  from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
+import  ContainerEditComponent  from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import Card from 'react-bootstrap/Card';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
