@@ -20,12 +20,15 @@ class HotelAndOverviewContainer extends Component {
                <div class="container-fluid" >
                     <section >
                         <div class="container" data-aos="fade-up">
+                        <div class="row row-cols-lg-2">
+                             
                             <div class="left1" style={{ height: '98%' }}>
                                 <HotelSummary id="sandr-roomdescription-id"/>
                             </div>
-                            <div class="right1">
+                            <div class="card-content">
                                 <OverviewEditContainer id="sandr-hoteloverview-id"/>
                             </div>
+                          </div>  
                         </div>
                     </section>
                </div>

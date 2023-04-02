@@ -21,7 +21,7 @@ class NavBarComponent extends Component {
 
     render() {
         return (
-            <header id="header" className="fixed-top ">
+            <header id="header" className="fixed-top">
                 <div className="container d-flex align-items-center justify-content-between">
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}

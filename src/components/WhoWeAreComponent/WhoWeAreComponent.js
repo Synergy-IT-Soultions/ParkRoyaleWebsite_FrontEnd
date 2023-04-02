@@ -102,12 +102,16 @@ class WhoWeAreComponent extends Component {
                 <Card className="mx-auto my-3 text-white mb-2 rounded">
                     <Card.Body>
                         <Row lg={2}>  
-                            <Col className="d-flex">
-                            <iframe width="100%" height="100%" src={containerVideoURL} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            </Col>
-                            <Col className="d-flex">
+                            <div>
+                            <iframe style={{overflow : 'hidden', height : '100%', width : '100%' } }
+                                    src={containerVideoURL} 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                           </div>
+                           <div class="card-content">
                                     <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
-                            </Col>
+                            </div>
                         </Row>            
                     </Card.Body>
                 </Card>

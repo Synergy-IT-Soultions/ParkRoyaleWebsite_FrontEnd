@@ -67,3 +67,30 @@ tr:hover{
     justify-content: center;
 
 }
+.card {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .iframe {
+    flex: 1;
+    margin-right: 20px;
+    width: 100%;
+
+  }
+
+  .card-content {
+    flex: 1;
+  }
+
+  @media screen and (max-width: 750px) {
+    .card {
+      flex-direction: column; /* change the flex-direction to column to make the columns turn into rows */
+    }
+    
+    .iframe {
+      margin-right: 0;
+      margin-bottom: 20px;
+      max-width: none;
+    }
+  }

@@ -21,6 +21,7 @@ class RoomsAndOverviewContainer extends Component {
                
                     <section >
                          <div class="container" data-aos="fade-up">
+                         <div class="row row-cols-lg-2">
                               <div class="left">
                                    <Card>
                                         <Card.Body >
@@ -28,9 +29,10 @@ class RoomsAndOverviewContainer extends Component {
                                         </Card.Body>
                                    </Card>
                               </div>
-                              <div class="right">
+                              <div class="card-content">
                                    <OverviewEditContainer id="sandr-roomsoverview-id"/>
                               </div>
+                         </div>
                          </div>
                     </section>
               

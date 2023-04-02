@@ -34,7 +34,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
+        <BrowserRouter basename="/HotelManagement">
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
