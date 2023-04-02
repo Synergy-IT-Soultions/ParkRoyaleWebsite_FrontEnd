@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
+import { displayErrors } from "../../utils/CommonUtils";
 
 class WhoWeAreComponent extends Component {
     
@@ -73,7 +74,7 @@ class WhoWeAreComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
     }
     

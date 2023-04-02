@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { toast } from "react-toastify";
+import { displayErrors } from "../../utils/CommonUtils";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
@@ -58,7 +59,7 @@ class RoomPricingSwiperComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
 
 

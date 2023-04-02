@@ -9,6 +9,7 @@ import  ContainerEditComponent  from "../../CommonComponents/ContainerEditCompon
 import Card from 'react-bootstrap/Card';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
+import { displayErrors } from "../../utils/CommonUtils";
 
  class OverviewEditContainer extends Component {
     
@@ -73,7 +74,7 @@ import {decode} from 'html-entities';
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
     }
     

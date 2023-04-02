@@ -8,6 +8,7 @@ import { FloatingLabel } from 'react-bootstrap';
 import _ from "lodash";
 import { hidePageLoader, showPageLoader } from '../../utils/ReduxActions';
 import cmClient from '../../clients/ContentManagementClient';
+import { displayErrors } from '../../utils/CommonUtils';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -60,7 +61,7 @@ class LoginComponent extends React.Component {
             })
             .catch(error => {
                 console.log(error);
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
                 hidePageLoader();
             });
 

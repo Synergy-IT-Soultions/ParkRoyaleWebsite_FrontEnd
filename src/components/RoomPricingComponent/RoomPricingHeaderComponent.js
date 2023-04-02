@@ -5,6 +5,7 @@ import _ from 'lodash'
 import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { toast } from "react-toastify";
+import { displayErrors } from "../../utils/CommonUtils";
 
 class RoomPricingHeaderComponent extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class RoomPricingHeaderComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
     }
 

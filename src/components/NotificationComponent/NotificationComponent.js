@@ -9,7 +9,7 @@ class NotificationComponent extends React.Component {
         return ( 
         <ToastContainer
             position="top-right"
-            autoClose={3000}
+            autoClose={false}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick

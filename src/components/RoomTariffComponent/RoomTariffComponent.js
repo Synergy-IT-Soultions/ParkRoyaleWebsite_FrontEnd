@@ -8,6 +8,7 @@ import TableRowComponent from "./TableRowComponent";
 import InputComponent from "../../CommonComponents/InputComponent";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { toast } from "react-toastify";
+import { displayErrors } from "../../utils/CommonUtils";
 
 class RoomTariffComponent extends Component {
     constructor(props) {
@@ -83,7 +84,7 @@ class RoomTariffComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
 
     }
