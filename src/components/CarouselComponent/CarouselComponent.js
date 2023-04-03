@@ -10,6 +10,7 @@ import  CarouselCardComponent  from "./CarouselCardComponent";
 import cmClient from "../../clients/ContentManagementClient";
 import { toast } from "react-toastify";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
+import { displayErrors } from "../../utils/CommonUtils";
 
 class CarouselComponent extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class CarouselComponent extends Component {
         this.uploadImage = this.uploadImage.bind(this);
         this.handleCloseUpload = this.handleCloseUpload.bind(this);
         this.handleShowUpload = this.handleShowUpload.bind(this);
+        this.displayCarousel = this.displayCarousel.bind(this);
 
     }
 
@@ -71,7 +73,8 @@ class CarouselComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                //toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
 
     }
@@ -94,7 +97,8 @@ class CarouselComponent extends Component {
             })
             .catch(error => {console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                //toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
     }
 
@@ -105,12 +109,36 @@ class CarouselComponent extends Component {
 
     }
 
+    displayCarousel(activeImages) {
+        return <Carousel>
+        {
+
+            _.map(activeImages, (image) => {
+
+                let imageId = image.imageInfo.imageInfoId;
+                return (<Carousel.Item key={imageId}>
+                    <img
+                        className="d-block w-100"
+                        src={image.imageInfo.imageURL}
+                        alt={image.imageInfo.imageAlt}
+                    />
+
+                </Carousel.Item>)
+
+            })
+
+        }
+    </Carousel>
+    }
+
 
     render() {
         const { isAdmin } = this.props;
         let activeImages = _.filter(this.state.data, (item) => {
             return _.isEqual(item.imageInfo.imageIsActive, 1);
         });
+
+        let noOfImages = activeImages.length;
 
 
 
@@ -131,7 +159,7 @@ class CarouselComponent extends Component {
                         <Modal.Title >Image Editor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {activeImages.length === 0 ? "Images not added yet, please add images." : ""}
+                        {noOfImages === 0 ? "Images not added yet, please add images." : ""}
                         <div >
                             {
                                 activeImages.map(image =>
@@ -161,25 +189,22 @@ class CarouselComponent extends Component {
                     id={this.props.id} 
                     imageType={this.props.imageType} />
 
-                <Carousel>
-                    {
+                {
+                    noOfImages==1?_.map(activeImages, (image) => {
 
-                        _.map(activeImages, (image) => {
+                        let imageId = image.imageInfo.imageInfoId;
+                        return (
+                            <img
+                                className="d-block w-100"
+                                src={image.imageInfo.imageURL}
+                                alt={image.imageInfo.imageAlt}
+                            />
 
-                            let imageId = image.imageInfo.imageInfoId;
-                            return (<Carousel.Item key={imageId}>
-                                <img
-                                    className="d-block w-100"
-                                    src={image.imageInfo.imageURL}
-                                    alt={image.imageInfo.imageAlt}
-                                />
+                        )
 
-                            </Carousel.Item>)
-
-                        })
-
-                    }
-                </Carousel>
+                    }):this.displayCarousel(activeImages)
+                }
+                
             </div>
         );
     }

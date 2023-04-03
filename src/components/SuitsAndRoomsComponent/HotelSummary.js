@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
+import { displayErrors } from "../../utils/CommonUtils";
 
 class HotelSummary extends Component {
     
@@ -71,7 +72,7 @@ class HotelSummary extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
     }
     

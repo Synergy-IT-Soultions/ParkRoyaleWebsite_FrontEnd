@@ -5,6 +5,7 @@ import InputComponent from "../../CommonComponents/InputComponent";
 import cmClient from "../../clients/ContentManagementClient";
 import { toast } from "react-toastify";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
+import { displayErrors } from "../../utils/CommonUtils";
 
 class TableRowComponent extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class TableRowComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
 
     }
@@ -82,7 +83,7 @@ class TableRowComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                toast.error(error.response.data.errorMessage);
+                displayErrors(error);
             });
     }
 
