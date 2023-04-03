@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { browserHistory, BrowserRouter, Routes, Route } from "react-router-dom";
 import LayoutComponent from './components/LayoutComponent/LayoutComponent';
 import HomePageComponent from './components/HomePageComponent/HomePageComponent';
 import NoPageComponent from './components/NoPageComponent/NoPageComponent';
@@ -35,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter basename="/HotelManagement">
+        <BrowserRouter basename={process.env.REACT_APP_ENV == "DEV" ? '/' :  process.env.REACT_APP_BASE_NAME }>
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
