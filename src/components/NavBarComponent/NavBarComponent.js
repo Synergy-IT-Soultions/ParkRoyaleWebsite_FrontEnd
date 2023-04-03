@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logoImage from '../../assets/ParkRoyale_Logo.png'
 import LoginComponent from '../LoginComponent/LoginComponent';
@@ -25,36 +26,18 @@ class NavBarComponent extends Component {
                 <div className="container d-flex align-items-center justify-content-between">
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
-                    <a href="index.html" className="logo"><img src={logoImage} alt="" className="img-fluid" /></a>
+                    <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a>
 
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>
-                            <li><Link className="nav-link scrollto active" to="/">Home</Link></li>
+                            <li><NavLink className="nav-link scrollto" to="/" activeClassName="active">Home</NavLink></li>
                             {/* <li><a className="nav-link scrollto" href="#about">Suits and Rooms</a></li> */}
-                            <li><Link className='nav-link scrollto' to="suitsandrooms">Suits and Rooms</Link></li>
-                            <li><a className="nav-link scrollto" href="#services">Restaurants</a></li>
-                            <li><a className="nav-link scrollto " href="#portfolio">Recreations</a></li>
-                            <li><a className="nav-link scrollto" href="#team">Tours and Travels</a></li>
-                            {/* <li className="dropdown"><a href="#"><span>Drop Down</span> <i className="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li className="dropdown"><a href="#"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li> */}
-                            <li><a className="nav-link scrollto" href="#contact">Gallery</a></li>
-
-                            <li><a className="getstarted scrollto" href="#about">Contact Us</a></li>
+                            <li><NavLink className='nav-link scrollto' to="/suitsandrooms" activeClassName="active">Suits and Rooms</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/restaurants" activeClassName="active">Restaurants</NavLink></li>
+                            <li><NavLink className="nav-link scrollto " to="/recreations" activeClassName="active">Recreations</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/toursandtravels" activeClassName="active">Tours and Travels</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/gallery" activeClassName="active">Gallery</NavLink></li>
+                            <li><NavLink className="getstarted scrollto" to="/contactus" activeClassName="active">Contact Us</NavLink></li>
                             <LoginComponent />
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" ref={this.mobileToggleRef} onClick={this.mobileToggleClicked}></i>

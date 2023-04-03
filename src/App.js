@@ -7,6 +7,7 @@ import NoPageComponent from './components/NoPageComponent/NoPageComponent';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import SuitsAndRoomsComponent from './components/SuitsAndRoomsComponent/SuitsAndRoomsComponent';
+import ComingSoonComponent from './components/ComingSoonComponent/ComingSoonComponent';
 
 
 class App extends Component {
@@ -39,6 +40,11 @@ class App extends Component {
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
               <Route path="/suitsandrooms" element={<SuitsAndRoomsComponent />} />
+              <Route path="/restaurants" element={<ComingSoonComponent />} />
+              <Route path="/recreations" element={<ComingSoonComponent />} />
+              <Route path="/toursandtravels" element={<ComingSoonComponent />} />
+              <Route path="/gallery" element={<ComingSoonComponent />} />
+              <Route path="/contactus" element={<ComingSoonComponent />} />
               <Route path="*" element={<NoPageComponent />} />
             </Route>
           </Routes>
