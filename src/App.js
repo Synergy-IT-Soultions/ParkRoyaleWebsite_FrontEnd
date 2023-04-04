@@ -35,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter basename={process.env.REACT_APP_ENV == "DEV" ? '/' :  process.env.REACT_APP_BASE_NAME }>
+        <BrowserRouter >
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
