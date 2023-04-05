@@ -13,12 +13,14 @@ import { displayErrors } from '../../utils/CommonUtils';
 class LoginComponent extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { show: false, loggedin: false, user_name: "", password: "", validated: false }
+        this.state = { show: false, loggedin: false, user_name: "", password: "", validated: false, isInValid:false }
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.validateUser = this.validateUser.bind(this);
         this.logoutUser = this.logoutUser.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.isUserNameValid = this.isUserNameValid.bind(this);
+        this.isPasswordValid = this.isPasswordValid.bind(this);
     }
 
     handleClose() {
@@ -43,7 +45,7 @@ class LoginComponent extends React.Component {
             toast("Invalid User Credentials");
             return;
         }
-        this.setState({ validated: true });
+        this.setState({ validated: true , isValid:true});
 
         showPageLoader();
         cmClient.post('/user/authenticate', {}, {
@@ -56,12 +58,13 @@ class LoginComponent extends React.Component {
             .then(response => {
                 addUserInfo("userInfo", response.data);
                 sessionStorage.setItem('userInfo', JSON.stringify(response.data));
-                this.setState({ show: false, loggedin: true });
+                this.setState({ show: false, loggedin: true, isInValid: false });
                 hidePageLoader();
             })
             .catch(error => {
                 console.log(error);
                 displayErrors(error);
+                this.setState({ validated: false , isInValid: true});
                 hidePageLoader();
             });
 
@@ -81,6 +84,9 @@ class LoginComponent extends React.Component {
         let key = e.target.id;
         let data = {};
         data[key] = e.target.value;
+        if(_.isEmpty(e.target.value)){
+            data.isInValid = false;
+        }
         this.setState(data);
 
     }
@@ -96,7 +102,19 @@ class LoginComponent extends React.Component {
         }, 1000);
     }
 
+    isUserNameValid() {
+        if(_.isEmpty(this.state.user_name)) return false;
+        
+        return this.state.isInValid;
+    }
+
+    isPasswordValid() {
+        if(_.isEmpty(this.state.password)) return false;
+        return this.state.isInValid;
+    }
+
     render() {
+
         return (
             <React.Fragment>
 
@@ -110,16 +128,16 @@ class LoginComponent extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
 
-                        <Form noValidate validated={this.state.validated}>
+                        <Form>
                             <FloatingLabel
                                 controlId="floatingInput"
                                 label="User Name"
                                 className="mb-3"
                             >
-                                <Form.Control type="text" name="user_name" isValid={!_.isEmpty(this.state.user_name)} isInvalid={_.isEmpty(this.state.user_name)} placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
+                                <Form.Control type="text" isInvalid={this.isUserNameValid()} name="user_name" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
                             </FloatingLabel>
                             <FloatingLabel controlId="floatingPassword" label="Password">
-                                <Form.Control type="password" isValid={!_.isEmpty(this.state.password)} isInvalid={_.isEmpty(this.state.password)} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
+                                <Form.Control type="password" isInvalid={this.isPasswordValid()} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
                             </FloatingLabel>
 
 
