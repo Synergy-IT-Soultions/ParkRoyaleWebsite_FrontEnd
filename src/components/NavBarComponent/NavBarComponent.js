@@ -37,7 +37,8 @@ class NavBarComponent extends Component {
                 <div className="container d-flex align-items-center justify-content-between">
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
-                    <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a>
+                    {/* <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a> */}
+                    <NavLink className="nav-link logo" to="/"><img src={logoImage} alt=""  /></NavLink>
 
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>
