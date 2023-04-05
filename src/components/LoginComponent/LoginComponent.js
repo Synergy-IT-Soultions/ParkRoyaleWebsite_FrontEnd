@@ -29,6 +29,9 @@ class LoginComponent extends React.Component {
 
     handleShow() {
         this.setState({ show: true });
+        if(this.props.mobileToggleClicked){
+            this.props.mobileToggleClicked();
+        }
     }
 
     validateUser(event) {
