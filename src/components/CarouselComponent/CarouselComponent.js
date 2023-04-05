@@ -61,7 +61,7 @@ class CarouselComponent extends Component {
     }
 
     deleteImage(fileId) {
-        const { showPageLoader, hidePageLoader} = this.props;
+        const { showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
         showPageLoader();
         cmClient.post('/image/delete/' + fileId)
             .then(response => {
@@ -74,13 +74,13 @@ class CarouselComponent extends Component {
                 console.log(error);
                 hidePageLoader();
                 //toast.error(error.response.data.errorMessage);
-                displayErrors(error);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
             });
 
     }
 
     uploadImage(formData) {
-        const { token , showPageLoader, hidePageLoader} = this.props;
+        const { token , showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
         const auth = "Bearer " + token;
         showPageLoader();
         cmClient.post('/image/upload', formData, {
@@ -98,7 +98,7 @@ class CarouselComponent extends Component {
             .catch(error => {console.log(error);
                 hidePageLoader();
                 //toast.error(error.response.data.errorMessage);
-                displayErrors(error);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
             });
     }
 
@@ -221,6 +221,7 @@ const mapDispatchToProps = dispatch => {
     return {
         showPageLoader: () => showPageLoader(dispatch),
         hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 

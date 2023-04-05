@@ -22,7 +22,7 @@ class TableRowComponent extends Component {
     saveRowData(event) {
 
         const { containerPricingInfoId } = this.state.rowData;
-        const { token, formData, showPageLoader, hidePageLoader } = this.props;
+        const { token, formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         const auth = "Bearer " + token;
 
         let rowDataCopy = _.cloneDeep(this.state.rowData);
@@ -50,13 +50,13 @@ class TableRowComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                displayErrors(error);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
             });
 
     }
 
     deleteRowData(event) {
-        const { token, showPageLoader, hidePageLoader } = this.props;
+        const { token, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         const auth = "Bearer " + token;
 
         let rowDataCopy = _.cloneDeep(this.state.rowData);
@@ -83,7 +83,7 @@ class TableRowComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                displayErrors(error);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
             });
     }
 
@@ -184,6 +184,7 @@ const mapDispatchToProps = dispatch => {
     return {
         showPageLoader: () => showPageLoader(dispatch),
         hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 

@@ -37,7 +37,7 @@ class HotelSummary extends Component {
     handleSave = (data)=>{
         
         console.log(this.props);
-        const {  formData, showPageLoader, hidePageLoader } = this.props;
+        const {  formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         const { token } = this.props;
         const auth = "Bearer " + token;
 
@@ -72,7 +72,7 @@ class HotelSummary extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                displayErrors(error);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
             });
     }
     
@@ -125,6 +125,7 @@ const mapDispatchToProps = dispatch => {
     return {
         showPageLoader: () => showPageLoader(dispatch),
         hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 

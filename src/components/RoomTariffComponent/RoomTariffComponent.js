@@ -53,7 +53,7 @@ class RoomTariffComponent extends Component {
 
     handlSave() {
 
-        const { token, formData, showPageLoader, hidePageLoader } = this.props;
+        const { token, formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         const auth = "Bearer " + token;
 
         let rowDataCopy = _.cloneDeep(this.state.data[0]);
@@ -84,7 +84,7 @@ class RoomTariffComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                displayErrors(error);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
             });
 
     }
@@ -163,6 +163,7 @@ const mapDispatchToProps = dispatch => {
     return {
         showPageLoader: () => showPageLoader(dispatch),
         hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 

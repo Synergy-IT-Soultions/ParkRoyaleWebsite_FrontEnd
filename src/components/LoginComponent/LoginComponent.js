@@ -24,11 +24,15 @@ class LoginComponent extends React.Component {
     }
 
     handleClose() {
-        this.setState({ show: false });
+        //this.setState({ show: false });
+        const { showLoginModalDispatcher } = this.props;
+        showLoginModalDispatcher(false);
     }
 
     handleShow() {
-        this.setState({ show: true });
+        //this.setState({ show: true });
+        const { showLoginModalDispatcher } = this.props;
+        showLoginModalDispatcher(true);
         if(this.props.mobileToggleClicked){
             this.props.mobileToggleClicked();
         }
@@ -37,7 +41,7 @@ class LoginComponent extends React.Component {
     validateUser(event) {
         //const user = authenticate();
         //alert(JSON.stringify(user.data));
-        const { addUserInfo, showPageLoader, hidePageLoader } = this.props;
+        const { addUserInfo, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         //addUserInfo("userInfo",user.data);
         const form = event.currentTarget;
 
@@ -62,6 +66,7 @@ class LoginComponent extends React.Component {
                 addUserInfo("userInfo", response.data);
                 sessionStorage.setItem('userInfo', JSON.stringify(response.data));
                 this.setState({ show: false, loggedin: true, isInValid: false });
+                showLoginModalDispatcher(false);
                 hidePageLoader();
             })
             .catch(error => {
@@ -118,6 +123,8 @@ class LoginComponent extends React.Component {
 
     render() {
 
+        const { showLoginModal } = this.props;
+
         return (
             <React.Fragment>
 
@@ -125,7 +132,7 @@ class LoginComponent extends React.Component {
 
                 {!this.state.loggedin && <li><a className="nav-link scrollto" href="javascript:void(0)" onClick={this.handleShow}> Login </a></li>}
                 {this.state.loggedin && <li><a className="nav-link scrollto" href="javascript:void(0)" onClick={this.logoutUser}> Logout </a></li>}
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal show={showLoginModal} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>
                     </Modal.Header>
@@ -160,7 +167,8 @@ class LoginComponent extends React.Component {
 
 const mapStateToPros = state => {
     return {
-        count: state.count
+        count: state.count,
+        showLoginModal: state.showLoginModal
     };
 };
 const mapDispatchToProps = dispatch => {
@@ -169,6 +177,7 @@ const mapDispatchToProps = dispatch => {
         removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id }),
         showPageLoader: () => showPageLoader(dispatch),
         hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 

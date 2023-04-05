@@ -16,7 +16,7 @@ class RoomPricingHeaderComponent extends Component {
     }
 
     handleSave = (event) => {
-        const { data, formData, showPageLoader, hidePageLoader } = this.props;
+        const { data, formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         const { token } = this.props;
         const auth = "Bearer " + token;
 
@@ -31,7 +31,7 @@ class RoomPricingHeaderComponent extends Component {
         showPageLoader();
         cmClient.post('/content/save/container', requestData, {
             headers: {
-                'Authorization': auth
+                'Authorization': auth+"12"
             }
         })
             .then(response => {
@@ -45,7 +45,7 @@ class RoomPricingHeaderComponent extends Component {
             .catch(error => {
                 console.log(error);
                 hidePageLoader();
-                displayErrors(error);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
             });
     }
 
@@ -77,6 +77,7 @@ const mapDispatchToProps = dispatch => {
     return {
         showPageLoader: () => showPageLoader(dispatch),
         hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 

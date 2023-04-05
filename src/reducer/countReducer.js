@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 const defaultState = {
     showPageLoader:false,
+    showLoginModal:false,
     user : {},
     todos:[],
     showLogin: false,
@@ -41,6 +42,8 @@ const countReducer = function (state = defaultState, action) {
         return {...state, ...userData}
       case PAGELOADER:
         return {...state, showPageLoader:action.value}
+      case "SHOW_LOGIN":
+        return {...state, showLoginModal:action.showLoginModal}
       default:
         return state;
     }
