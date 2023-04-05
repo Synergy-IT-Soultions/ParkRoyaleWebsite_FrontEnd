@@ -31,7 +31,7 @@ class RoomPricingHeaderComponent extends Component {
         showPageLoader();
         cmClient.post('/content/save/container', requestData, {
             headers: {
-                'Authorization': auth+"12"
+                'Authorization': auth
             }
         })
             .then(response => {
