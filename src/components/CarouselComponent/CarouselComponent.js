@@ -61,9 +61,14 @@ class CarouselComponent extends Component {
     }
 
     deleteImage(fileId) {
-        const { showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
+        const { token, showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
+        const auth = "Bearer " + token;
         showPageLoader();
-        cmClient.post('/image/delete/' + fileId)
+        cmClient.post('/image/delete/' + fileId,{},{
+            headers: {
+                'Authorization': auth
+            }
+        })
             .then(response => {
                 toast.success("Image deleted Successfully.")
                 this.fetchImages();
