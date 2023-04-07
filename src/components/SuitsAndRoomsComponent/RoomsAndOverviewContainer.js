@@ -20,16 +20,16 @@ class RoomsAndOverviewContainer extends Component {
          return (
                
                     <section >
-                         <div class="container" data-aos="fade-up">
-                         <div class="row row-cols-lg-2">
-                              <div class="left">
+                         <div className="container" data-aos="fade-up">
+                         <div className="row row-cols-lg-2">
+                              <div className="left">
                                    <Card>
                                         <Card.Body >
                                              <CarouselComponent id="sandr-pictures-id" imageType="ROOMS"/>
                                         </Card.Body>
                                    </Card>
                               </div>
-                              <div class="card-content">
+                              <div className="card-content">
                                    <OverviewEditContainer id="sandr-roomsoverview-id"/>
                               </div>
                          </div>

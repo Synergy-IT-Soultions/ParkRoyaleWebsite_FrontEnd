@@ -72,7 +72,7 @@ class RoomPricingSwiperComponent extends Component {
 
         <Card className="mx-auto my-3 text-white mb-2 rounded">
             <Card.Header  className="cardHeader">
-            <div class="d-flex" >
+            <div className="d-flex" >
 
                     <div className="text">
                         { 
@@ -166,8 +166,8 @@ class RoomPricingSwiperComponent extends Component {
                 </div>
                 <div className="swiper-pagination"></div>
                 {/* <!-- If we need navigation buttons --> */}
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div className="swiper-button-prev"></div>
+                <div className="swiper-button-next"></div>
             </div>
         );
     }

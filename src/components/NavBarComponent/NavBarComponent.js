@@ -42,14 +42,14 @@ class NavBarComponent extends Component {
 
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>
-                            <li><NavLink className="nav-link scrollto" to="/" activeClassName="active" onClick={this.closeMobileToggleDropDown}>Home</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Home</NavLink></li>
                             {/* <li><a className="nav-link scrollto" href="#about">Suits and Rooms</a></li> */}
-                            <li><NavLink className='nav-link scrollto' to="/suitsandrooms" activeClassName="active" onClick={this.closeMobileToggleDropDown}>Suits and Rooms</NavLink></li>
-                            <li><NavLink className="nav-link scrollto" to="/restaurants" activeClassName="active" onClick={this.closeMobileToggleDropDown}>Restaurants</NavLink></li>
-                            <li><NavLink className="nav-link scrollto " to="/recreations" activeClassName="active" onClick={this.closeMobileToggleDropDown}>Recreations</NavLink></li>
-                            <li><NavLink className="nav-link scrollto" to="/toursandtravels" activeClassName="active" onClick={this.closeMobileToggleDropDown}>Tours and Travels</NavLink></li>
-                            <li><NavLink className="nav-link scrollto" to="/gallery" activeClassName="active" onClick={this.closeMobileToggleDropDown}>Gallery</NavLink></li>
-                            <li><NavLink className="getstarted scrollto" to="/contactus" activeClassName="active" onClick={this.closeMobileToggleDropDown}>Contact Us</NavLink></li>
+                            <li><NavLink className='nav-link scrollto' to="/suitsandrooms" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Suits and Rooms</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/restaurants" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Restaurants</NavLink></li>
+                            <li><NavLink className="nav-link scrollto " to="/recreations" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Recreations</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/toursandtravels" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Tours and Travels</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/gallery" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Gallery</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/contactus" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Contact Us</NavLink></li>
                             <LoginComponent mobileToggleClicked={this.closeMobileToggleDropDown}/>
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" ref={this.mobileToggleRef} onClick={this.mobileToggleClicked}></i>

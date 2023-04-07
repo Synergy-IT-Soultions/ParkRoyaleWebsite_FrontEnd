@@ -10,10 +10,10 @@ class CarouselCardComponent extends Component {
             
                     <Card className="mx-auto my-3 text-white mb-2 rounded">
                         <Card.Header>
-                        <div class="d-flex" >
+                        <div className="d-flex" >
             
                                 <div >
-                                      <i class="fa fa-fw fa-trash" onClick={deleteImage.bind(this, [id])}></i>
+                                      <i className="fa fa-fw fa-trash" onClick={deleteImage.bind(this, [id])}></i>
                                 </div>
                                 <div className='cardHeader'>
                                      {name}

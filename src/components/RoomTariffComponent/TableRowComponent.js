@@ -161,12 +161,12 @@ class TableRowComponent extends Component {
         let editable = this.props.editable;
         return (
             <tr >
-                <td >{editable?<InputComponent id={"roomType"+containerPricingInfoId} value={roomType} noLabel="true"/>:<div class='tablecard'>{roomType}</div>}</td>
-                <td >{editable?<InputComponent id={"roomPrice"+containerPricingInfoId} value={roomPrice} noLabel="true"/>:<div class='tablecard'>{roomPrice}</div>}</td>
-                <td >{editable?<InputComponent id={"gstPercentage"+containerPricingInfoId} value={gstPercentage} noLabel="true"/>:<div class='tablecard'>{gstPercentage}</div>}</td>
-                <td >{editable?this.state.rowData.gstCalculatedPrice:<div class='tablecard'>{gstCalculatedPrice}</div>}</td>
-                <td  >{editable?this.state.rowData.totalPrice:<div class='tablecard'>{totalPrice}</div>}</td>
-                {editable?<td ><i class="fa fa-fw fa-trash" onClick={this.deleteRowData}></i> <i class="fa fa-floppy-o" onClick={this.saveRowData}></i></td>:""}
+                <td >{editable?<InputComponent id={"roomType"+containerPricingInfoId} value={roomType} noLabel="true"/>:<div className='tablecard'>{roomType}</div>}</td>
+                <td >{editable?<InputComponent id={"roomPrice"+containerPricingInfoId} value={roomPrice} noLabel="true"/>:<div className='tablecard'>{roomPrice}</div>}</td>
+                <td >{editable?<InputComponent id={"gstPercentage"+containerPricingInfoId} value={gstPercentage} noLabel="true"/>:<div className='tablecard'>{gstPercentage}</div>}</td>
+                <td >{editable?this.state.rowData.gstCalculatedPrice:<div className='tablecard'>{gstCalculatedPrice}</div>}</td>
+                <td  >{editable?this.state.rowData.totalPrice:<div className='tablecard'>{totalPrice}</div>}</td>
+                {editable?<td ><i className="fa fa-fw fa-trash" onClick={this.deleteRowData}></i> <i className="fa fa-floppy-o" onClick={this.saveRowData}></i></td>:""}
             </tr>
 
         );

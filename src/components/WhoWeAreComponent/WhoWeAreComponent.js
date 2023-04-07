@@ -99,7 +99,7 @@ class WhoWeAreComponent extends Component {
                     <div className="section-title">
                          <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                     </div>
-                <div class="d-flex">
+                <div className="d-flex">
                 <Card className="mx-auto my-3 text-white mb-2 rounded">
                     <Card.Body>
                         <Row lg={2}>  
@@ -108,9 +108,9 @@ class WhoWeAreComponent extends Component {
                                     src={containerVideoURL} 
                                     title="YouTube video player" 
                                     frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                            </div>
-                           <div class="card-content">
+                           <div className="card-content">
                                     <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
                             </div>
                         </Row>            

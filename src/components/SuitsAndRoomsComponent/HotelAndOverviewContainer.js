@@ -17,15 +17,15 @@ class HotelAndOverviewContainer extends Component {
 
      render() {
          return (
-               <div class="container-fluid" >
+               <div className="container-fluid" >
                     <section >
-                        <div class="container" data-aos="fade-up">
-                        <div class="row row-cols-lg-2">
+                        <div className="container" data-aos="fade-up">
+                        <div className="row row-cols-lg-2">
                              
-                            <div class="left1" style={{ height: '98%' }}>
+                            <div className="left1" style={{ height: '98%' }}>
                                 <HotelSummary id="sandr-roomdescription-id"/>
                             </div>
-                            <div class="card-content">
+                            <div className="card-content">
                                 <OverviewEditContainer id="sandr-hoteloverview-id"/>
                             </div>
                           </div>  

@@ -108,10 +108,10 @@ class RoomTariffComponent extends Component {
                         <h2>{isAdmin ? editOption : ""}Room Tariff</h2>
 
                     </div>
-                    <div class="tableHolder">
+                    <div className="tableHolder">
                     <Table striped bordered hover>
                         <thead>
-                            <tr class="tableHeader">
+                            <tr className="tableHeader">
                                 <th>King Suite</th>
                                 <th>Rate</th>
                                 <th>GST %</th>

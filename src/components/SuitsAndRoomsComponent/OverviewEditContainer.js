@@ -87,8 +87,8 @@ import { displayErrors } from "../../utils/CommonUtils";
         const displayData = data?.containerTextInfo.map((containerTextInfo) => {
             return (
              <tr >
-                 <td className="tableCol" > <div class='tablecard'> {containerTextInfo?.containerTextLabelName}: </div> </td>
-                 <td className="tableCol" > <div class='tablecard' > {decode(containerTextInfo?.containertextLabelValue)}</div></td>
+                 <td className="tableCol" > <div className='tablecard'> {containerTextInfo?.containerTextLabelName}: </div> </td>
+                 <td className="tableCol" > <div className='tablecard' > {decode(containerTextInfo?.containertextLabelValue)}</div></td>
               </tr>
             );
           });

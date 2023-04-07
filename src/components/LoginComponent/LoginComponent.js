@@ -9,6 +9,7 @@ import _ from "lodash";
 import { hidePageLoader, showPageLoader } from '../../utils/ReduxActions';
 import cmClient from '../../clients/ContentManagementClient';
 import { displayErrors } from '../../utils/CommonUtils';
+import { NavLink } from 'react-router-dom';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -130,8 +131,8 @@ class LoginComponent extends React.Component {
 
 
 
-                {!this.state.loggedin && <li><a className="nav-link scrollto" href="javascript:void(0)" onClick={this.handleShow}> Login </a></li>}
-                {this.state.loggedin && <li><a className="nav-link scrollto" href="javascript:void(0)" onClick={this.logoutUser}> Logout </a></li>}
+                {!this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.handleShow}> Login </NavLink></li>}
+                {this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.logoutUser}> Logout </NavLink></li>}
                 <Modal show={showLoginModal} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>
@@ -140,13 +141,13 @@ class LoginComponent extends React.Component {
 
                         <Form>
                             <FloatingLabel
-                                controlId="floatingInput"
+                                // controlId="floatingInput"
                                 label="User Name"
                                 className="mb-3"
                             >
                                 <Form.Control type="text" isInvalid={this.isUserNameValid()} name="user_name" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
                             </FloatingLabel>
-                            <FloatingLabel controlId="floatingPassword" label="Password">
+                            <FloatingLabel label="Password">
                                 <Form.Control type="password" isInvalid={this.isPasswordValid()} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
                             </FloatingLabel>
 
