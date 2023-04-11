@@ -18,6 +18,10 @@ class NavBarComponent extends Component {
 
         // let displayStyle = this.mobileToggleRef.current.style.getPropertyValue('display');
         // console.log("mobileToggleClicked->displayStyle : "+displayStyle);
+        if(this.mobileToggleRef.current.classList.contains("bi-x")){
+            this.closeMobileToggleDropDown();
+            return;
+        }
 
         this.navBarRef.current.classList.add("navbar-mobile");
         this.mobileToggleRef.current.classList.remove("bi-list"); 

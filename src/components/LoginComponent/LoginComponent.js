@@ -106,6 +106,9 @@ class LoginComponent extends React.Component {
         removeUserInfo("userInfo");
         sessionStorage.removeItem('userInfo');
         this.setState({ loggedin: false, user_name: "", password: "" });
+        if(this.props.mobileToggleClicked){
+            this.props.mobileToggleClicked();
+        }
         setTimeout(() => {
             hidePageLoader();
         }, 1000);
