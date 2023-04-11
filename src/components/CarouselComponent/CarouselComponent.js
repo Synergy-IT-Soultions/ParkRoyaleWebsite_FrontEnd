@@ -63,25 +63,27 @@ class CarouselComponent extends Component {
     deleteImage(fileId) {
         const { token, showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
         const auth = "Bearer " + token;
-        showPageLoader();
-        cmClient.post('/image/delete/' + fileId,{},{
-            headers: {
-                'Authorization': auth
-            }
-        })
-            .then(response => {
-                toast.success("Image deleted Successfully.")
-                this.fetchImages();
-                hidePageLoader();
-
+        const isOk = window.confirm('Are you sure to delete this image?');
+        if(isOk) {
+            showPageLoader();
+            cmClient.post('/image/delete/' + fileId,{},{
+                headers: {
+                    'Authorization': auth
+                }
             })
-            .catch(error => {
-                console.log(error);
-                hidePageLoader();
-                //toast.error(error.response.data.errorMessage);
-                displayErrors(error, showLoginModalDispatcher.bind({},true));
-            });
+                .then(response => {
+                    toast.success("Image deleted Successfully.")
+                    this.fetchImages();
+                    hidePageLoader();
 
+                })
+                .catch(error => {
+                    console.log(error);
+                    hidePageLoader();
+                    //toast.error(error.response.data.errorMessage);
+                    displayErrors(error, showLoginModalDispatcher.bind({},true));
+                });
+        }
     }
 
     uploadImage(formData) {

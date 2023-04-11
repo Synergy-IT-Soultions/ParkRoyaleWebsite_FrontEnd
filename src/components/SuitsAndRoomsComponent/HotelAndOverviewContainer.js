@@ -24,10 +24,9 @@ class HotelAndOverviewContainer extends Component {
                              
                             <div className="left1" style={{ height: '98%' }}>
                                 <HotelSummary id="sandr-roomdescription-id"/>
+                                
                             </div>
-                            <div className="card-content">
-                                <OverviewEditContainer id="sandr-hoteloverview-id"/>
-                            </div>
+                            
                           </div>  
                         </div>
                     </section>

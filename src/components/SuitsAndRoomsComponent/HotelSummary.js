@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
 import { displayErrors } from "../../utils/CommonUtils";
+import OverviewEditContainer from "./OverviewEditContainer";
 
 class HotelSummary extends Component {
     
@@ -102,7 +103,10 @@ class HotelSummary extends Component {
                     <Card.Body>
                     <div className="d-flex">
                         <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
-                    </div>                
+                    </div>      
+                    <div className='mx-auto my-3 mb-2 bottom'>
+                        <OverviewEditContainer id="sandr-hoteloverview-id"/>
+                    </div>          
                     </Card.Body>
                 </Card>
                 </div>
