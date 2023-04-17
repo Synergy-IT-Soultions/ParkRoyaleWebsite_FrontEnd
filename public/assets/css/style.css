@@ -145,6 +145,8 @@ h6 {
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
+  opacity: 0.8;
+  box-shadow: 0px 0px 7px 3px rgba(255, 255, 255, 0.8);
 }
 
 #header .logo a {
@@ -152,7 +154,7 @@ h6 {
 }
 
 #header .logo img {
-  max-height: 40px;
+  max-height: 65px;
 }
 
 /*--------------------------------------------------------------
@@ -567,7 +569,7 @@ h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 100px 0;
+  padding: 50px 0;
   overflow: hidden;
 }
 
@@ -577,15 +579,15 @@ section {
 
 .section-title {
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .section-title h2 {
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
   position: relative;
 }
 
@@ -1133,7 +1135,7 @@ section {
 # Pricing
 --------------------------------------------------------------*/
 .pricing .box {
-  padding: 20px;
+  padding: 10px;
   background: #fff;
   text-align: center;
   border-radius: 5px;

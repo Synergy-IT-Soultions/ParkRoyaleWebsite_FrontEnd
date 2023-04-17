@@ -1,19 +1,17 @@
 //import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { browserHistory, BrowserRouter, Routes, Route } from "react-router-dom";
 import LayoutComponent from './components/LayoutComponent/LayoutComponent';
 import HomePageComponent from './components/HomePageComponent/HomePageComponent';
 import NoPageComponent from './components/NoPageComponent/NoPageComponent';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticate } from './utils/APIExecuter';
-import axios from 'axios';
+import SuitsAndRoomsComponent from './components/SuitsAndRoomsComponent/SuitsAndRoomsComponent';
+import ComingSoonComponent from './components/ComingSoonComponent/ComingSoonComponent';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   componentDidMount() {
     // //const user = authenticate();
@@ -21,7 +19,7 @@ class App extends Component {
     // const { addUserInfo } = this.props;
     // //addUserInfo("userInfo",user.data);
 
-    // axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
+    // cmClient.post('/user/authenticate', {}, {
     //   auth: {
     //     username: "nprasath",
     //     password: "password234"
@@ -37,10 +35,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
+        <BrowserRouter >
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
+              <Route path="/suitsandrooms" element={<SuitsAndRoomsComponent />} />
+              <Route path="/restaurants" element={<ComingSoonComponent />} />
+              <Route path="/recreations" element={<ComingSoonComponent />} />
+              <Route path="/toursandtravels" element={<ComingSoonComponent />} />
+              <Route path="/gallery" element={<ComingSoonComponent />} />
+              <Route path="/contactus" element={<ComingSoonComponent />} />
               <Route path="*" element={<NoPageComponent />} />
             </Route>
           </Routes>

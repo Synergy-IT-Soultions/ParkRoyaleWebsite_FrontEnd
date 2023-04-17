@@ -2,39 +2,50 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FloatingLabel } from 'react-bootstrap';
 import _ from "lodash";
+import { hidePageLoader, showPageLoader } from '../../utils/ReduxActions';
+import cmClient from '../../clients/ContentManagementClient';
+import { displayErrors } from '../../utils/CommonUtils';
+import { NavLink } from 'react-router-dom';
 
 class LoginComponent extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { show: false, loggedin: false, user_name: "", password: "", validated: false }
+        this.state = { show: false, loggedin: false, user_name: "", password: "", validated: false, isInValid:false }
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.validateUser = this.validateUser.bind(this);
         this.logoutUser = this.logoutUser.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.isUserNameValid = this.isUserNameValid.bind(this);
+        this.isPasswordValid = this.isPasswordValid.bind(this);
     }
 
     handleClose() {
-        this.setState({ show: false });
+        //this.setState({ show: false });
+        const { showLoginModalDispatcher } = this.props;
+        showLoginModalDispatcher(false);
     }
 
     handleShow() {
-        this.setState({ show: true });
+        //this.setState({ show: true });
+        const { showLoginModalDispatcher } = this.props;
+        showLoginModalDispatcher(true);
+        if(this.props.mobileToggleClicked){
+            this.props.mobileToggleClicked();
+        }
     }
 
     validateUser(event) {
         //const user = authenticate();
         //alert(JSON.stringify(user.data));
-        const { addUserInfo } = this.props;
+        const { addUserInfo, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         //addUserInfo("userInfo",user.data);
         const form = event.currentTarget;
-        
+
         if (form.checkValidity() === false || _.isEmpty(this.state.user_name) || _.isEmpty(this.state.password)) {
             event.preventDefault();
             event.stopPropagation();
@@ -42,9 +53,10 @@ class LoginComponent extends React.Component {
             toast("Invalid User Credentials");
             return;
         }
-        this.setState({ validated: true });
+        this.setState({ validated: true , isValid:true});
 
-        axios.post('http://10.10.10.32/ContentManagement/user/authenticate', {}, {
+        showPageLoader();
+        cmClient.post('/user/authenticate', {}, {
             auth: {
                 username: this.state.user_name,
                 password: this.state.password
@@ -52,68 +64,96 @@ class LoginComponent extends React.Component {
         })
             //.then(response => console.log(response))
             .then(response => {
-                addUserInfo("userInfo", response.data)
-                this.setState({ show: false, loggedin: true });
+                addUserInfo("userInfo", response.data);
+                sessionStorage.setItem('userInfo', JSON.stringify(response.data));
+                this.setState({ show: false, loggedin: true, isInValid: false });
+                showLoginModalDispatcher(false);
+                hidePageLoader();
             })
             .catch(error => {
                 console.log(error);
-                toast("Invalid User Credentials");
+                displayErrors(error);
+                this.setState({ validated: false , isInValid: true});
+                hidePageLoader();
             });
 
+    }
+
+    componentDidMount() {
+        const { addUserInfo } = this.props;
+        const userInfo = sessionStorage.getItem('userInfo');
+        if(!_.isEmpty(userInfo)){
+            addUserInfo("userInfo", JSON.parse(userInfo));
+            this.setState({ show: false, loggedin: true });
+        }
+        
     }
 
     onChange(e) {
         let key = e.target.id;
         let data = {};
         data[key] = e.target.value;
+        if(_.isEmpty(e.target.value)){
+            data.isInValid = false;
+        }
         this.setState(data);
 
     }
 
     logoutUser() {
-        const { removeUserInfo } = this.props;
+        const { removeUserInfo, showPageLoader, hidePageLoader } = this.props;
+        showPageLoader();
         removeUserInfo("userInfo");
+        sessionStorage.removeItem('userInfo');
         this.setState({ loggedin: false, user_name: "", password: "" });
+        if(this.props.mobileToggleClicked){
+            this.props.mobileToggleClicked();
+        }
+        setTimeout(() => {
+            hidePageLoader();
+        }, 1000);
+    }
+
+    isUserNameValid() {
+        if(_.isEmpty(this.state.user_name)) return false;
+        
+        return this.state.isInValid;
+    }
+
+    isPasswordValid() {
+        if(_.isEmpty(this.state.password)) return false;
+        return this.state.isInValid;
     }
 
     render() {
+
+        const { showLoginModal } = this.props;
+
         return (
             <React.Fragment>
 
 
 
-                {!this.state.loggedin && <li><a className="nav-link scrollto" href="javascript:void(0)" onClick={this.handleShow}> Login </a></li>}
-                {this.state.loggedin && <li><a className="nav-link scrollto" href="javascript:void(0)" onClick={this.logoutUser}> Logout </a></li>}
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                {!this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.handleShow}> Login </NavLink></li>}
+                {this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.logoutUser}> Logout </NavLink></li>}
+                <Modal show={showLoginModal} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
-                        <Form noValidate validated={this.state.validated}>
+                        <Form>
                             <FloatingLabel
-                                controlId="floatingInput"
+                                // controlId="floatingInput"
                                 label="User Name"
                                 className="mb-3"
                             >
-                                <Form.Control type="text" name="user_name" isValid={!_.isEmpty(this.state.user_name)} isInvalid={ _.isEmpty(this.state.user_name)} placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
+                                <Form.Control type="text" isInvalid={this.isUserNameValid()} name="user_name" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
                             </FloatingLabel>
-                            <FloatingLabel controlId="floatingPassword" label="Password">
-                                <Form.Control type="password" isValid={!_.isEmpty(this.state.password)} isInvalid={ _.isEmpty(this.state.password)} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
+                            <FloatingLabel label="Password">
+                                <Form.Control type="password" isInvalid={this.isPasswordValid()} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
                             </FloatingLabel>
-                            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>User Name</Form.Label>
-                                <Form.Control type="text" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange}/>
-                                
-                            </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" id="password" value={this.state.password} onChange={this.onChange}/>
-                            </Form.Group> */}
-                            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group> */}
 
                         </Form>
 
@@ -131,13 +171,17 @@ class LoginComponent extends React.Component {
 
 const mapStateToPros = state => {
     return {
-        count: state.count
+        count: state.count,
+        showLoginModal: state.showLoginModal
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
         addUserInfo: (id, data) => dispatch({ type: 'USER_INFO', id, data }),
-        removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id })
+        removeUserInfo: (id) => dispatch({ type: 'REMOVE_USER', id }),
+        showPageLoader: () => showPageLoader(dispatch),
+        hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 

@@ -1,47 +1,69 @@
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logoImage from '../../assets/ParkRoyale_Logo.png'
 import LoginComponent from '../LoginComponent/LoginComponent';
 
-function NavBarComponent() {
-    return (<header id="header" className="fixed-top ">
-        <div className="container d-flex align-items-center justify-content-between">
-            {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
-            {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
-      <a href="index.html" className="logo"><img src={logoImage} alt="" className="img-fluid"/></a>
+class NavBarComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.navBarRef = React.createRef();
+        this.mobileToggleRef = React.createRef();
 
-            <nav id="navbar" className="navbar">
-                <ul>
-                    <li><a className="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a className="nav-link scrollto" href="#about">Suits and Rooms</a></li>
-                    <li><a className="nav-link scrollto" href="#services">Restaurants</a></li>
-                    <li><a className="nav-link scrollto " href="#portfolio">Recreations</a></li>
-                    <li><a className="nav-link scrollto" href="#team">Tours and Travels</a></li>
-                    {/* <li className="dropdown"><a href="#"><span>Drop Down</span> <i className="bi bi-chevron-down"></i></a>
+        this.mobileToggleClicked = this.mobileToggleClicked.bind(this);
+        this.closeMobileToggleDropDown = this.closeMobileToggleDropDown.bind(this);
+    }
+
+    mobileToggleClicked() {
+
+        // let displayStyle = this.mobileToggleRef.current.style.getPropertyValue('display');
+        // console.log("mobileToggleClicked->displayStyle : "+displayStyle);
+        if(this.mobileToggleRef.current.classList.contains("bi-x")){
+            this.closeMobileToggleDropDown();
+            return;
+        }
+
+        this.navBarRef.current.classList.add("navbar-mobile");
+        this.mobileToggleRef.current.classList.remove("bi-list"); 
+        this.mobileToggleRef.current.classList.add("bi-x");
+
+    }
+
+    closeMobileToggleDropDown(){
+        this.mobileToggleRef.current.classList.remove("bi-x");
+        this.mobileToggleRef.current.classList.add("bi-list");
+        this.navBarRef.current.classList.remove("navbar-mobile");
+    }
+
+    render() {
+        return (
+            <header id="header" className="fixed-top">
+                <div className="container d-flex align-items-center justify-content-between">
+                    {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
+                    {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
+                    {/* <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a> */}
+                    <NavLink className="nav-link logo" to="/"><img src={logoImage} alt=""  /></NavLink>
+
+                    <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li className="dropdown"><a href="#"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
+                            <li><NavLink className="nav-link scrollto" to="/" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Home</NavLink></li>
+                            {/* <li><a className="nav-link scrollto" href="#about">Suits and Rooms</a></li> */}
+                            <li><NavLink className='nav-link scrollto' to="/suitsandrooms" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Suits and Rooms</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/restaurants" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Restaurants</NavLink></li>
+                            <li><NavLink className="nav-link scrollto " to="/recreations" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Recreations</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/toursandtravels" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Tours and Travels</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/gallery" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Gallery</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to="/contactus" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Contact Us</NavLink></li>
+                            <LoginComponent mobileToggleClicked={this.closeMobileToggleDropDown}/>
                         </ul>
-                    </li> */}
-                    <li><a className="nav-link scrollto" href="#contact">Gallery</a></li>
-                    
-                    <li><a className="getstarted scrollto" href="#about">Contact Us</a></li>
-                    <LoginComponent/>
-                </ul>
-                <i className="bi bi-list mobile-nav-toggle"></i>
-            </nav>
+                        <i className="bi bi-list mobile-nav-toggle" ref={this.mobileToggleRef} onClick={this.mobileToggleClicked}></i>
+                    </nav>
 
-        </div>
-    </header>);
+                </div>
+            </header>
+
+        );
+    }
 }
 
 export default NavBarComponent;

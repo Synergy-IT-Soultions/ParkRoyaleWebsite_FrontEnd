@@ -9,7 +9,7 @@ class NotificationComponent extends React.Component {
         return ( 
         <ToastContainer
             position="top-right"
-            autoClose={3000}
+            autoClose={10000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick
@@ -17,7 +17,7 @@ class NotificationComponent extends React.Component {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="light"
+            theme="colored"
             /> 
         );
     }

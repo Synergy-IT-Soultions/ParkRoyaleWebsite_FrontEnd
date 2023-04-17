@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import { connect } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
 import _ from 'lodash';
+
+
 //import {imageInfo} from '../../assets/image_info.json'
 
-function FileUploadComponent(props) {
+function FileUploadComponent(props ) {
+    const id  = props.id && props.id
+    const imageType  = props.imageType && props.imageType
     const [validated, setValidated] = useState(false);
     const [show, setShow] = useState(false);
     const [file, setFile] = useState();
-    const [imageInfo, setImageInfo] = useState({imageIsActive:1,updatedBy:3,containerDivId: "home-imagecarousel-id"});
+    const [imageInfo, setImageInfo] = useState({imageIsActive:1,updatedBy:3,containerDivId: id,imageType:imageType});
 
     const onFileChange = e => {
         let uploadedFile = e.target.files[0];
@@ -27,7 +28,6 @@ function FileUploadComponent(props) {
          };
 
         setFile(e.target.files[0]);
-        //setFilename(e.target.files[0].name);
     };
 
     const onChange = e => {
@@ -45,101 +45,90 @@ function FileUploadComponent(props) {
             event.preventDefault();
             event.stopPropagation();
             setValidated(true);
+
         }
         else{
             setValidated(true);
             uploadFile();
-            //alert(JSON.stringify(res.data))
         }
-
-        
-
-        
-
 
     };
 
     const uploadFile =  ()=>{
-
         const formData = new FormData();
         formData.append('file', file);
-        //formData.append('imageInfo', imageInfo);
         _.forEach(imageInfo, (value, key)=> formData.append(key, value) );
-        //formData.append('abc', "abc");
         const { uploadImage } = props;
         uploadImage(formData);
         setShow(false);
-
-
-        // axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
-        //     headers: {
-        //       'Content-Type': 'multipart/form-data;boundary=',
-        //       'Authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibnByYXNhdGgiLCJleHAiOjE2NzcwMTM4ODksImlhdCI6MTY3Njk5OTQ4OSwic2NvcGUiOiJBZG1pbiJ9.X-6khriPu_G0RLByhWmSO0VGfrYRlvLo4tdKONvoXGzhCARoNQFUtSuw2s3XB-pFYFL3poKgRAcyLrgoYprW071mPWg44rEkf9GccvcudWS2JD-OItCg17V4QEE-KzUXCPVMjCYz5cU6yTM0Z2-ZC7RATRq0IWekjex36q8hZcNKoMEdjC7XLTtWTKiGcvJ_IeiUWU5EO9cRhfjTjgjwoOyDUjk3t09DEgv0EVRkaR_iOKLnsW95DU4jGbh5m2dm3H6fZSO7cIOmy1zFNJ_lZYBP8b8mwl8vLUKC1_PKJGHA0PLbbfb01BtVhxzRli6xcFRumhrU_cU3JKgFy1TwtA'
-        //     }
-        //   })
-        //   .then(response => alert(response.data))
-        //     .catch(error => console.log(error));
-
-          
-
     }
 
     const uploadForm = (event) => {
         return (
-            // <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <div>
             <Row className="mb-3">
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
+                <Form.Group as={Col} md="12" controlId="validationCustom01">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         id="imageName"
                         onChange={onChange}
+                        autoComplete="off"
+                        
                     />
                 </Form.Group>
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
+               </Row>
+               <Row className="mb-3"> 
+                <Form.Group as={Col} md="12" controlId="validationCustom01">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         id="imageDescription"
                         onChange={onChange}
+                        autoComplete="off"
                     />
                 </Form.Group>
-
             </Row>
-            <Row className="mb-3">
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
-                    <Form.Label>Type</Form.Label>
+            <Row >
+                <Form.Group as={Col}  controlId="validationCustom01">
                     <Form.Control
-                        required
-                        type="text"
+                        disabled
+                        type="hidden"
                         id="imageType"
                         onChange={onChange}
-                        defaultValue="CAROUSEL"
+                        defaultValue={imageType}
                     />
                 </Form.Group>
-                <Form.Group as={Col} md="6" controlId="validationCustom01">
+                </Row>
+                <Row className="mb-3">
+                <Form.Group as={Col} md="12" controlId="validationCustom01">
                     <Form.Label>Alt Text</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         id="imageAlt"
                         onChange={onChange}
+                        autoComplete="off"
                     />
                 </Form.Group>
-
             </Row>
             <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom01">
-                    
-                    <Form.Control required type="file" id="new_image_file" accept="image/png,image/webp" onChange={onFileChange}/>
+            <Form.Label>Image File</Form.Label>
+                    <Form.Control 
+                        required type="file" 
+                        id="new_image_file" 
+                        accept="image/png, image/webp, image/jpg, image/jpeg" 
+                        onChange={onFileChange}
+                        autoComplete="off"
+                    />
                 </Form.Group>
                 
             </Row>
-
-            <Button type="submit" onClick={handleSubmit}>Save</Button>
+            
+           
             </div>
         //</Form>
         );
@@ -150,18 +139,21 @@ function FileUploadComponent(props) {
     }
     const handleShow = () => {
         setShow(true);
+        
     }
 
     return (<>
-        <Button type="text" onClick={handleShow}>Add Image</Button>
-        <Modal size="lg" show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
+        {/* <Button type="text" onClick={handleShow}>Add Image</Button> */}
+        <Modal size="sm"  show={props.show} onHide={props.handleCloseUpload}>
+            <Modal.Header className="modalHeader text-white" closeButton>
                 <Modal.Title>Upload Image</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {uploadForm()}
             </Modal.Body>
-
+            <Modal.Footer>
+            <Button type="submit" onClick={handleSubmit}>Save</Button>
+            </Modal.Footer>
         </Modal></>
     );
 }
@@ -179,4 +171,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default FileUploadComponent;
-//connect(mapStateToPros, mapDispatchToProps)(FileUploadComponent);

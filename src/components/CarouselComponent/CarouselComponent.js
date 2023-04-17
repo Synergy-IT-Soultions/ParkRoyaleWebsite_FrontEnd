@@ -2,22 +2,24 @@ import { React, Component } from "react";
 import { Carousel } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
 import './CarouselComponent.css'
-import axios from 'axios';
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
-import { authenticate } from "../../utils/APIExecuter";
 import { connect } from "react-redux";
 import _ from "lodash";
-
+import  CarouselCardComponent  from "./CarouselCardComponent";
+import cmClient from "../../clients/ContentManagementClient";
+import { toast } from "react-toastify";
+import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
+import { displayErrors } from "../../utils/CommonUtils";
 
 class CarouselComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show:false,
-            data:[],
-            isLoading:true
+            show: false,
+            data: [],
+            isLoading: true,
+            showUpload: false
         }
 
         this.handleClose = this.handleClose.bind(this);
@@ -25,6 +27,9 @@ class CarouselComponent extends Component {
         this.fetchImages = this.fetchImages.bind(this);
         this.deleteImage = this.deleteImage.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
+        this.handleCloseUpload = this.handleCloseUpload.bind(this);
+        this.handleShowUpload = this.handleShowUpload.bind(this);
+        this.displayCarousel = this.displayCarousel.bind(this);
 
     }
 
@@ -36,42 +41,72 @@ class CarouselComponent extends Component {
         this.setState({ show: true });
     }
 
+    handleCloseUpload() {
+
+        this.setState({ showUpload: false });
+        this.handleShow();
+    }
+
+    handleShowUpload() {
+        this.handleClose();
+        this.setState({ showUpload: true });
+    }
+
     fetchImages() {
-        const {id} = this.props;
+        const { id } = this.props;
 
-        // const user = authenticate();
-        // this.setState({user: user.data});
-
-        axios.get('http://10.10.10.32/ContentManagement/content/get/container/images/'+id)
-            //.then(response => console.log(response))
-            .then(response => this.setState({ data: response.data , isLoading:false}))
+        cmClient.get('/content/get/container/images/' + id)
+            .then(response => this.setState({ data: response.data, isLoading: false }))
             .catch(error => console.log(error));
     }
 
     deleteImage(fileId) {
-
-        axios.post('http://10.10.10.32/ContentManagement/image/delete/'+fileId)
-            //.then(response => console.log(response))
-            .then(response => {
-                this.fetchImages();
+        const { token, showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
+        const auth = "Bearer " + token;
+        const isOk = window.confirm('Are you sure to delete this image?');
+        if(isOk) {
+            showPageLoader();
+            cmClient.post('/image/delete/' + fileId,{},{
+                headers: {
+                    'Authorization': auth
+                }
             })
-            .catch(error => console.log(error));
+                .then(response => {
+                    toast.success("Image deleted Successfully.")
+                    this.fetchImages();
+                    hidePageLoader();
 
+                })
+                .catch(error => {
+                    console.log(error);
+                    hidePageLoader();
+                    //toast.error(error.response.data.errorMessage);
+                    displayErrors(error, showLoginModalDispatcher.bind({},true));
+                });
+        }
     }
 
     uploadImage(formData) {
-        const {token} = this.props;
-        const auth = "Bearer "+token;
-        axios.post('http://10.10.10.32/ContentManagement/image/upload', formData, {
+        const { token , showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
+        const auth = "Bearer " + token;
+        showPageLoader();
+        cmClient.post('/image/upload', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data;boundary=',
-              'Authorization': auth
+                'Content-Type': 'multipart/form-data;boundary=',
+                'Authorization': auth
             }
-          })
-          .then(response => {
-            this.fetchImages();
-          })
-            .catch(error => console.log(error));
+        })
+            .then(response => {
+                toast.success("Image Uploaded Successfully.");
+                this.fetchImages();
+                hidePageLoader();
+                this.setState({showUpload:false})
+            })
+            .catch(error => {console.log(error);
+                hidePageLoader();
+                //toast.error(error.response.data.errorMessage);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
+            });
     }
 
 
@@ -81,126 +116,102 @@ class CarouselComponent extends Component {
 
     }
 
+    displayCarousel(activeImages) {
+        return <Carousel>
+        {
+
+            _.map(activeImages, (image) => {
+
+                let imageId = image.imageInfo.imageInfoId;
+                return (<Carousel.Item key={imageId}>
+                    <img
+                        className="d-block w-100"
+                        src={image.imageInfo.imageURL}
+                        alt={image.imageInfo.imageAlt}
+                    />
+
+                </Carousel.Item>)
+
+            })
+
+        }
+    </Carousel>
+    }
+
+
     render() {
-        const {isAdmin} = this.props;
+        const { isAdmin } = this.props;
         let activeImages = _.filter(this.state.data, (item) => {
             return _.isEqual(item.imageInfo.imageIsActive, 1);
         });
 
-        
+        let noOfImages = activeImages.length;
+
+
 
         return (
             <div>
-            {isAdmin?<Button variant="primary" className="over-parent" onClick={this.handleShow}>Edit Images</Button>:""}
-            <Modal size="lg" show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Image Editor</Modal.Title>
+                {
+                    isAdmin ?
+
+                        <Button variant="primary" size="sm" className="over-parent " onClick={this.handleShow}>
+                            <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+
+                        </Button>
+
+                        : ""
+                }
+                <Modal show={this.state.show} onHide={this.handleClose} >
+                    <Modal.Header className="modalHeader text-white" closeButton>
+                        <Modal.Title >Image Editor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
-                        {activeImages.length == 0 ? <SpinnerComponent/> :""}
-
-                        <div className="image-editor-grid">
+                        {noOfImages === 0 ? "Images not added yet, please add images." : ""}
+                        <div >
                             {
-                                activeImages.map(image => <span><i class="fa fa-fw fa-trash" onClick={this.deleteImage.bind(this, [image.imageInfo.imageInfoId])}></i><img src={"http://10.10.10.32/ContentManagement/image/download/"+image.imageInfo.imageInfoId} className="image_icon" /></span>)
-                                // this.state.images.map(image => <span><i class="fa fa-fw fa-trash" onClick={this.deleteImage.bind(this, [image.id])}></i><img src={image.fileURL} className="image_icon" data-filePath={image.fileURL} /></span>)
+                                activeImages.map(image =>
+                                    <CarouselCardComponent key={image.imageInfo.imageInfoId}
+                                        id={image.imageInfo.imageInfoId}
+                                        name={image.imageInfo.imageName}
+                                        thumbnailURL={image.imageInfo.thumbnailURL}
+                                        description={image.imageInfo.imageDescription}
+                                        updatedDate={image.imageInfo.updatedDate}
+                                        deleteImage={this.deleteImage} />
+                                )
                             }
-
                         </div>
-
-
                     </Modal.Body>
                     <Modal.Footer>
-                        {/* <input
-                            type='file'
-                            className='custom-file-input'
-                            id='customFile'
-                            onChange={this.onChange}
-                        />
-                        <Button variant="primary" onClick={this.uploadImage}>Upload</Button> */}
-                        <FileUploadComponent uploadImage={this.uploadImage}/>
+
+                        <Button type="text" onClick={this.handleShowUpload}>Add Image</Button>
+
                     </Modal.Footer>
                 </Modal>
-            
-            <Carousel>
-                {
+                  
+                <FileUploadComponent 
+                    show={this.state.showUpload} 
+                    uploadImage={this.uploadImage} 
+                    handleShowUpload={this.handleShowUpload} 
+                    handleCloseUpload={this.handleCloseUpload} 
+                    id={this.props.id} 
+                    imageType={this.props.imageType} />
 
-                    _.map(activeImages, (image) => {
+                {
+                    noOfImages==1?_.map(activeImages, (image) => {
 
                         let imageId = image.imageInfo.imageInfoId;
-                        return (<Carousel.Item key={imageId}>
+                        return (
                             <img
                                 className="d-block w-100"
-                                src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
-                                alt="First slide"
+                                src={image.imageInfo.imageURL}
+                                alt={image.imageInfo.imageAlt}
                             />
-                            <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>)
 
-                    })
+                        )
 
-                    
-
-                    
-
-                        // _.map(this.state.data?.containerImageInfo, (containerImageInfoObject) => {
-
-                        //     let imageId = containerImageInfoObject?.imageInfo?.imageInfoId;
-                        //     return (<Carousel.Item>
-                        //         <img
-                        //             className="d-block w-100"
-                        //             src={"http://10.10.10.32/ContentManagement/image/download/" + imageId}
-                        //             alt="First slide"
-                        //         />
-                        //         <Carousel.Caption>
-                        //             <h3>First slide label</h3>
-                        //             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        //         </Carousel.Caption>
-                        //     </Carousel.Item>)
-
-                        // })
+                    }):this.displayCarousel(activeImages)
                 }
-                {/* <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src={hotelImage1}
-                        alt="First slide"
-                    />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src={hotelImage2}
-                        alt="Second slide"
-                    />
-
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src={hotelImage3}
-                        alt="Third slide"
-                    />
-
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                        </p>
-                    </Carousel.Caption>
-                </Carousel.Item> */}
-            </Carousel>
+                
             </div>
         );
     }
@@ -209,16 +220,18 @@ class CarouselComponent extends Component {
 const mapStateToPros = state => {
     return {
         isAdmin: _.isEqual(state?.userInfo?.role, "Admin"),
-        token: state.userInfo.token
+        token: state.userInfo.token,
     };
 };
+
 const mapDispatchToProps = dispatch => {
     return {
-        handleIncrementClick: () => dispatch({ type: 'INCREMENT' }),
-        handleDecrementClick: () => dispatch({ type: 'DECREMENT' })
+        showPageLoader: () => showPageLoader(dispatch),
+        hidePageLoader: () => hidePageLoader(dispatch),
+        showLoginModalDispatcher: (value) => dispatch({ type: "SHOW_LOGIN", showLoginModal:value})
     }
 };
 
 
-//export default CarouselComponent;
-export default connect(mapStateToPros, undefined)(CarouselComponent);
+
+export default connect(mapStateToPros, mapDispatchToProps)(CarouselComponent);

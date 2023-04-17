@@ -1,10 +1,14 @@
-import { ON_CHANGE } from "../utils/ActionTypes";
+import { ON_CHANGE, PAGELOADER } from "../utils/ActionTypes";
+import _ from 'lodash'
 
 const defaultState = {
+    showPageLoader:false,
+    showLoginModal:false,
     user : {},
     todos:[],
     showLogin: false,
-    userInfo:{}
+    userInfo:{},
+    formData:{}
 }
 
 
@@ -17,21 +21,17 @@ const countReducer = function (state = defaultState, action) {
       case "DECREMENT":
         return {...state, count:state.count-1}
       case "callAPI":{
-        //call axios API
         var resp = {data:[]};
-        const apiKey = action.key;
-
         return {...state, apiKey:resp.data}
-
       }
       case "PROMPT_LOGIN":
         return {...state, showLogin:true}
       case "CLOSE_LOGIN":
         return {...state, showLogin:false}
       case ON_CHANGE:
-        let data = {};
-        data[action.id] = action.value;
-        return {...state, ...data}
+        let formData = {...state.formData};
+        _.set(formData, action.data.id, action.data.value);
+        return {...state, formData:{...formData}}
       case "USER_INFO":
         userData = {};
         userData[action.id] = action.data;
@@ -40,6 +40,10 @@ const countReducer = function (state = defaultState, action) {
         userData = {};
         userData[action.id] = "";
         return {...state, ...userData}
+      case PAGELOADER:
+        return {...state, showPageLoader:action.value}
+      case "SHOW_LOGIN":
+        return {...state, showLoginModal:action.showLoginModal}
       default:
         return state;
     }
