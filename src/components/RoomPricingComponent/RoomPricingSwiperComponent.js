@@ -75,7 +75,7 @@ class RoomPricingSwiperComponent extends Component {
         return <div key={slide.containerDivId} className="swiper-slide mb-2">
 
         <Card className="mx-auto my-3 text-white mb-2 rounded">
-            <Card.Header  className="cardHeader">
+            {/* <Card.Header  className="cardHeader">
             <div className="d-flex" >
 
                     <div className="text">
@@ -88,18 +88,18 @@ class RoomPricingSwiperComponent extends Component {
                     </div>
                     
             </div>
-            </Card.Header>
+            </Card.Header> */}
             <Card.Img variant="top"  src={slide.containerImageInfo[0].imageInfo.imageURL}  onClick={this.swiperClicked}/>
-            <Card.Body>
-                <Card.Text className="cardDescription">
+            {/* <Card.Body>
+                 <Card.Text className="cardDescription">
                          <div>
                                 
                                    {slide.containerTextInfo[0].containerTextLabelName +":"+slide.containerTextInfo[0].containertextLabelValue} <br></br>
                                    {slide.containerTextInfo[1].containertextLabelValue}
                                 
                             </div>
-                </Card.Text>
-            </Card.Body>
+                </Card.Text> 
+            </Card.Body> */}
             {isAdmin?
             <Card.Footer className="cardFooter">
                 <small className="text-white">{"Updated Date: " + slide.updatedDate}</small>

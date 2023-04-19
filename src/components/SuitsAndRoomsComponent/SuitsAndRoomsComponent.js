@@ -1,5 +1,6 @@
 import { Component } from "react";
 import CarouselComponent from "../CarouselComponent/CarouselComponent";
+import RoomPricingComponent from "../RoomPricingComponent/RoomPricingComponent";
 import RoomTariffComponent from "../RoomTariffComponent/RoomTariffComponent";
 import RoomsAndOverviewContainer from "../SuitsAndRoomsComponent/RoomsAndOverviewContainer";
 import HotelAndOverviewContainer from "./HotelAndOverviewContainer";
@@ -12,7 +13,8 @@ class SuitsAndRoomsComponent extends Component {
             <HotelAndOverviewContainer id="sandr-hoteloverview-id" /> 
             <RoomTariffComponent id="home-roompricing-id"/>
             <RoomTariffComponent id="home-roompricing-id"/>
-             <RoomsAndOverviewContainer /> 
+             {/* <RoomsAndOverviewContainer />  */}
+             <RoomPricingComponent id="home-roompricing-id"/>
              
              
         </div>);
