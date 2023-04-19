@@ -117,7 +117,7 @@ class CarouselComponent extends Component {
     }
 
     displayCarousel(activeImages) {
-        return <Carousel>
+        return <Carousel interval={2000}>
         {
 
             _.map(activeImages, (image) => {

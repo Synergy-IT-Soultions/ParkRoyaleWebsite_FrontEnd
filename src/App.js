@@ -39,6 +39,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
+              <Route path="/adminlogin" element={<HomePageComponent />} />
               <Route path="/suitsandrooms" element={<SuitsAndRoomsComponent />} />
               <Route path="/restaurants" element={<ComingSoonComponent />} />
               <Route path="/recreations" element={<ComingSoonComponent />} />

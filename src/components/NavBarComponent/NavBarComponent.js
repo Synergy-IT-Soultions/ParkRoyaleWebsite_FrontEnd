@@ -14,6 +14,10 @@ class NavBarComponent extends Component {
         this.closeMobileToggleDropDown = this.closeMobileToggleDropDown.bind(this);
     }
 
+    componentDidMount(){
+        //alert(window.location.pathname);
+    }
+
     mobileToggleClicked() {
 
         // let displayStyle = this.mobileToggleRef.current.style.getPropertyValue('display');
@@ -54,7 +58,7 @@ class NavBarComponent extends Component {
                             <li><NavLink className="nav-link scrollto" to="/toursandtravels" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Tours and Travels</NavLink></li>
                             <li><NavLink className="nav-link scrollto" to="/gallery" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Gallery</NavLink></li>
                             <li><NavLink className="nav-link scrollto" to="/contactus" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Contact Us</NavLink></li>
-                            <LoginComponent mobileToggleClicked={this.closeMobileToggleDropDown}/>
+                            {window.location.pathname == "/adminlogin"?<LoginComponent mobileToggleClicked={this.closeMobileToggleDropDown}/>:""}
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" ref={this.mobileToggleRef} onClick={this.mobileToggleClicked}></i>
                     </nav>

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import _ from "lodash";
-import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
+import Swiper, { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import { connect } from "react-redux";
 import Card from 'react-bootstrap/Card';
@@ -8,13 +8,16 @@ import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { toast } from "react-toastify";
 import { displayErrors } from "../../utils/CommonUtils";
+import { Modal } from "react-bootstrap";
+import ImageGalleryComponent from "../../CommonComponents/ImageGalleryComponent/ImageGalleryComponent";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data:[],
-            options:[]
+            options:[],
+            showGallery:false
         }
         this.createSlide = this.createSlide.bind(this);
     }
@@ -66,8 +69,9 @@ class RoomPricingSwiperComponent extends Component {
 
     }
 
-    createSlide(slide) {
+    createSlide(slide, images) {
         const { isAdmin } = this.props;
+        images.push(slide.containerImageInfo[0].imageInfo.imageURL);
         return <div key={slide.containerDivId} className="swiper-slide mb-2">
 
         <Card className="mx-auto my-3 text-white mb-2 rounded">
@@ -85,7 +89,7 @@ class RoomPricingSwiperComponent extends Component {
                     
             </div>
             </Card.Header>
-            <Card.Img variant="top"  src={slide.containerImageInfo[0].imageInfo.imageURL}  />
+            <Card.Img variant="top"  src={slide.containerImageInfo[0].imageInfo.imageURL}  onClick={this.swiperClicked}/>
             <Card.Body>
                 <Card.Text className="cardDescription">
                          <div>
@@ -109,12 +113,15 @@ class RoomPricingSwiperComponent extends Component {
 
     componentDidMount(){
         new Swiper('.testimonials-slider', {
-            modules: [Navigation, Pagination, Scrollbar],
-            speed: 600,
-            loop: true,
+            modules: [Navigation, Pagination, Scrollbar, Autoplay],
+            speed: 1000,
+            centeredSlides: false,
+            loop: true,//This will work only when total slides is equal to slidesPerView*2
+            // freeMode: true,
             autoplay: {
-              delay: 5000,
-              disableOnInteraction: false
+              delay: 2000,
+              disableOnInteraction: false,
+              stopOnLastSlide: false
             },
             slidesPerView: 'auto',
             // pagination: {
@@ -133,7 +140,7 @@ class RoomPricingSwiperComponent extends Component {
               },
         
               1200: {
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 40
               }
             }
@@ -150,15 +157,21 @@ class RoomPricingSwiperComponent extends Component {
         return this.state.options;
     }
 
+    swiperClicked = ()=>{
+        //alert("Hello");
+        this.setState({showGallery:true})
+    }
+
     render() {
         const { data } = this.props;
+        let images = [];
         
         return (
             <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                 <div className="swiper-wrapper">
                 {
                     _.map(data, (dataObj)=>{
-                        return this.createSlide(dataObj);
+                        return this.createSlide(dataObj, images);
                     })
                 }
                     
@@ -168,7 +181,16 @@ class RoomPricingSwiperComponent extends Component {
                 {/* <!-- If we need navigation buttons --> */}
                 <div className="swiper-button-prev"></div>
                 <div className="swiper-button-next"></div>
+                <Modal show={this.state.showGallery} fullscreen={true} onHide={() => this.setState({showGallery:false})}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Gallery</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ImageGalleryComponent images={images}/>
+                    </Modal.Body>
+                </Modal>
             </div>
+            
         );
     }
 }
