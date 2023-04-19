@@ -9,9 +9,12 @@ class SuitsAndRoomsComponent extends Component {
     render() { 
         return (<div>
             <CarouselComponent id="sandr-imagebar-id" imageType="IMAGEBAR"/>
+            <HotelAndOverviewContainer id="sandr-hoteloverview-id" /> 
+            <RoomTariffComponent id="home-roompricing-id"/>
+            <RoomTariffComponent id="home-roompricing-id"/>
              <RoomsAndOverviewContainer /> 
-             <RoomTariffComponent id="home-roompricing-id"/>
-             <HotelAndOverviewContainer id="sandr-hoteloverview-id" /> 
+             
+             
         </div>);
     }
 }

@@ -18,7 +18,6 @@ class RoomsAndOverviewContainer extends Component {
       }
      render() {
          return (
-               
                     <section >
                          <div className="container" data-aos="fade-up">
                          <div className="row row-cols-lg-2">
@@ -29,13 +28,9 @@ class RoomsAndOverviewContainer extends Component {
                                         </Card.Body>
                                    </Card>
                               </div>
-                              <div className="card-content">
-                                   <OverviewEditContainer id="sandr-roomsoverview-id"/>
-                              </div>
                          </div>
                          </div>
                     </section>
-              
           )
      }
 }

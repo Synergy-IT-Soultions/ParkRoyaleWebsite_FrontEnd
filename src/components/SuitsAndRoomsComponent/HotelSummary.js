@@ -103,10 +103,7 @@ class HotelSummary extends Component {
                     <Card.Body>
                     <div className="d-flex">
                         <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
-                    </div>      
-                    <div className='mx-auto my-3 mb-2 bottom'>
-                        <OverviewEditContainer id="sandr-hoteloverview-id"/>
-                    </div>          
+                    </div>             
                     </Card.Body>
                 </Card>
                 </div>
