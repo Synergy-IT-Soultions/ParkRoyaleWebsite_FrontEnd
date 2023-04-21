@@ -101,3 +101,11 @@
         max-height: 100%;
     }
 }
+
+.carousel-control-next-icon {
+    background-image: url('../../assets/next-svgrepo-com.svg');
+  }
+  
+.carousel-control-prev-icon {
+    background-image: url('../../assets/previous-return-svgrepo-com.svg');
+  }

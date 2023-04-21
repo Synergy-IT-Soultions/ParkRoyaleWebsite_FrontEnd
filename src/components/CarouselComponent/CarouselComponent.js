@@ -117,17 +117,24 @@ class CarouselComponent extends Component {
     }
 
     displayCarousel(activeImages) {
-        return <Carousel interval={2000}>
+        return <Carousel interval={1000}>
+               
         {
 
             _.map(activeImages, (image) => {
 
                 let imageId = image.imageInfo.imageInfoId;
-                return (<Carousel.Item key={imageId}>
+                return (
+                
+                <Carousel.Item key={imageId}>
+                    
                     <img
                         className="d-block w-100"
                         src={image.imageInfo.imageURL}
                         alt={image.imageInfo.imageAlt}
+                        style={{border: "4px solid #5846F9"}}
+                       
+                        
                     />
 
                 </Carousel.Item>)
@@ -135,6 +142,7 @@ class CarouselComponent extends Component {
             })
 
         }
+         
     </Carousel>
     }
 
