@@ -4,6 +4,10 @@
     cursor: pointer;
 }
 
+.price-table-bottom-text{
+  color: red;
+}
+
 .fa-floppy-o:hover{
     color: rgb(73, 238, 67);
     cursor: pointer;

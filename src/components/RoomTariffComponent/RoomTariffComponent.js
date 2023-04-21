@@ -9,6 +9,7 @@ import InputComponent from "../../CommonComponents/InputComponent";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { toast } from "react-toastify";
 import { displayErrors } from "../../utils/CommonUtils";
+import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 
 class RoomTariffComponent extends Component {
     constructor(props) {
@@ -16,21 +17,28 @@ class RoomTariffComponent extends Component {
         this.state = {
             data: [],
             editable: false,
-            show: false
+            show: false,
+            showEditPage:true
         }
         this.loadData = this.loadData.bind(this);
         this.toggleTableEditable = this.toggleTableEditable.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.handlSave = this.handlSave.bind(this);
+        this.handleSaveTableData = this.handleSaveTableData.bind(this);
+        this.handleSaveHeaderData = this.handleSaveHeaderData.bind(this);
         this.handleShow = this.handleShow.bind(this);
     }
 
     loadData() {
 
         const { id } = this.props;
-        cmClient.get('/content/get/container/pricing/' + id)
+        cmClient.get('/content/get/container/group-details/' + id)
             //.then(response => console.log(response))
-            .then(response => this.setState({ data: response.data }))
+            .then(response => {
+
+                let responseData = response.data[0];
+    
+                this.setState({ data: responseData.containerPricingInfo , headerData: responseData})
+            })
             .catch(error => console.log(error));
 
     }
@@ -51,7 +59,47 @@ class RoomTariffComponent extends Component {
         this.setState({show:false});
     }
 
-    handlSave() {
+    handleSaveHeaderData = (event) => {
+        const { formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
+        const { token } = this.props;
+        const { headerData } = this.state;
+        const auth = "Bearer " + token;
+
+        let requestData = _.cloneDeep(headerData);
+
+        //Lets delete extra info 
+        delete requestData.containerImageInfo;
+        delete requestData.containerPricingInfo;
+
+        requestData.containerHeader = _.get(formData, headerData.pageContainerInfoId + "")
+        requestData.containerTextInfo[0].containertextLabelValue = _.get(formData, headerData.containerTextInfo[0].containerTextInfoId);
+
+        console.log("requestData======================>");
+        console.log(JSON.stringify(requestData));
+        console.log(requestData);
+        //return;
+        showPageLoader();
+        cmClient.post('/content/save/container', requestData, {
+            headers: {
+                'Authorization': auth
+            }
+        })
+            .then(response => {
+                toast.success("Record saved Successfully.");
+                console.log("record saved successfully");
+                console.log(response.data);
+                this.loadData();
+                hidePageLoader();
+                this.setState({showEditPage:false})
+            })
+            .catch(error => {
+                console.log(error);
+                hidePageLoader();
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
+            });
+    }
+
+    handleSaveTableData() {
 
         const { token, formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         const auth = "Bearer " + token;
@@ -95,26 +143,38 @@ class RoomTariffComponent extends Component {
 
     render() {
         const { isAdmin } = this.props;
-        let editOption;
+        let tableEditOption;
+        let contentEditOption;
         if (isAdmin) {
-            editOption = <Button size="sm" onClick={this.toggleTableEditable}>
+            tableEditOption = <Button size="sm" onClick={this.toggleTableEditable}>
                 <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
             </Button>;
+
+            contentEditOption = <Button size="sm" onClick={this.toggleTableEditable}>
+            <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+        </Button>;
         }
 
-        let { editable, show } = this.state;
+        let { editable, show, data, headerData } = this.state;
         editable = editable && isAdmin;
+
+        const containerHeader = headerData &&  headerData.containerHeader;
+        const containertextLabelValue = headerData && headerData.containerTextInfo[0].containertextLabelValue;
         
 
         return (
             <section id="pricing" className="pricing section-bg">
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
-                        <h2>{isAdmin ? editOption : ""}Room Tariff</h2>
+                        {/* <h2>{isAdmin ? contentEditOption : ""}Room Tariff</h2> */}
+                        <h2>{isAdmin && headerData ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={headerData} handleSave={this.handleSaveHeaderData} /> : ""}{containerHeader}</h2>
+                
 
                     </div>
                     <div className="tableHolder">
+                    <div className="pull-left">{isAdmin ? tableEditOption : ""}</div>
                     <Table striped bordered hover>
+                        
                         <thead>
                             <tr className="tableHeader">
                                 <th> Suite</th>
@@ -133,7 +193,9 @@ class RoomTariffComponent extends Component {
                         </tbody>
 
                     </Table>
+                    
                     </div>
+                    <p className="price-table-bottom-text">{containertextLabelValue}</p>
                     {editable ? <Button type="text" onClick={this.handleShow}>Add Row</Button> : ""}
                     
                     <Modal size="md" show={show} onHide={this.handleClose}>
@@ -148,7 +210,7 @@ class RoomTariffComponent extends Component {
                             <InputComponent label="Week End Without Breakfast" id="week_end_without_breakfast_new_rate"/>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button type="submit" onClick={this.handlSave}>Save</Button>
+                            <Button type="submit" onClick={this.handleSaveTableData}>Save</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
