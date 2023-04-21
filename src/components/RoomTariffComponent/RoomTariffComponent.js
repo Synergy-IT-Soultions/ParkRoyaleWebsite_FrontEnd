@@ -59,7 +59,11 @@ class RoomTariffComponent extends Component {
         let rowDataCopy = _.cloneDeep(this.state.data[0]);
         delete rowDataCopy.containerPricingInfoId;
         rowDataCopy.roomType = _.get(formData, "room_tariff_new_king_suite");
-        rowDataCopy.roomPrice = _.get(formData, "room_tariff_new_rate");
+        rowDataCopy.weekDaysWithBreakfastPrice = _.get(formData, "week_days_with_breakfast_new_rate");
+        rowDataCopy.weekDaysWithOutBreakfastPrice = _.get(formData, "week_days_without_breakfast_new_rate");
+        rowDataCopy.weekEndWithBreakfastPrice = _.get(formData, "week_end_with_breakfast_new_rate");
+        rowDataCopy.weekEndWithOutBreakfastPrice = _.get(formData, "week_end_without_breakfast_new_rate");
+
 
         console.log("rowDataCopy======================>");
         console.log(JSON.stringify(rowDataCopy));
@@ -100,6 +104,7 @@ class RoomTariffComponent extends Component {
 
         let { editable, show } = this.state;
         editable = editable && isAdmin;
+        
 
         return (
             <section id="pricing" className="pricing section-bg">
@@ -112,11 +117,11 @@ class RoomTariffComponent extends Component {
                     <Table striped bordered hover>
                         <thead>
                             <tr className="tableHeader">
-                                <th>King Suite</th>
-                                <th>Rate</th>
-                                <th>GST %</th>
-                                <th>GST</th>
-                                <th>Total</th>
+                                <th> Suite</th>
+                                <th>Week Days With Breakfast</th>
+                                <th>Week Days Without Breakfast</th>
+                                <th>Week End With Breakfast</th>
+                                <th>Week End Without Breakfast</th>
                                 {editable ? <th>Delete/Save</th> : ""}
                             </tr>
                         </thead>
@@ -136,9 +141,11 @@ class RoomTariffComponent extends Component {
                             <Modal.Title>Editor</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <InputComponent label="King Suite" id="room_tariff_new_king_suite"/>
-                            <InputComponent label="Rate" id="room_tariff_new_rate"/>
-
+                            <InputComponent label="Suite" id="room_tariff_new_king_suite"/>
+                            <InputComponent label="Week Days With Breakfast" id="week_days_with_breakfast_new_rate"/>
+                            <InputComponent label="Week Days Without Breakfast" id="week_days_without_breakfast_new_rate"/>
+                            <InputComponent label="Week End With Breakfast" id="week_end_with_breakfast_new_rate"/>
+                            <InputComponent label="Week End Without Breakfast" id="week_end_without_breakfast_new_rate"/>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button type="submit" onClick={this.handlSave}>Save</Button>

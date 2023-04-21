@@ -11,8 +11,8 @@ class SuitsAndRoomsComponent extends Component {
         return (<div>
             <CarouselComponent id="sandr-imagebar-id" imageType="IMAGEBAR"/>
             <HotelAndOverviewContainer id="sandr-hoteloverview-id" /> 
-            <RoomTariffComponent id="home-roompricing-id"/>
-            <RoomTariffComponent id="home-roompricing-id"/>
+            <RoomTariffComponent id="home-king-suite-tariff-id"/>
+            <RoomTariffComponent id="home-deluxe-suite-tariff-id"/>
              {/* <RoomsAndOverviewContainer />  */}
              <RoomPricingComponent id="home-roompricing-id"/>
              
