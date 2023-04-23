@@ -89,6 +89,13 @@ tr:hover{
     .card {
       flex-direction: column; /* change the flex-direction to column to make the columns turn into rows */
     }
+
+    .tableHeader {
+      background-color: #5846f9;
+      color: white;
+      font-style: bold;
+      font-size: x-small;
+  }
     
     .iframe {
       margin-right: 0;

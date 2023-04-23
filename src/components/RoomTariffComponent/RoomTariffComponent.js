@@ -172,17 +172,22 @@ class RoomTariffComponent extends Component {
 
                     </div>
                     <div className="tableHolder">
-                    <div className="pull-left">{isAdmin ? tableEditOption : ""}</div>
+                    <div >{isAdmin ? tableEditOption : ""}</div>
                     <Table striped bordered hover>
                         
                         <thead>
                             <tr className="tableHeader">
-                                <th> Suite</th>
-                                <th>Week Days With Breakfast</th>
-                                <th>Week Days Without Breakfast</th>
-                                <th>Week End With Breakfast</th>
-                                <th>Week End Without Breakfast</th>
-                                {editable ? <th>Delete/Save</th> : ""}
+                                <td rowspan="2"> Suite</td>
+                                <td colspan="2">Week Days </td>
+                                <td colspan="2">Week End</td>
+                                
+                                {editable ? <td rowspan="2">Delete/Save</td> : ""}
+                            </tr>
+                            <tr className="tableHeader">
+                                <td > With Breakfast</td>
+                                <td >Without Breakfast</td>
+                                <td >With Breakfast</td>
+                                <td >Without Breakfast</td>
                             </tr>
                         </thead>
                         <tbody>
