@@ -117,7 +117,7 @@ class CarouselComponent extends Component {
     }
 
     displayCarousel(activeImages) {
-        return <Carousel interval={1000}>
+        return <Carousel interval={2000}>
                
         {
 
@@ -132,7 +132,7 @@ class CarouselComponent extends Component {
                         className="d-block w-100"
                         src={image.imageInfo.imageURL}
                         alt={image.imageInfo.imageAlt}
-                        style={{border: "4px solid #5846F9"}}
+                        style={{border: "15px solid #5846F9"}}
                        
                         
                     />
@@ -213,6 +213,7 @@ class CarouselComponent extends Component {
                                 className="d-block w-100"
                                 src={image.imageInfo.imageURL}
                                 alt={image.imageInfo.imageAlt}
+                                style={{border: "15px solid #5846F9"}}
                             />
 
                         )

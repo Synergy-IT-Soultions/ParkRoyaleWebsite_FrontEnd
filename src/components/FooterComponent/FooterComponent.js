@@ -3,7 +3,7 @@ function FooterComponent() {
         <footer id="footer">
            
             <div className="footer-top"> 
-            PARK ROYALE 5/94, Kurinji Andavar Road, Kodaikanal - 624101, Next to Chettiyar Park Tamilnadu, India. 
+               Park Royale @ Kodaikanal, 5/94 Kurinji Andavar Kovil Main Road, Next to Chettiyar Park, Kodaikanal - 624101, Tamilnadu, India
             </div>
 
             <div className="container">
