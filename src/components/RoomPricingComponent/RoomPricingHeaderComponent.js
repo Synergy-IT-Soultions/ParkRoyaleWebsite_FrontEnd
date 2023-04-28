@@ -22,7 +22,7 @@ class RoomPricingHeaderComponent extends Component {
 
         let requestData = _.cloneDeep(data);
         requestData.containerHeader = _.get(formData, data.pageContainerInfoId + "")
-        requestData.containerTextInfo[0].containertextLabelValue = _.get(formData, data.containerTextInfo[0].containerTextInfoId);
+        //requestData.containerTextInfo[0].containertextLabelValue = _.get(formData, data.containerTextInfo[0].containerTextInfoId);
 
         console.log("requestData======================>");
         console.log(JSON.stringify(requestData));
@@ -53,12 +53,12 @@ class RoomPricingHeaderComponent extends Component {
         const { data, isAdmin } = this.props;
         
         const containerHeader = data.containerHeader;
-        const containertextLabelValue = data.containerTextInfo[0].containertextLabelValue;
+        //const containertextLabelValue = data.containerTextInfo[0].containertextLabelValue;
 
         return (
             <div className="section-title">
                 <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
-                <p>{containertextLabelValue}</p>
+                {/* <p>{containertextLabelValue}</p> */}
             </div>
         );
     }

@@ -8,8 +8,10 @@ import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { toast } from "react-toastify";
 import { displayErrors } from "../../utils/CommonUtils";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import ImageGalleryComponent from "../../CommonComponents/ImageGalleryComponent/ImageGalleryComponent";
+import  CarouselCardComponent  from "../CarouselComponent/CarouselCardComponent";
+import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
 
 class RoomPricingSwiperComponent extends Component {
     constructor(props) {
@@ -17,9 +19,85 @@ class RoomPricingSwiperComponent extends Component {
         this.state = {
             data:[],
             options:[],
-            showGallery:false
+            showGallery:false,
+            show: false,
+            showUpload: false
         }
         this.createSlide = this.createSlide.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.deleteImage = this.deleteImage.bind(this);
+        this.handleShowUpload = this.handleShowUpload.bind(this);
+        this.handleCloseUpload = this.handleCloseUpload.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
+    }
+
+    handleShowUpload() {
+        this.handleClose();
+        this.setState({ showUpload: true });
+    }
+
+    handleCloseUpload() {
+
+        this.setState({ showUpload: false });
+        this.handleShow();
+    }
+
+    deleteImage(fileId) {
+        const { token, showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
+        const auth = "Bearer " + token;
+        const isOk = window.confirm('Are you sure to delete this image?');
+        if(isOk) {
+            showPageLoader();
+            cmClient.post('/image/delete/' + fileId,{},{
+                headers: {
+                    'Authorization': auth
+                }
+            })
+                .then(response => {
+                    toast.success("Image deleted Successfully.")
+                    this.props.loadData();
+                    hidePageLoader();
+
+                })
+                .catch(error => {
+                    console.log(error);
+                    hidePageLoader();
+                    //toast.error(error.response.data.errorMessage);
+                    displayErrors(error, showLoginModalDispatcher.bind({},true));
+                });
+        }
+    }
+
+    uploadImage(formData) {
+        const { token , showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
+        const auth = "Bearer " + token;
+        showPageLoader();
+        cmClient.post('/image/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data;boundary=',
+                'Authorization': auth
+            }
+        })
+            .then(response => {
+                toast.success("Image Uploaded Successfully.");
+                this.fetchImages();
+                hidePageLoader();
+                this.setState({showUpload:false})
+            })
+            .catch(error => {console.log(error);
+                hidePageLoader();
+                //toast.error(error.response.data.errorMessage);
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
+            });
+    }
+
+    handleClose() {
+        this.setState({ show: false });
+    }
+
+    handleShow() {
+        this.setState({ show: true });
     }
 
     handleSave = (data)=>{
@@ -68,8 +146,49 @@ class RoomPricingSwiperComponent extends Component {
 
 
     }
-
     createSlide(slide, images) {
+        const { isAdmin } = this.props;
+        images.push(slide.imageInfo.imageURL);
+        return <div key={slide.containerImageInfoId} className="swiper-slide mb-2">
+
+        <Card className="mx-auto my-3 text-white mb-2 rounded">
+            {/* <Card.Header  className="cardHeader">
+            <div className="d-flex" >
+
+                    <div className="text">
+                        { 
+                           isAdmin ? 
+                                        <ContainerEditComponent data={slide}  handleSave={this.handleSave} fetchOptions={this.fetchOptions}/>
+                                   : ""
+                        }
+                        {slide.containerHeader}
+                    </div>
+                    
+            </div>
+            </Card.Header> */}
+            <Card.Img variant="top"  src={slide.imageInfo.imageURL}  onClick={this.swiperClicked}/>
+            {/* <Card.Body>
+                 <Card.Text className="cardDescription">
+                         <div>
+                                
+                                   {slide.containerTextInfo[0].containerTextLabelName +":"+slide.containerTextInfo[0].containertextLabelValue} <br></br>
+                                   {slide.containerTextInfo[1].containertextLabelValue}
+                                
+                            </div>
+                </Card.Text> 
+            </Card.Body> */}
+            {isAdmin?
+            <Card.Footer className="cardFooter">
+                <small className="text-white">{"Updated Date: " + slide.updatedDate}</small>
+            </Card.Footer>
+            :""}
+            </Card>
+            
+            </div>;
+                
+    }
+
+    createSlide1(slide, images) {
         const { isAdmin } = this.props;
         images.push(slide.containerImageInfo[0].imageInfo.imageURL);
         return <div key={slide.containerDivId} className="swiper-slide mb-2">
@@ -140,7 +259,7 @@ class RoomPricingSwiperComponent extends Component {
               },
         
               1200: {
-                slidesPerView: 2,
+                slidesPerView: 3,
                 spaceBetween: 40
               }
             }
@@ -163,11 +282,62 @@ class RoomPricingSwiperComponent extends Component {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, isAdmin } = this.props;
         let images = [];
+
+        let activeImages = _.filter(data, (item) => {
+            return _.isEqual(item.imageInfo.imageIsActive, 1);
+        });
+
+        let noOfImages = activeImages.length;
         
         return (
+            <>
+            <p>{
+                    isAdmin ?
+
+                        <Button variant="primary" size="sm" className=" " onClick={this.handleShow}>
+                            <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+
+                        </Button>
+
+                        : ""
+                }</p>
             <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                
+                <Modal show={this.state.show} onHide={this.handleClose} >
+                    <Modal.Header className="modalHeader text-white" closeButton>
+                        <Modal.Title >Image Editor</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {noOfImages === 0 ? "Images not added yet, please add images." : ""}
+                        <div >
+                            {
+                                activeImages.map(image =>
+                                    <CarouselCardComponent key={image.imageInfo.imageInfoId}
+                                        id={image.imageInfo.imageInfoId}
+                                        name={image.imageInfo.imageName}
+                                        thumbnailURL={image.imageInfo.thumbnailURL}
+                                        description={image.imageInfo.imageDescription}
+                                        updatedDate={image.imageInfo.updatedDate}
+                                        deleteImage={this.deleteImage} />
+                                )
+                            }
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+
+                        <Button type="text" onClick={this.handleShowUpload}>Add Image</Button>
+
+                    </Modal.Footer>
+                </Modal>
+                <FileUploadComponent 
+                    show={this.state.showUpload} 
+                    uploadImage={this.uploadImage} 
+                    handleShowUpload={this.handleShowUpload} 
+                    handleCloseUpload={this.handleCloseUpload} 
+                    id={this.props.id} 
+                    imageType={this.props.imageType} />
                 <div className="swiper-wrapper">
                 {
                     _.map(data, (dataObj)=>{
@@ -190,7 +360,7 @@ class RoomPricingSwiperComponent extends Component {
                     </Modal.Body>
                 </Modal>
             </div>
-            
+            </>
         );
     }
 }

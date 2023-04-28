@@ -14,7 +14,9 @@ class SuitsAndRoomsComponent extends Component {
             <RoomTariffComponent id="home-king-suite-tariff-id"/>
             <RoomTariffComponent id="home-deluxe-suite-tariff-id"/>
              {/* <RoomsAndOverviewContainer />  */}
-             <RoomPricingComponent id="home-roompricing-id"/>
+             {/* <RoomPricingComponent id="home-roompricing-id"/> */}
+             <RoomPricingComponent id="sandr-room-gallery-id"/>
+             
              
              
         </div>);
