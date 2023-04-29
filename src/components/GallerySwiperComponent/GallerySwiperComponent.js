@@ -1,11 +1,11 @@
 import { Component } from "react";
-import RoomPricingHeaderComponent from "./RoomPricingHeaderComponent";
-import RoomPricingSwiperComponent from "./RoomPricingSwiperComponent";
 import _ from "lodash";
 import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
 import cmClient from "../../clients/ContentManagementClient";
+import GallerySwiperHeaderComponent from "./GallerySwiperHeaderComponent";
+import GallerySwiperDetailsComponent from "./GallerySwiperDetailsComponent";
 
-class RoomPricingComponent extends Component {
+class GallerySwiperComponent extends Component {
     constructor(props) {
         super(props);
         this.state={data:[],isLoading:true}
@@ -34,8 +34,7 @@ class RoomPricingComponent extends Component {
     
     render() {
         const isLoading = this.state.isLoading;
-        // const headerObject = _.slice(this.state.data,0,1)[0];
-        // const swiperCards = _.slice(this.state.data,1);
+        const {imageType} = this.props;
 
         const headerObject = _.cloneDeep(this.state.data);
         delete headerObject.containerImageInfo;
@@ -45,16 +44,12 @@ class RoomPricingComponent extends Component {
             return _.isEqual(item.imageInfo.imageIsActive, 1);
         });
 
-
-        //let imageType = _.get(swiperCards[0], "containerImageInfo[0].imageInfo.imageType");
-        let imageType = swiperCards && _.get(swiperCards[0], "imageInfo.imageType");
-
         return (
             isLoading?<SpinnerComponent/>:
                 <section id="pricing" className="pricing section-bg">
                 <div className="container" data-aos="fade-up">
-                <RoomPricingHeaderComponent id={this.props.id} data={headerObject} loadData={this.loadData}/>
-                <RoomPricingSwiperComponent id={this.props.id} data={swiperCards} loadData={this.loadData} imageType={imageType}/>
+                <GallerySwiperHeaderComponent id={this.props.id} data={headerObject} loadData={this.loadData}/>
+                <GallerySwiperDetailsComponent id={this.props.id} data={swiperCards} loadData={this.loadData} imageType={imageType}/>
                 </div>
                 </section>
         
@@ -62,4 +57,4 @@ class RoomPricingComponent extends Component {
     }
 }
 
-export default RoomPricingComponent;
+export default GallerySwiperComponent;

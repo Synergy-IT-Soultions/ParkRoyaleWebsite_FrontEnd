@@ -3,15 +3,15 @@ import CarouselComponent from "../CarouselComponent/CarouselComponent";
 import GallerySwiperComponent from "../GallerySwiperComponent/GallerySwiperComponent";
 import OverviewComponent from "../SuitsAndRoomsComponent/OverviewComponent";
 
-class RestaurantHomeComponent extends Component {
+class RecreationHomeComponent extends Component {
   
     render() { 
         return (<div>
-            <CarouselComponent id="rest-imagecarousel-id" imageType="IMAGEBAR"/>
-            <OverviewComponent id="rest-overview-id" /> 
-            <GallerySwiperComponent id="rest-gallery-id" imageType="RESTAURANT"/> 
+            <CarouselComponent id="rec-imagecarousel-id" imageType="IMAGEBAR"/>
+            <OverviewComponent id="rec-overview-id" /> 
+            <GallerySwiperComponent id="rec-gallery-id" imageType="RECREATION"/> 
              </div>);
     }
 }
  
-export default RestaurantHomeComponent;
+export default RecreationHomeComponent;

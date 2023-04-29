@@ -1,21 +1,19 @@
 import React from "react";
 import { Component } from "react";
 import _ from "lodash";
-import cmClient from "../../clients/ContentManagementClient";
+import  cmClient  from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { connect } from "react-redux";
-import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
-import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
+import  SpinnerComponent  from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
+import  ContainerEditComponent  from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
 import { displayErrors } from "../../utils/CommonUtils";
-import CarouselComponent from "../CarouselComponent/CarouselComponent";
 
-class RestaurantDisplayComponent extends Component {
+
+class HotelSummary extends Component {
     
     constructor(props) {
         super(props);
@@ -52,7 +50,7 @@ class RestaurantDisplayComponent extends Component {
 
         requestData.containerHeader = _.get(formData, data.pageContainerInfoId + "")
         requestData.containerTextInfo[0].containertextLabelValue = encodedText;
-        requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
+       // requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
 
         console.log("requestData======================>");
         console.log(JSON.stringify(requestData));
@@ -90,7 +88,7 @@ class RestaurantDisplayComponent extends Component {
         if(containertextLabelValue) {
           data.containerTextInfo[0].containertextLabelValue = containertextLabelValue ;
         }
-        const containerVideoURL = data && data.containerTextInfo[1].containertextLabelValue;
+        
     
         return (
             
@@ -103,14 +101,9 @@ class RestaurantDisplayComponent extends Component {
                 <div className="d-flex">
                 <Card className="mx-auto my-3 text-white mb-2 rounded">
                     <Card.Body>
-                        <Row lg={2}>  
-                            <div>
-                            <CarouselComponent id="home-imagecarousel-id" imageType="CAROUSEL"/>
-                           </div>
-                           <div className="card-content">
-                                    <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
-                            </div>
-                        </Row>            
+                    <div className="d-flex">
+                        <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
+                    </div>             
                     </Card.Body>
                 </Card>
                 </div>
@@ -137,4 +130,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToPros, mapDispatchToProps) (RestaurantDisplayComponent);
+export default connect(mapStateToPros, mapDispatchToProps) (HotelSummary);

@@ -13,7 +13,7 @@ import ImageGalleryComponent from "../../CommonComponents/ImageGalleryComponent/
 import  CarouselCardComponent  from "../CarouselComponent/CarouselCardComponent";
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
 
-class RoomPricingSwiperComponent extends Component {
+class GallerySwiperDetailsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -380,4 +380,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToPros, mapDispatchToProps)(RoomPricingSwiperComponent);
+export default connect(mapStateToPros, mapDispatchToProps)(GallerySwiperDetailsComponent);

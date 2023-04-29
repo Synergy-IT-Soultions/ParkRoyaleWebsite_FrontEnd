@@ -7,7 +7,7 @@ import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { toast } from "react-toastify";
 import { displayErrors } from "../../utils/CommonUtils";
 
-class RoomPricingHeaderComponent extends Component {
+class GallerySwiperHeaderComponent extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -81,4 +81,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToPros, mapDispatchToProps)(RoomPricingHeaderComponent);
+export default connect(mapStateToPros, mapDispatchToProps)(GallerySwiperHeaderComponent);
