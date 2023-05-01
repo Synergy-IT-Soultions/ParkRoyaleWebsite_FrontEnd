@@ -11,11 +11,8 @@ import ComingSoonComponent from './components/ComingSoonComponent/ComingSoonComp
 import RestaurantHomeComponent from './components/RestaurantComponent/RestaurantHomeComponent';
 import RecreationHomeComponent from './components/RecreationComponent/RecreationComponent';
 import ToursAndTravelsComponent from './components/ToursAndTravelsComponent/ToursAndTravelsComponent';
-<<<<<<< HEAD
 import ContactUsComponent from './components/ContactUsComponent/ContactUsComponent';
-=======
 import GalleryComponent from './components/GalleryComponent/GalleryComponent';
->>>>>>> 0d5182a (Gallery page)
 
 
 class App extends Component {
