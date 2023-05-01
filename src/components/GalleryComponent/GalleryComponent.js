@@ -1,17 +1,18 @@
 import { Component } from "react";
+import './GalleryComponent.css'
 
-class NoPageComponent extends Component {
+class GalleryComponent extends Component {
   
     render() { 
         return (
           <div>
             <div  class="container">
             
-              <p> Page Not Available...!  </p>
+              <p> Coming Soon...!  </p>
            </div>
         </div>
         );
     }
 }
  
-export default NoPageComponent;
+export default GalleryComponent;

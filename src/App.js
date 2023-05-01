@@ -11,7 +11,11 @@ import ComingSoonComponent from './components/ComingSoonComponent/ComingSoonComp
 import RestaurantHomeComponent from './components/RestaurantComponent/RestaurantHomeComponent';
 import RecreationHomeComponent from './components/RecreationComponent/RecreationComponent';
 import ToursAndTravelsComponent from './components/ToursAndTravelsComponent/ToursAndTravelsComponent';
+<<<<<<< HEAD
 import ContactUsComponent from './components/ContactUsComponent/ContactUsComponent';
+=======
+import GalleryComponent from './components/GalleryComponent/GalleryComponent';
+>>>>>>> 0d5182a (Gallery page)
 
 
 class App extends Component {
@@ -48,8 +52,8 @@ class App extends Component {
               <Route path="/restaurants" element={<RestaurantHomeComponent />} />
               <Route path="/recreations" element={<RecreationHomeComponent />} />
               <Route path="/toursandtravels" element={<ToursAndTravelsComponent />} />
-              <Route path="/gallery" element={<ComingSoonComponent />} />
               <Route path="/contactus" element={<ContactUsComponent />} />
+              <Route path="/gallery" element={<GalleryComponent/>} />
               <Route path="*" element={<NoPageComponent />} />
             </Route>
           </Routes>
