@@ -11,6 +11,7 @@ import ComingSoonComponent from './components/ComingSoonComponent/ComingSoonComp
 import RestaurantHomeComponent from './components/RestaurantComponent/RestaurantHomeComponent';
 import RecreationHomeComponent from './components/RecreationComponent/RecreationComponent';
 import ToursAndTravelsComponent from './components/ToursAndTravelsComponent/ToursAndTravelsComponent';
+import ContactUsComponent from './components/ContactUsComponent/ContactUsComponent';
 
 
 class App extends Component {
@@ -48,7 +49,7 @@ class App extends Component {
               <Route path="/recreations" element={<RecreationHomeComponent />} />
               <Route path="/toursandtravels" element={<ToursAndTravelsComponent />} />
               <Route path="/gallery" element={<ComingSoonComponent />} />
-              <Route path="/contactus" element={<ComingSoonComponent />} />
+              <Route path="/contactus" element={<ContactUsComponent />} />
               <Route path="*" element={<NoPageComponent />} />
             </Route>
           </Routes>
