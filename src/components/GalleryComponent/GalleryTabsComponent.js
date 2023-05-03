@@ -8,6 +8,9 @@ import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import cmClient from "../../clients/ContentManagementClient";
 import { toast } from "react-toastify";
 import { displayErrors } from "../../utils/CommonUtils";
+import ImageGalleryComponent from "../../CommonComponents/ImageGalleryComponent/ImageGalleryComponent";
+
+import './ImageGalleryComponent.css'
 
 class GalleryTabsComponent extends Component {
 
@@ -19,6 +22,7 @@ class GalleryTabsComponent extends Component {
             show: false,
             isLoading: true,
             showUpload: false,
+            showGallery:false,
 
             containerDivId: undefined,
             imageType: undefined
@@ -211,20 +215,30 @@ class GalleryTabsComponent extends Component {
         }
     }
 
-    createCard = (imageCard) => {
+    createCard = (imageCard, images) => {
+
+        images.push(imageCard.imageInfo.imageURL);
+
         return <div className="col-lg-4 col-md-6 portfolio-item filter-app" key={imageCard.imageInfo.imageInfoId}>
-            <div className="portfolio-wrap">
-                <img src={imageCard.imageInfo.thumbnailURL} className="img-fluid" alt="" />
-                <div className="portfolio-info">
+            <div className="">{/**portfolio-wrap */}
+                <img src={imageCard.imageInfo.thumbnailURL} className="img-fluid show-zoomin" alt=""  onClick={this.swiperClicked}/>
+                {/* <div className="portfolio-info">
                     <h4>App 1</h4>
                     <p>App</p>
-                </div>
-                <div className="portfolio-links">
+                </div> */}
+                {/* <div className="portfolio-links">
                     <a href={imageCard.imageInfo.imageURL} data-gallery="portfolioGallery" className="portfolio-lightbox" title="App 1"><i className="bx bx-plus"></i></a>
-                    {/* <a href="portfolio-details.html" title="More Details"><i className="bx bx-link"></i></a> */}
-                </div>
+                    <a><i className="bx bx-plus" onClick={this.swiperClicked}></i></a>
+                    
+                    <a href="portfolio-details.html" title="More Details"><i className="bx bx-link"></i></a>
+                </div> */}
             </div>
         </div>;
+    }
+
+    swiperClicked = ()=>{
+        //alert("Hello");
+        this.setState({showGallery:true})
     }
 
     showEditForImages = () => {
@@ -284,6 +298,7 @@ class GalleryTabsComponent extends Component {
     render() {
         const { tabsData } = this.props;
         const { filteredImages } = this.state;
+        let images = [];
         // let images = [];
         // _.forEach(tabsData, (tab)=>{
         //     tab.containerImageInfo && _.forEach(tab.containerImageInfo, (item)=>{
@@ -320,11 +335,20 @@ class GalleryTabsComponent extends Component {
 
                     {
                         filteredImages.map(image =>
-                            this.createCard(image)
+                            this.createCard(image, images)
                         )
                     }
 
                 </div>
+
+                <Modal show={this.state.showGallery} fullscreen={true} onHide={() => this.setState({showGallery:false})}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Gallery</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ImageGalleryComponent images={images}/>
+                    </Modal.Body>
+                </Modal>
             </>
         );
     }
