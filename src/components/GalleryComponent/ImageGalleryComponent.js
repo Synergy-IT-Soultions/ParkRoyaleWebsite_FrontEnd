@@ -7,6 +7,7 @@ import 'aos/dist/aos.css'
 import Isotope from "isotope-layout";
 import GalleryHeaderComponent from "./GalleryHeaderComponent";
 import GalleryTabsComponent from "./GalleryTabsComponent";
+import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
 
 class ImageGalleryComponent extends Component {
 
@@ -135,8 +136,18 @@ class ImageGalleryComponent extends Component {
       <section id="portfolio" className="portfolio">
         <div className="container" data-aos="fade-up">
 
-          <GalleryHeaderComponent headerData={headerObject[0]}/>
-          <GalleryTabsComponent images={images} tabsData = {galleryTabs} />
+          {
+            _.isEmpty(galleryData)?<SpinnerComponent/>:
+            <GalleryHeaderComponent headerData={headerObject[0]} loadData={this.loadData}/>
+            
+          }
+          {
+            _.isEmpty(galleryData)?<SpinnerComponent/>:
+            <GalleryTabsComponent images={images} tabsData = {galleryTabs} loadData={this.loadData}/>
+          }
+
+          
+          
 
           
 
