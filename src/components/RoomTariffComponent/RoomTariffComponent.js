@@ -177,17 +177,17 @@ class RoomTariffComponent extends Component {
                         
                         <thead>
                             <tr className="tableHeader">
-                                <td rowspan="2"> Suite</td>
-                                <td colspan="2">Week Days </td>
-                                <td colspan="2">Week End</td>
+                                <td rowspan="2" className="valign-middle fw-bold"> Suite</td>
+                                <td colspan="2" className="valign-middle fw-bold">Week Days </td>
+                                <td colspan="2" className="valign-middle fw-bold">Week End</td>
                                 
-                                {editable ? <td rowspan="2">Delete/Save</td> : ""}
+                                {editable ? <td rowspan="2" className="valign-middle fw-bold">Delete/Save</td> : ""}
                             </tr>
                             <tr className="tableHeader">
-                                <td > With Breakfast</td>
-                                <td >Without Breakfast</td>
-                                <td >With Breakfast</td>
-                                <td >Without Breakfast</td>
+                                <td className="valign-middle fw-bold"> With Breakfast</td>
+                                <td className="valign-middle fw-bold">Without Breakfast</td>
+                                <td className="valign-middle fw-bold">With Breakfast</td>
+                                <td className="valign-middle fw-bold">Without Breakfast</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -208,11 +208,11 @@ class RoomTariffComponent extends Component {
                             <Modal.Title>Editor</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <InputComponent label="Suite" id="room_tariff_new_king_suite"/>
-                            <InputComponent label="Week Days With Breakfast" id="week_days_with_breakfast_new_rate"/>
-                            <InputComponent label="Week Days Without Breakfast" id="week_days_without_breakfast_new_rate"/>
-                            <InputComponent label="Week End With Breakfast" id="week_end_with_breakfast_new_rate"/>
-                            <InputComponent label="Week End Without Breakfast" id="week_end_without_breakfast_new_rate"/>
+                            <InputComponent label="Suite" id="room_tariff_new_king_suite" />
+                            <InputComponent label="Week Days With Breakfast" id="week_days_with_breakfast_new_rate" />
+                            <InputComponent label="Week Days Without Breakfast" id="week_days_without_breakfast_new_rate" />
+                            <InputComponent label="Week End With Breakfast" id="week_end_with_breakfast_new_rate" />
+                            <InputComponent label="Week End Without Breakfast" id="week_end_without_breakfast_new_rate" />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button type="submit" onClick={this.handleSaveTableData}>Save</Button>

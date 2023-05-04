@@ -102,7 +102,7 @@ class ContactUsMapComponent extends Component {
                 <Card className="mx-auto my-3 text-white mb-2 rounded">
                     <Card.Body>
                         <Row lg={2}>  
-                            <div>
+                            <div className="mapsize">
 
                             <iframe 
                                 src= {containerMapURL}
@@ -116,8 +116,8 @@ class ContactUsMapComponent extends Component {
 
                            
                            </div>
-                           <div className="card-content">
-                                    <p align="left" >  <div dangerouslySetInnerHTML={{ __html: containerAddress }} />  </p>
+                           <div className="card-content ">
+                                    <p>  <div dangerouslySetInnerHTML={{ __html: containerAddress }} />  </p>
                             </div>
                         </Row>            
                     </Card.Body>

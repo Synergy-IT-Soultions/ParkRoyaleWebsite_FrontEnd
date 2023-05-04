@@ -102,12 +102,12 @@ class TableRowComponent extends Component {
         let editable = this.props.editable;
         return (
             <tr >
-                <td >{editable?<InputComponent id={"roomType"+containerPricingInfoId} value={roomType} noLabel="true"/>:<div className='tablecard'>{roomType}</div>}</td>
-                <td >{editable?<InputComponent id={"weekDaysWithBreakfastPrice"+containerPricingInfoId} value={weekDaysWithBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekDaysWithBreakfastPrice}</div>}</td>
-                <td >{editable?<InputComponent id={"weekDaysWithOutBreakfastPrice"+containerPricingInfoId} value={weekDaysWithOutBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekDaysWithOutBreakfastPrice}</div>}</td>
-                <td >{editable?<InputComponent id={"weekEndWithBreakfastPrice"+containerPricingInfoId} value={weekEndWithBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekEndWithBreakfastPrice}</div>}</td>
-                <td >{editable?<InputComponent id={"weekEndWithOutBreakfastPrice"+containerPricingInfoId} value={weekEndWithOutBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekEndWithOutBreakfastPrice}</div>}</td>
-                {editable?<td ><i className="fa fa-fw fa-trash" onClick={this.deleteRowData}></i> <i className="fa fa-floppy-o" onClick={this.saveRowData}></i></td>:""}
+                <td className="valign-middle" >{editable?<InputComponent id={"roomType"+containerPricingInfoId} value={roomType} noLabel="true"/>:<div className='tablecard'>{roomType}</div>}</td>
+                <td className="valign-middle">{editable?<InputComponent id={"weekDaysWithBreakfastPrice"+containerPricingInfoId} value={weekDaysWithBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekDaysWithBreakfastPrice}</div>}</td>
+                <td className="valign-middle">{editable?<InputComponent id={"weekDaysWithOutBreakfastPrice"+containerPricingInfoId} value={weekDaysWithOutBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekDaysWithOutBreakfastPrice}</div>}</td>
+                <td className="valign-middle">{editable?<InputComponent id={"weekEndWithBreakfastPrice"+containerPricingInfoId} value={weekEndWithBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekEndWithBreakfastPrice}</div>}</td>
+                <td className="valign-middle">{editable?<InputComponent id={"weekEndWithOutBreakfastPrice"+containerPricingInfoId} value={weekEndWithOutBreakfastPrice} noLabel="true"/>:<div className='tablecard'>{weekEndWithOutBreakfastPrice}</div>}</td>
+                {editable?<td className="valign-middle"><i className="fa fa-fw fa-trash" onClick={this.deleteRowData}></i> <i className="fa fa-floppy-o" onClick={this.saveRowData}></i></td>:""}
             </tr>
 
         );

@@ -103,3 +103,7 @@ tr:hover{
       max-width: none;
     }
   }
+
+  .valign-middle {
+    vertical-align: middle;
+  }
