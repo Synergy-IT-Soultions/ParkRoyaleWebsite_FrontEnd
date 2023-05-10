@@ -1,7 +1,7 @@
 import { Component } from "react";
 import _ from "lodash";
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Card, Form, Modal } from "react-bootstrap";
 import CarouselCardComponent from "../CarouselComponent/CarouselCardComponent";
 import { connect } from "react-redux";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
@@ -11,6 +11,7 @@ import { displayErrors } from "../../utils/CommonUtils";
 import ImageGalleryComponent from "../../CommonComponents/ImageGalleryComponent/ImageGalleryComponent";
 
 import './ImageGalleryComponent.css'
+import CheckBoxComponent from "../../CommonComponents/CheckBoxComponent";
 
 class GalleryTabsComponent extends Component {
 
@@ -215,7 +216,48 @@ class GalleryTabsComponent extends Component {
         }
     }
 
-    createCard = (imageCard, images) => {
+    callOnSwitchClick = (event) => {
+        console.log("callOnSwitchClick==>START");
+        console.log(event);
+
+        let userChecked = event.target.checked;
+
+        console.log("callOnSwitchClick==>END");
+    }
+
+    createCard = (imageCard, images)=>{
+
+        const { isAdmin } = this.props;
+        images.push(imageCard.imageInfo.imageURL);
+
+        let containerImageIsLinked = imageCard.containerImageIsLinked?(imageCard.containerImageIsLinked==0?false:true):false;
+        const checkBoxLabel = containerImageIsLinked? "Remove from Carousel":"Add to Carousel";
+
+        return <div className="col-lg-4 col-md-6 portfolio-item filter-app" key={imageCard.imageInfo.imageInfoId}>
+            <div className="">
+                <Card className="mx-auto my-3 text-white mb-2 rounded">
+                    <Card.Img variant="top" src={imageCard.imageInfo.thumbnailURL} onClick={this.swiperClicked} />
+
+                    {isAdmin ?
+                        <Card.Footer className="cardFooter">
+                            <CheckBoxComponent label={checkBoxLabel} id={imageCard.imageInfo.imageInfoId+""} value={containerImageIsLinked}/>
+                            {/* <Form.Check
+                                type="switch"
+                                id={}
+                                label={checkBoxLabel}
+                                onClick={this.callOnSwitchClick}
+                                checked={containerImageIsLinked}
+                            /> */}
+                            {/* <small className="text-white">{"Updated Date: " + slide.updatedDate}</small> */}
+                        </Card.Footer>
+                        : ""}
+                </Card>
+            </div>
+        </div>;
+            
+    }
+
+    createCard1 = (imageCard, images) => {
 
         images.push(imageCard.imageInfo.imageURL);
 
