@@ -33,12 +33,17 @@ class CheckBoxComponent extends Component {
     }
 
     onValueChange = (event)=>{
-        const { onChange , id} = this.props;
+        const { onChange , id, performAction} = this.props;
         let data={};
         let value = event.target.checked;
         _.set(data, "id", id);
         _.set(data, "value", value);
         onChange(data);
+
+        if(performAction){
+            performAction(event);
+        }
+
 
     }
 

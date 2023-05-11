@@ -13,6 +13,8 @@ import ImageGalleryComponent from "../../CommonComponents/ImageGalleryComponent/
 import './ImageGalleryComponent.css'
 import CheckBoxComponent from "../../CommonComponents/CheckBoxComponent";
 
+import galleryTabsAndNavBarMappings from './galleryTabsAndNavBarMappings.json'
+
 class GalleryTabsComponent extends Component {
 
     constructor(props) {
@@ -104,6 +106,50 @@ class GalleryTabsComponent extends Component {
                     displayErrors(error, showLoginModalDispatcher.bind({},true));
                 });
         }
+    }
+
+    updateImageLinkage = (event) => {
+        console.log("updateImageLinkage==>START");
+
+        var selectedTabDivId = document.querySelector("#portfolio-flters li.filter-active").id;
+        const toContainerDivId = galleryTabsAndNavBarMappings[selectedTabDivId];
+
+        let userChecked = event.target.checked;
+
+        let requestObject = {
+            "fromContainerDivId": selectedTabDivId,
+            "toContainerDivId": toContainerDivId,
+            "imageInfoId": 13167,
+            "isLinked": userChecked?1:0
+        }
+
+        
+        console.log(requestObject);
+
+        const { token , showPageLoader, hidePageLoader, showLoginModalDispatcher} = this.props;
+        const auth = "Bearer " + token;
+
+        showPageLoader();
+        cmClient.post('/content/save/container/image/link', requestObject, {
+            headers: {
+                'Authorization': auth
+            }
+        })
+            .then(response => {
+                toast.success(userChecked?"Image Added to Carousel":"Image Removed from Carousel");
+                console.log(userChecked?"Image Added to Carousel":"Image Removed from Carousel");
+                console.log(response.data);
+                this.props.loadData();
+                hidePageLoader();
+                //this.setState({showEditPage:false})
+            })
+            .catch(error => {
+                console.log(error);
+                hidePageLoader();
+                displayErrors(error, showLoginModalDispatcher.bind({},true));
+            });
+
+        console.log("updateImageLinkage==>END");
     }
 
     uploadImage = (formData) => {
@@ -240,7 +286,10 @@ class GalleryTabsComponent extends Component {
 
                     {isAdmin ?
                         <Card.Footer className="cardFooter">
-                            <CheckBoxComponent label={checkBoxLabel} id={imageCard.imageInfo.imageInfoId+""} value={containerImageIsLinked}/>
+                            <CheckBoxComponent label={checkBoxLabel} 
+                                id={imageCard.imageInfo.imageInfoId+""} 
+                                value={containerImageIsLinked}
+                                performAction={this.updateImageLinkage}/>
                             {/* <Form.Check
                                 type="switch"
                                 id={}
