@@ -58,51 +58,7 @@ class ImageGalleryComponent extends Component {
                             return this.createSlide(image);
                         })
                     }
-                    {/* <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div className="swiper-zoom-container">
-                            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                        </div>
-                    </SwiperSlide> */}
+                   
                 </Swiper>
             </>
         );

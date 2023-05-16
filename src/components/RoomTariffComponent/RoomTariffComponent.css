@@ -84,7 +84,36 @@ tr:hover{
   .card-content {
     flex: 1;
   }
+  @media screen and (max-width: 360px) {
+    .card {
+      flex-direction: column; /* change the flex-direction to column to make the columns turn into rows */
+    }
 
+    .tableHeader {
+      background-color: #5846f9;
+      color: white;
+      font-style: bold;
+      font-size: x-small;
+   }
+
+   .tableHolder{
+    margin-bottom: 5px;
+    border-radius: 7px;
+    background: linear-gradient(145deg,  #bbb8d2,  #c1bcee,  #bbbac6);
+    padding: 0px;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 3px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.7);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    font-size: x-small;
+    cursor: pointer;
+  }
+    
+    .iframe {
+      margin-right: 0;
+      margin-bottom: 20px;
+      max-width: none;
+    }
+  }
+  
   @media screen and (max-width: 750px) {
     .card {
       flex-direction: column; /* change the flex-direction to column to make the columns turn into rows */
@@ -96,13 +125,9 @@ tr:hover{
       font-style: bold;
       font-size: x-small;
   }
-    
-    .iframe {
-      margin-right: 0;
-      margin-bottom: 20px;
-      max-width: none;
-    }
   }
+
+  
 
   .valign-middle {
     vertical-align: middle;

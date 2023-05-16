@@ -145,12 +145,6 @@ class ImageGalleryComponent extends Component {
             _.isEmpty(galleryData)?<SpinnerComponent/>:
             <GalleryTabsComponent images={images} tabsData = {galleryTabs} loadData={this.loadData}/>
           }
-
-          
-          
-
-          
-
         </div>
       </section>
     );

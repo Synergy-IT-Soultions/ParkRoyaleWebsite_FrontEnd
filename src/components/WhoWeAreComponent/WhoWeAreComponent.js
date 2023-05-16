@@ -103,7 +103,7 @@ class WhoWeAreComponent extends Component {
                 <Card className="mx-auto my-3 text-white mb-2 rounded">
                     <Card.Body>
                         <Row lg={2}>  
-                            <div>
+                            <div className="videosize">
                             <iframe style={{overflow : 'hidden', height : '100%', width : '100%' } }
                                     src={containerVideoURL} 
                                     title="YouTube video player" 
