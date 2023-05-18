@@ -278,7 +278,7 @@ class GalleryTabsComponent extends Component {
         images.push(imageCard.imageInfo.imageURL);
 
         let containerImageIsLinked = imageCard.containerImageIsLinked?(imageCard.containerImageIsLinked==0?false:true):false;
-        const checkBoxLabel = containerImageIsLinked? "Remove from Carousel":"Add to Carousel";
+        const checkBoxLabel = containerImageIsLinked? "Remove from Swiper":"Add to Swiper";
 
         return <div className="col-lg-4 col-md-6 portfolio-item filter-app" key={imageCard.imageInfo.imageInfoId}>
             <div className="">

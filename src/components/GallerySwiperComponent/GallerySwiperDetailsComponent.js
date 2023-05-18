@@ -293,7 +293,7 @@ class GallerySwiperDetailsComponent extends Component {
         
         return (
             <>
-            <p>{
+            {/* <p>{
                     isAdmin ?
 
                         <Button variant="primary" size="sm" className=" " onClick={this.handleShow}>
@@ -302,7 +302,7 @@ class GallerySwiperDetailsComponent extends Component {
                         </Button>
 
                         : ""
-                }</p>
+                }</p> */}
             <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                 
                 <Modal show={this.state.show} onHide={this.handleClose} >
