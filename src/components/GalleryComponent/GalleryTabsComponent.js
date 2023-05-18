@@ -115,11 +115,12 @@ class GalleryTabsComponent extends Component {
         const toContainerDivId = galleryTabsAndNavBarMappings[selectedTabDivId];
 
         let userChecked = event.target.checked;
+        let selectedImageInfoId = parseInt(event.target.id);
 
         let requestObject = {
             "fromContainerDivId": selectedTabDivId,
             "toContainerDivId": toContainerDivId,
-            "imageInfoId": 13167,
+            "imageInfoId": selectedImageInfoId,
             "isLinked": userChecked?1:0
         }
 
