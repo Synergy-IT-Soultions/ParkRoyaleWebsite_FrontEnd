@@ -1,6 +1,6 @@
 {
-    "gllry-sandr-cntnr-id":"sandr-imagebar-id",
-    "gllry-rest-cntnr-id":"rest-imagecarousel-id",
-    "gllry-recr-cntnr-id":"rec-imagecarousel-id",
-    "gllry-tandt-cntnr-id":"tandt-imagecarousel-id"
+    "gllry-sandr-cntnr-id":"sandr-room-gallery-id",
+    "gllry-rest-cntnr-id":"rest-gallery-id",
+    "gllry-recr-cntnr-id":"rec-gallery-id",
+    "gllry-tandt-cntnr-id":"tandt-gallery-id"
 }
