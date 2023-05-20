@@ -183,6 +183,34 @@ class GalleryTabsComponent extends Component {
             });
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { tabsData } = this.props;
+
+        if(_.isEqual(prevProps.tabsData, tabsData)){
+            return;
+        }
+
+        let portfolioFilters = this.select('#portfolio-flters li.filter-active', false);
+
+        let filteredImages = [];
+        _.forEach(tabsData, (tab) => {
+            if (_.isEqual(tab.containerDivId, portfolioFilters.id)) {
+                tab.containerImageInfo && _.forEach(tab.containerImageInfo, (item) => {
+                    filteredImages.push(item);
+                })
+
+                //this.setContainerDivIdAndImageType(tab);
+            }
+
+        });
+
+        filteredImages = _.filter(filteredImages, (item) => {
+            return _.isEqual(item.imageInfo.imageIsActive, 1);
+        });
+
+        this.setState({ filteredImages });
+    }
+
     componentDidMount() {
 
         console.log("===============");
