@@ -107,11 +107,11 @@ class WhoWeAreComponent extends Component {
                             <iframe style={{overflow : 'hidden', height : '100%', width : '100%' } }
                                     src={containerVideoURL} 
                                     title="YouTube video player" 
-                                    frameborder="0" 
+                                    // frameBorder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                            </div>
                            <div className="card-content">
-                                    <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
+                                    <div align="left" dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />
                             </div>
                         </Row>            
                     </Card.Body>

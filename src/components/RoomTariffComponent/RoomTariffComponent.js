@@ -192,7 +192,7 @@ class RoomTariffComponent extends Component {
                         </thead>
                         <tbody>
                             {
-                                _.map(this.state.data, (row) => <TableRowComponent  data={row} editable={editable} loadData={this.loadData} />)
+                                _.map(this.state.data, (row, index) => <TableRowComponent  data={row} editable={editable} key={index} loadData={this.loadData} />)
                             }
                             {/* <tr aria-colspan={4}></tr> */}
                         </tbody>
