@@ -177,11 +177,11 @@ class RoomTariffComponent extends Component {
                         
                         <thead>
                             <tr className="tableHeader">
-                                <td rowspan="2" className="valign-middle fw-bold"> Suite</td>
-                                <td colspan="2" className="valign-middle fw-bold">Week Days </td>
-                                <td colspan="2" className="valign-middle fw-bold">Week End</td>
+                                <td rowSpan="2" className="valign-middle fw-bold"> Suite</td>
+                                <td colSpan="2" className="valign-middle fw-bold">Week Days </td>
+                                <td colSpan="2" className="valign-middle fw-bold">Week End</td>
                                 
-                                {editable ? <td rowspan="2" className="valign-middle fw-bold">Delete/Save</td> : ""}
+                                {editable ? <td rowSpan="2" className="valign-middle fw-bold">Delete/Save</td> : ""}
                             </tr>
                             <tr className="tableHeader">
                                 <td className="valign-middle fw-bold"> With Breakfast</td>
@@ -194,7 +194,7 @@ class RoomTariffComponent extends Component {
                             {
                                 _.map(this.state.data, (row, index) => <TableRowComponent  data={row} editable={editable} key={index} loadData={this.loadData} />)
                             }
-                            {/* <tr aria-colspan={4}></tr> */}
+                            {/* <tr aria-colSpan={4}></tr> */}
                         </tbody>
 
                     </Table>
