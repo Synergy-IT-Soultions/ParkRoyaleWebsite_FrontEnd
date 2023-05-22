@@ -137,8 +137,8 @@ class GalleryTabsComponent extends Component {
             }
         })
             .then(response => {
-                toast.success(userChecked?"Image Added to Carousel":"Image Removed from Carousel");
-                console.log(userChecked?"Image Added to Carousel":"Image Removed from Carousel");
+                toast.success(userChecked?"Image Added to Swiper":"Image Removed from Swiper");
+                console.log(userChecked?"Image Added to Swiper":"Image Removed from Swiper");
                 console.log(response.data);
                 this.props.loadData();
                 hidePageLoader();
