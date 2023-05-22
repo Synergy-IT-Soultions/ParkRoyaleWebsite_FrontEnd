@@ -117,7 +117,7 @@ class ContactUsMapComponent extends Component {
                            
                            </div>
                            <div className="card-content ">
-                                    <p>  <div dangerouslySetInnerHTML={{ __html: containerAddress }} />  </p>
+                                    <div dangerouslySetInnerHTML={{ __html: containerAddress }} /> 
                             </div>
                         </Row>            
                     </Card.Body>
