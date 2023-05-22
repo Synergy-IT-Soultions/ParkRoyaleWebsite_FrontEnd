@@ -56,7 +56,7 @@ class CheckBoxComponent extends Component {
                         type={type?type:"switch"}
                         id={id}
                         label={label}
-                        onClick={this.onValueChange}
+                        onChange={this.onValueChange}
                         checked={_.get(formData, id)}
                     />
                 </div>

@@ -25,8 +25,8 @@ class ImageGalleryComponent extends Component {
     componentDidMount() {
     }
 
-    createSlide(image){
-       return  <SwiperSlide>
+    createSlide(image, index){
+       return  <SwiperSlide key={index}>
                         <div className="swiper-zoom-container">
                             <img src={image} />
                         </div>
@@ -54,8 +54,8 @@ class ImageGalleryComponent extends Component {
                 >
 
                     {
-                         _.map(images, (image)=>{
-                            return this.createSlide(image);
+                         _.map(images, (image, index)=>{
+                            return this.createSlide(image, index);
                         })
                     }
                    
