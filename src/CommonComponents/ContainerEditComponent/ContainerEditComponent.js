@@ -112,6 +112,15 @@ class ContainerEditComponent extends Component {
         this.reenderUI();
         this.loadingStop();
     }
+
+    componentDidUpdate(prevProps, prevState){
+        const { data } = this.props;
+        if(_.isEqual(prevProps.data, data)){
+            return;
+        }
+
+        this.reenderUI();
+    }
     
     render() { 
         const { uiComponents, isLoading, show, formChanged } = this.state;
