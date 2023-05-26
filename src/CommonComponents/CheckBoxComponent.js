@@ -58,6 +58,7 @@ class CheckBoxComponent extends Component {
                         label={label}
                         onChange={this.onValueChange}
                         checked={_.get(formData, id)}
+                        className="show-pointer"
                     />
                 </div>
         );

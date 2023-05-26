@@ -27,6 +27,9 @@ class InputComponent extends Component {
             let options = fetchOptions();
             this.setState({options:options});
         }
+
+        let v = document.getElementById(id);
+        v.value = value;
         
 
         if(!select) return;
@@ -57,7 +60,7 @@ class InputComponent extends Component {
     }
 
     render() {
-        const { id, label, type, select, formData ,showSelectedImage, noLabel} = this.props;
+        const { id, label, type, select, formData ,showSelectedImage, noLabel, value} = this.props;
         const { options, imageInfo } = this.state;
 
         return (
@@ -70,7 +73,7 @@ class InputComponent extends Component {
                         required
                         type={type}
                         id={id}
-                        value={_.get(formData, id)}
+                        //value={_.get(formData, id)}
                         onChange={this.onValueChange}
                     />
                     :

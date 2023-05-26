@@ -309,9 +309,9 @@ class GalleryTabsComponent extends Component {
         const checkBoxLabel = containerImageIsLinked? "Remove from Swiper":"Add to Swiper";
 
         return <div className="col-lg-4 col-md-6 portfolio-item filter-app" key={imageCard.imageInfo.imageInfoId}>
-            <div className="">
-                <Card className="mx-auto my-3 text-white mb-2 rounded">
-                    <Card.Img variant="top" src={imageCard.imageInfo.thumbnailURL} onClick={this.swiperClicked} />
+            <div className="zoom-on-hover">
+                <Card className="box-img text-white">
+                    <Card.Img variant="top" src={imageCard.imageInfo.thumbnailURL} onClick={this.swiperClicked}/>
 
                     {isAdmin ?
                         <Card.Footer className="cardFooter">
