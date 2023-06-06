@@ -9,9 +9,11 @@ import  ContainerEditComponent  from "../../CommonComponents/ContainerEditCompon
 import Card from 'react-bootstrap/Card';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
+import {encode} from 'html-entities';
 import { displayErrors } from "../../utils/CommonUtils";
 
- class OverviewEditContainer extends Component {
+
+class HotelSummary extends Component {
     
     constructor(props) {
         super(props);
@@ -43,14 +45,11 @@ import { displayErrors } from "../../utils/CommonUtils";
         let requestData = _.cloneDeep(data);
         console.log(data);
 
+        // Encode the HTML entities in the formatted text
+        const encodedText = encode(_.get(formData, data.containerTextInfo[0].containerTextInfoId));
 
         requestData.containerHeader = _.get(formData, data.pageContainerInfoId + "")
-
-        data?.containerTextInfo.map((containerTextInfo,index) => {
-            requestData.containerTextInfo[index].containertextLabelValue = _.get(formData, data.containerTextInfo[index].containerTextInfoId);
-          });
-
-       
+        requestData.containerTextInfo[0].containertextLabelValue = encodedText;
        // requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
 
         console.log("requestData======================>");
@@ -84,32 +83,32 @@ import { displayErrors } from "../../utils/CommonUtils";
         const isLoading = this.state.isLoading;
         const containerHeader = data && data.containerHeader;
         
-        const displayData = data?.containerTextInfo.map((containerTextInfo) => {
-            return (
-             <tr >
-                 <td className="tableCol" > <div className='tablecard'> {containerTextInfo?.containerTextLabelName}: </div> </td>
-                 <td className="tableCol" > <div className='tablecard' > {decode(containerTextInfo?.containertextLabelValue)}</div></td>
-              </tr>
-            );
-          });
+        const containertextLabelValue = data && decode(data.containerTextInfo[0].containertextLabelValue);
+        
+        if(containertextLabelValue) {
+          data.containerTextInfo[0].containertextLabelValue = containertextLabelValue ;
+        }
+        
     
         return (
             
             isLoading?<SpinnerComponent/>:
-              
-                <Card className='tableHolder'>
-                                   <Card.Header style={{ backgroundColor: '#5846f9', color:'white', fontWeight: 800 }} > 
-                                   {isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader }
-                                   </Card.Header>
-                                   <Card.Body >
-                                        <table>
-                                        {
-                                           displayData
-                                        }    
-                                        </table>
-                                   </Card.Body>
-                              </Card>
-              
+                <section id="who-we-are" className="pricing section-bg">
+                <div className="container" data-aos="fade-up">
+                    <div className="section-title">
+                         <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
+                    </div>
+                <div className="d-flex">
+                <Card className="mx-auto my-3 text-white mb-2 rounded">
+                    <Card.Body>
+                    <div className="d-flex">
+                        <div align="left" dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />
+                    </div>             
+                    </Card.Body>
+                </Card>
+                </div>
+                </div>
+                </section>
           
         );
     }
@@ -131,4 +130,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default  connect(mapStateToPros, mapDispatchToProps) (OverviewEditContainer);
+export default connect(mapStateToPros, mapDispatchToProps) (HotelSummary);

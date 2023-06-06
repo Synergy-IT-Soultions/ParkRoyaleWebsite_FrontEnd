@@ -22,6 +22,9 @@ class LoginComponent extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.isUserNameValid = this.isUserNameValid.bind(this);
         this.isPasswordValid = this.isPasswordValid.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+
+        this.userNameRef = React.createRef();
     }
 
     handleClose() {
@@ -31,12 +34,14 @@ class LoginComponent extends React.Component {
     }
 
     handleShow() {
+        
         //this.setState({ show: true });
         const { showLoginModalDispatcher } = this.props;
         showLoginModalDispatcher(true);
         if(this.props.mobileToggleClicked){
             this.props.mobileToggleClicked();
         }
+        //this.userNameRef.current.focus();
     }
 
     validateUser(event) {
@@ -49,8 +54,8 @@ class LoginComponent extends React.Component {
         if (form.checkValidity() === false || _.isEmpty(this.state.user_name) || _.isEmpty(this.state.password)) {
             event.preventDefault();
             event.stopPropagation();
-            this.setState({ validated: false });
-            toast("Invalid User Credentials");
+            this.setState({ validated: false , isInValid: true});
+            toast.error("Invalid User Credentials");
             return;
         }
         this.setState({ validated: true , isValid:true});
@@ -125,6 +130,14 @@ class LoginComponent extends React.Component {
         return this.state.isInValid;
     }
 
+    handleKeyPress(e){
+        //alert("Hello"+ e.keyCode);
+        if (e.keyCode == 13) {
+            this.validateUser(e);
+        }
+        
+    }
+
     render() {
 
         const { showLoginModal } = this.props;
@@ -134,9 +147,9 @@ class LoginComponent extends React.Component {
 
 
 
-                {!this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.handleShow}> Login </NavLink></li>}
+                {!this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.handleShow}> Admin Login </NavLink></li>}
                 {this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.logoutUser}> Logout </NavLink></li>}
-                <Modal show={showLoginModal} onHide={this.handleClose}>
+                <Modal show={showLoginModal} onHide={this.handleClose} onKeyDown={this.handleKeyPress}>
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>
                     </Modal.Header>
@@ -148,10 +161,10 @@ class LoginComponent extends React.Component {
                                 label="User Name"
                                 className="mb-3"
                             >
-                                <Form.Control type="text" isInvalid={this.isUserNameValid()} name="user_name" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required />
+                                <Form.Control type="text" ref={this.userNameRef} isInvalid={this.isUserNameValid()} name="user_name" placeholder="User Name" id="user_name" value={this.state.user_name} onChange={this.onChange} required onKeyDown={this.handleKeyPress}/>
                             </FloatingLabel>
                             <FloatingLabel label="Password">
-                                <Form.Control type="password" isInvalid={this.isPasswordValid()} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required />
+                                <Form.Control type="password" isInvalid={this.isPasswordValid()} placeholder="Password" id="password" value={this.state.password} onChange={this.onChange} required onKeyDown={this.handleKeyPress}/>
                             </FloatingLabel>
 
 

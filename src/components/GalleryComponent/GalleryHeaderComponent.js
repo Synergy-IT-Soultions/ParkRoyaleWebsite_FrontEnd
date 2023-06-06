@@ -1,13 +1,15 @@
 import { Component } from "react";
-import { connect } from "react-redux";
+import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
 import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import _ from 'lodash'
-import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
+import { connect } from "react-redux";
+import cmClient from "../../clients/ContentManagementClient";
 import { toast } from "react-toastify";
 import { displayErrors } from "../../utils/CommonUtils";
 
-class RoomPricingHeaderComponent extends Component {
+class GalleryHeaderComponent extends Component {
+
     constructor(props) {
         super(props);
         this.state={
@@ -16,13 +18,13 @@ class RoomPricingHeaderComponent extends Component {
     }
 
     handleSave = (event) => {
-        const { data, formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
+        const { headerData, formData, showPageLoader, hidePageLoader, showLoginModalDispatcher } = this.props;
         const { token } = this.props;
         const auth = "Bearer " + token;
 
-        let requestData = _.cloneDeep(data);
-        requestData.containerHeader = _.get(formData, data.pageContainerInfoId + "")
-        requestData.containerTextInfo[0].containertextLabelValue = _.get(formData, data.containerTextInfo[0].containerTextInfoId);
+        let requestData = _.cloneDeep(headerData);
+        requestData.containerHeader = _.get(formData, headerData.pageContainerInfoId + "")
+        requestData.containerTextInfo[0].containertextLabelValue = _.get(formData, headerData.containerTextInfo[0].containerTextInfoId+"");
 
         console.log("requestData======================>");
         console.log(JSON.stringify(requestData));
@@ -50,20 +52,23 @@ class RoomPricingHeaderComponent extends Component {
     }
 
     render() {
-        const { data, isAdmin } = this.props;
-        
-        const containerHeader = data.containerHeader;
-        const containertextLabelValue = data.containerTextInfo[0].containertextLabelValue;
+        const {headerData, isAdmin} = this.props;
+
+        const containerHeader = headerData.containerHeader;
+        const containertextLabelValue = headerData.containerTextInfo[0].containertextLabelValue;
 
         return (
+            <>
+            {headerData?
             <div className="section-title">
-                <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
+                <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={headerData} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                 <p>{containertextLabelValue}</p>
-            </div>
+                
+            </div>:<SpinnerComponent/>}
+            </>
         );
     }
 }
-
 
 const mapStateToPros = state => {
     return {
@@ -81,4 +86,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToPros, mapDispatchToProps)(RoomPricingHeaderComponent);
+export default connect(mapStateToPros, mapDispatchToProps)(GalleryHeaderComponent);

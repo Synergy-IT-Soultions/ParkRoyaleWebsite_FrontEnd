@@ -1,19 +1,19 @@
 import React from "react";
 import { Component } from "react";
 import _ from "lodash";
-import  cmClient  from "../../clients/ContentManagementClient";
+import cmClient from "../../clients/ContentManagementClient";
 import { hidePageLoader, showPageLoader } from "../../utils/ReduxActions";
 import { connect } from "react-redux";
-import  SpinnerComponent  from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
-import  ContainerEditComponent  from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
+import SpinnerComponent from "../../CommonComponents/SpinnerComponent/SpinnerComponent";
+import ContainerEditComponent from "../../CommonComponents/ContainerEditComponent/ContainerEditComponent";
 import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
 import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
 import { displayErrors } from "../../utils/CommonUtils";
-import OverviewEditContainer from "./OverviewEditContainer";
 
-class HotelSummary extends Component {
+class ContactUsMapComponent extends Component {
     
     constructor(props) {
         super(props);
@@ -50,7 +50,7 @@ class HotelSummary extends Component {
 
         requestData.containerHeader = _.get(formData, data.pageContainerInfoId + "")
         requestData.containerTextInfo[0].containertextLabelValue = encodedText;
-       // requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
+        requestData.containerTextInfo[1].containertextLabelValue = _.get(formData, data.containerTextInfo[1].containerTextInfoId);
 
         console.log("requestData======================>");
         console.log(JSON.stringify(requestData));
@@ -83,12 +83,12 @@ class HotelSummary extends Component {
         const isLoading = this.state.isLoading;
         const containerHeader = data && data.containerHeader;
         
-        const containertextLabelValue = data && decode(data.containerTextInfo[0].containertextLabelValue);
+        const containerMapURL = data && data.containerTextInfo[0].containertextLabelValue;
         
-        if(containertextLabelValue) {
-          data.containerTextInfo[0].containertextLabelValue = containertextLabelValue ;
+        if(containerMapURL) {
+          data.containerTextInfo[0].containertextLabelValue = containerMapURL ;
         }
-        
+        const containerAddress = data && decode(data.containerTextInfo[1].containertextLabelValue);
     
         return (
             
@@ -101,12 +101,25 @@ class HotelSummary extends Component {
                 <div className="d-flex">
                 <Card className="mx-auto my-3 text-white mb-2 rounded">
                     <Card.Body>
-                    <div className="d-flex">
-                        <p align="left">  <div dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />  </p>
-                    </div>      
-                    <div className='mx-auto my-3 mb-2 bottom'>
-                        <OverviewEditContainer id="sandr-hoteloverview-id"/>
-                    </div>          
+                        <Row lg={2}>  
+                            <div className="mapsize">
+
+                            <iframe 
+                                src= {containerMapURL}
+                                width="600"
+                                height="450"
+                                style={{overflow : 'hidden', height : '100%', width : '100%', border:'0'}} 
+                                allowFullScreen="" 
+                                loading="lazy" 
+                                referrerPolicy="no-referrer-when-downgrade">
+                            </iframe>
+
+                           
+                           </div>
+                           <div className="card-content ">
+                                    <div dangerouslySetInnerHTML={{ __html: containerAddress }} /> 
+                            </div>
+                        </Row>            
                     </Card.Body>
                 </Card>
                 </div>
@@ -133,4 +146,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToPros, mapDispatchToProps) (HotelSummary);
+export default connect(mapStateToPros, mapDispatchToProps) (ContactUsMapComponent);

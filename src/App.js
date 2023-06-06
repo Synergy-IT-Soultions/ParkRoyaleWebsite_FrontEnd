@@ -8,6 +8,11 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import SuitsAndRoomsComponent from './components/SuitsAndRoomsComponent/SuitsAndRoomsComponent';
 import ComingSoonComponent from './components/ComingSoonComponent/ComingSoonComponent';
+import RestaurantHomeComponent from './components/RestaurantComponent/RestaurantHomeComponent';
+import RecreationHomeComponent from './components/RecreationComponent/RecreationComponent';
+import ToursAndTravelsComponent from './components/ToursAndTravelsComponent/ToursAndTravelsComponent';
+import ContactUsComponent from './components/ContactUsComponent/ContactUsComponent';
+import GalleryComponent from './components/GalleryComponent/GalleryComponent';
 
 
 class App extends Component {
@@ -39,12 +44,13 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<LayoutComponent />}>
               <Route index element={<HomePageComponent />} />
+              <Route path="/adminlogin" element={<HomePageComponent />} />
               <Route path="/suitsandrooms" element={<SuitsAndRoomsComponent />} />
-              <Route path="/restaurants" element={<ComingSoonComponent />} />
-              <Route path="/recreations" element={<ComingSoonComponent />} />
-              <Route path="/toursandtravels" element={<ComingSoonComponent />} />
-              <Route path="/gallery" element={<ComingSoonComponent />} />
-              <Route path="/contactus" element={<ComingSoonComponent />} />
+              <Route path="/restaurants" element={<RestaurantHomeComponent />} />
+              <Route path="/recreations" element={<RecreationHomeComponent />} />
+              <Route path="/toursandtravels" element={<ToursAndTravelsComponent />} />
+              <Route path="/contactus" element={<ContactUsComponent />} />
+              <Route path="/gallery" element={<GalleryComponent/>} />
               <Route path="*" element={<NoPageComponent />} />
             </Route>
           </Routes>
