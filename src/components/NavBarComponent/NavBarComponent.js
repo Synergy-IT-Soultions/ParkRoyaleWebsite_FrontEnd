@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import logoImage from '../../assets/ParkRoyale_Logo.png'
 import LoginComponent from '../LoginComponent/LoginComponent';
 
+
 class NavBarComponent extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +17,22 @@ class NavBarComponent extends Component {
 
     componentDidMount(){
         //alert(window.location.pathname);
+        window.addEventListener('scroll', this.handleScroll);
     }
+
+    // componentWillUnmount() {
+    //     window.removeEventListener('scroll', this.handleScroll);
+    //   }
+
+      handleScroll = () => {
+        const shouldShowNavBar = window.scrollY === 0;
+        if (shouldShowNavBar) {
+          this.navBarRef.current.classList.remove('none');
+        } else {
+          this.navBarRef.current.classList.add('none');
+        }
+      };
+    
 
     mobileToggleClicked() {
 

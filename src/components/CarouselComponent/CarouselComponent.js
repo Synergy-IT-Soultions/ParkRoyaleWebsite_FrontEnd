@@ -132,7 +132,7 @@ class CarouselComponent extends Component {
                         className="d-block w-100 carouselimagesize"
                         src={image.imageInfo.imageURL}
                         alt={image.imageInfo.imageAlt}
-                        style={{border: "15px solid #5846F9"}}
+                        style={{}}
                         key={imageId}
                        
                         
@@ -212,10 +212,10 @@ class CarouselComponent extends Component {
                         return (
                             <img
                                 key={imageId}
-                                className="d-block w-100 carouselimagesize"
+                                className=" d-block w-100 carouselimagesize"
                                 src={image.imageInfo.imageURL}
                                 alt={image.imageInfo.imageAlt}
-                                style={{border: "15px solid #5846F9"}}
+                                style={{border: "15px solid #fff"}}
                             />
 
                         )

@@ -5,7 +5,7 @@
 }
 
 .price-table-bottom-text{
-  color: red;
+  color: #a8a8a8;
 }
 
 .fa-floppy-o:hover{
@@ -22,18 +22,24 @@
   }
 
 .tableHeader {
-    background-color: #5846f9;
+    background-color: #393939;;
     color: white;
     font-style: bold;
+}
+tr{
+  background: white;
 }
 
 tr:hover{
     
     border-radius: 5px;
-    background: linear-gradient(145deg, #766fa7, #9187ed,  #766fa7);
-    box-shadow: 0 10px 20px #5846f9, 0 4px 8px rgba(80, 53, 53, 0.06);
+    /* background: linear-gradient(145deg, #766fa7, #9187ed,  #766fa7);
+    box-shadow: 0 10px 20px #5846f9, 0 4px 8px rgba(80, 53, 53, 0.06); */
     color: white !important;
     font-weight: 400;
+}
+.table-hover>tbody>tr:hover>*{
+  background-color: none !important;
 }
 
 .tableHolder{

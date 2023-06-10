@@ -167,7 +167,7 @@ class RoomTariffComponent extends Component {
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
                         {/* <h2>{isAdmin ? contentEditOption : ""}Room Tariff</h2> */}
-                        <h2>{isAdmin && headerData ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={headerData} handleSave={this.handleSaveHeaderData} /> : ""}{containerHeader}</h2>
+                        <h2 style={{color:'#fff'}}>{isAdmin && headerData ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={headerData} handleSave={this.handleSaveHeaderData} /> : ""}{containerHeader}</h2>
                 
 
                     </div>

@@ -14,6 +14,7 @@ import {decode} from 'html-entities';
 import {encode} from 'html-entities';
 import { displayErrors } from "../../utils/CommonUtils";
 
+
 class WhoWeAreComponent extends Component {
     
     constructor(props) {
@@ -95,12 +96,13 @@ class WhoWeAreComponent extends Component {
             
             isLoading?<SpinnerComponent/>:
                 <section id="who-we-are" className="pricing section-bg">
+                    
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
-                         <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
+                         <h2 style={{ color: 'white'}}>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                     </div>
                 <div className="d-flex">
-                <Card className="mx-auto my-3 text-white mb-2 rounded">
+                <Card className="mx-auto my-3 text-white mb-2 rounded" style={{background:'#454545'}}>
                     <Card.Body>
                         <Row lg={2}>  
                             <div className="videosize">
