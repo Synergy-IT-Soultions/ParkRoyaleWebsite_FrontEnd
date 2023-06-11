@@ -100,7 +100,7 @@ class WhoWeAreComponent extends Component {
                          <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                     </div>
                 <div className="d-flex">
-                <Card className="mx-auto my-3 text-white mb-2 rounded">
+                <Card className="mx-auto my-3 mb-2 rounded">
                     <Card.Body>
                         <Row lg={2}>  
                             <div className="videosize">

@@ -9,3 +9,19 @@
     left:0;
     height:100px;
 }
+
+.menu-padding {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.menu-align-center{
+    width: 20%;
+}
+
+@media screen and (max-width: 991px) {
+    .menu-align-center{
+        width: 90%;
+    }
+    
+  }

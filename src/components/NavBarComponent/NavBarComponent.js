@@ -42,12 +42,14 @@ class NavBarComponent extends Component {
     render() {
         return (
             <header id="header" className="fixed-top">
-                <div className="container d-flex align-items-center justify-content-between">
+                <div className="menu-padding d-flex align-items-center ">
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
                     {/* <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a> */}
-                    <NavLink className="nav-link logo" to="/"><img src={logoImage} alt=""  /></NavLink>
-
+                   
+                    <NavLink className="nav-link logo" to="/"> <img src={logoImage} alt=""  /></NavLink>
+                    
+                    <div align="center" className="menu-align-center"></div>
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>
                             <li><NavLink className="nav-link scrollto" to="/" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Home</NavLink></li>
@@ -62,8 +64,8 @@ class NavBarComponent extends Component {
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" ref={this.mobileToggleRef} onClick={this.mobileToggleClicked}></i>
                     </nav>
-
-                </div>
+                  </div>
+                
             </header>
 
         );
