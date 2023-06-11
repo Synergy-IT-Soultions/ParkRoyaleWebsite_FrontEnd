@@ -152,5 +152,7 @@
     background-image: url('../../assets/previous-return-svgrepo-com.svg');
   }
 
-
+  .carousel-item{
+    filter: brightness(0.5);
+  }
 

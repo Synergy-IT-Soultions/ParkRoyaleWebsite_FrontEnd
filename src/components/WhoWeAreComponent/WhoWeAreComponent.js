@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import {decode} from 'html-entities';
 import {encode} from 'html-entities';
 import { displayErrors } from "../../utils/CommonUtils";
+import "./WhoweareComponent.css"
 
 
 class WhoWeAreComponent extends Component {
@@ -99,10 +100,10 @@ class WhoWeAreComponent extends Component {
                     
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
-                         <h2 style={{ color: 'white'}}>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
+                         <h2 style={{ color: 'rgb(255 162 47)'}}>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                     </div>
                 <div className="d-flex">
-                <Card className="mx-auto my-3 text-white mb-2 rounded" style={{background:'#454545'}}>
+                <Card className="mx-auto my-3 text-white mb-2 rounded glasseffectcard" style={{}}>
                     <Card.Body>
                         <Row lg={2}>  
                             <div className="videosize">

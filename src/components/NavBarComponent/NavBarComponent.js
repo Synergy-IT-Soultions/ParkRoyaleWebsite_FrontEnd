@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logoImage from '../../assets/ParkRoyale_Logo.png'
 import LoginComponent from '../LoginComponent/LoginComponent';
-
+import './NavbarComponents.css'
 
 class NavBarComponent extends Component {
     constructor(props) {
@@ -24,12 +24,15 @@ class NavBarComponent extends Component {
     //     window.removeEventListener('scroll', this.handleScroll);
     //   }
 
-      handleScroll = () => {
-        const shouldShowNavBar = window.scrollY === 0;
-        if (shouldShowNavBar) {
-          this.navBarRef.current.classList.remove('none');
+    handleScroll = () => {
+        const element = document.querySelector('.fixed-top');
+        const colorlink = document.querySelectorAll('.colorlink');
+        if (window.scrollY > 200) {
+          element.classList.add('scrolled');
+          colorlink.classList.add('linkscolor');
         } else {
-          this.navBarRef.current.classList.add('none');
+          element.classList.remove('scrolled');
+          colorlink.classList.remove('linkscolor');
         }
       };
     

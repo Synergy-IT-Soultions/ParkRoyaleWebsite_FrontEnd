@@ -1,0 +1,31 @@
+.navbar {
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .scrolled {
+    /* background: transparent !important;
+    backdrop-filter: blur(10px);
+    border-radius: 25px !important; */
+    
+    margin-inline: auto;
+    
+    width: 89%;
+    background: rgba( 255, 255, 255, 0.05 ) !important;
+    backdrop-filter: blur( 15.5px ) !important;
+    -webkit-backdrop-filter: blur( 15.5px ) !important;
+    border-radius: 25px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+
+  }
+
+  .scrolled .navbar ul li a{
+    color: #fff  !important;
+  }
+
+  .scrolled .navbar>ul>li>a:before{
+    background-color: #fff;
+  }
+  .linkscolor{
+    color: #fff  !important;
+  }
+
