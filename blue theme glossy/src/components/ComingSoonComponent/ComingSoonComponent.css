@@ -1,0 +1,82 @@
+  #coming-soon {
+      height: 100px;
+  }
+
+  #coming-soon .container {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      padding-left: 25%;
+      padding-right: 25%;
+      padding-bottom: 1%;
+      height: 100%;
+      overflow: hidden;
+  }
+
+  @media screen and (max-width: 750px) {
+      #coming-soon .container {
+          font-family: 'Arial', sans-serif;
+          display: flex;
+          padding-left: 7%;
+          padding-right: 25%;
+          padding-top: 7%;
+          height: 100%;
+          overflow: hidden;
+      }
+  }
+
+  #coming-soon .scroll {
+      white-space: nowrap;
+
+  }
+
+  #coming-soon .scroll div {
+      display: flex;
+      gap: 2em;
+  }
+
+  #coming-soon .scroll p {
+      font-size: 4em;
+      color: #5846f9;
+      font-weight: bold;
+      margin-bottom: 0;
+
+  }
+
+  @media screen and (max-width: 750px) {
+    #coming-soon .scroll p {
+        font-size: 2em;
+        color: #5846f9;
+        font-weight: bold;
+        margin-bottom: 0;
+  
+    }
+}
+
+  #coming-soon .RightToLeft {
+      animation: RightToLeft 1s infinite linear;
+  }
+
+  @keyframes RightToLeft {
+      from {
+          transform: translateX(0%);
+      }
+
+      to {
+          transform: translateX(-50%);
+      }
+  }
+
+  #coming-soon .LeftToRight {
+      animation: LeftToRight 5s infinite linear;
+  }
+
+  @keyframes LeftToRight {
+      from {
+          transform: translateX(-100%);
+      }
+
+      to {
+          transform: translateX(120%);
+      }
+  }
+

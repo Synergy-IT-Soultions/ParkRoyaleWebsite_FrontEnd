@@ -1,0 +1,8 @@
+.center-spinner{
+    display: flex;
+    justify-content: center;
+}
+
+.chandan.fade.modal.show {
+    backdrop-filter: blur(5px);
+}
