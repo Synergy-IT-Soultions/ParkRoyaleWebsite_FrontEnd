@@ -62,7 +62,7 @@ class GalleryHeaderComponent extends Component {
             {headerData?
             <div className="section-title">
                 <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={headerData} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
-                <p>{containertextLabelValue}</p>
+                {/* <p>{containertextLabelValue}</p> */}
                 
             </div>:<SpinnerComponent/>}
             </>

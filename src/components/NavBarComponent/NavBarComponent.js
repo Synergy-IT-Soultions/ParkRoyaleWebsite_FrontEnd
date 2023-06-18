@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import logoImage from '../../assets/ParkRoyale_Logo.png'
+import logoImage from '../../assets/img/parkroyallogo.png'
 import LoginComponent from '../LoginComponent/LoginComponent';
 import './NavbarComponents.css'
 
@@ -61,11 +61,11 @@ class NavBarComponent extends Component {
     render() {
         return (
             <header id="header" className="fixed-top">
-                <div className="container d-flex align-items-center justify-content-between">
+                <div className="container-fluid d-flex align-items-center justify-content-between navbar_padding">
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
                     {/* <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a> */}
-                    <NavLink className="nav-link logo" to="/"><img src={logoImage} alt=""  /></NavLink>
+                    <NavLink className="nav-link logo" to="/"><img src={logoImage} style={{width: '100%',height:'82px'}} alt=""  /></NavLink>
 
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>

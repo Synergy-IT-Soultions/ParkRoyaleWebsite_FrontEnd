@@ -4,8 +4,12 @@
     backdrop-filter: blur( 3.5px );
     -webkit-backdrop-filter: blur( 3.5px );
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 ); 
+    /* #0d3662;#14549a;#184375 */
 }
 .card-content h1{
     color: rgb(255 162 47);
+}
+.glasseffectcard h1 span{
+    color: rgb(255 162 47) !important;
 }

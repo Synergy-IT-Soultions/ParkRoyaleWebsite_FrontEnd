@@ -18,14 +18,23 @@
 
   }
 
-  .scrolled .navbar ul li a{
-    color: #fff  !important;
+  .scrolled .navbar ul li a:not(.getstarted){
+    color: rgb(255, 162, 47)  !important;
   }
 
-  .scrolled .navbar>ul>li>a:before{
-    background-color: #fff;
+  .scrolled .navbar>ul>li>a:before:not(.getstarted){
+    background-color: rgb(255, 162, 47);
   }
   .linkscolor{
     color: #fff  !important;
   }
+  .navbar .getstarted:hover:not(.getstarted),
+.navbar .getstarted:focus:hover:not(.getstarted) {
+  color: #262626;
+  border-color: #262626;
+  background: rgb(255, 162, 47);
+}
 
+.navbar_padding{
+  padding-inline: 40px;
+}
