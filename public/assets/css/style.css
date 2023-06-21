@@ -1723,3 +1723,14 @@ section {
   height: 10px;
   border-radius:50%;
 }
+.carousel.slide{
+  border: 15px solid #184375;
+  /* box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
+-webkit-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
+-moz-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66); */
+}
+
+.table > thead {
+  vertical-align: bottom;
+  background: #262626ba;
+}

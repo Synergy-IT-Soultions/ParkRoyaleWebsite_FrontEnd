@@ -63,7 +63,12 @@ tr:hover{
     backdrop-filter: blur( 3.5px );
     -webkit-backdrop-filter: blur( 3.5px );
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    /* border: 1px solid rgba( 255, 255, 255, 0.18 ); */
+    border: 15px solid #184375;
+
+    /* box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
+-webkit-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
+-moz-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66); */
   
 
   cursor: pointer;
