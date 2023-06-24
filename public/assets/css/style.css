@@ -199,7 +199,7 @@ h6 {
   font-family: "Poppins", sans-serif;
   font-size: 15px;
   font-weight: 600;
-  color: #c48a2c;
+  color: white;
   white-space: nowrap;
   transition: 0.3s;
   position: relative;
@@ -236,7 +236,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: rgb(255 162 47);
+  color: skyblue;
 }
 
 .navbar .getstarted,
@@ -244,11 +244,11 @@ h6 {
   padding: 8px 25px;
   margin-left: 30px;
   border-radius: 5px;
-  color: rgb(255, 162, 47);
+  color: white;
   transition: 0.3s;
   font-size: 14px;
   font-weight: 600;
-  border: 2px solid rgb(255, 162, 47);
+  border: 2px solid white;
 }
 
 
@@ -257,7 +257,7 @@ h6 {
 .navbar .getstarted:focus:hover {
   color: #262626;
   border-color: #262626;
-  background: rgb(255, 162, 47);
+  background: white;
 }
 
 .navbar .getstarted:before,
@@ -585,7 +585,7 @@ section {
 .portfolio{
   background-color: #f9f8ff;
   /* background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjgwZjJmOTU5MTEwZjQ4OTAwNTdlMmI4ZmFkYTM3ODYzMTYyYzE2NiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/UC8DbMqXvkpd6/giphy.gif'); */
-  background-image: url('../img/firecamp.png');
+  /* background-image: url('../img/firecamp.png'); */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -594,9 +594,9 @@ section {
 }
 
 .section-bg {
-  background-color: #f9f8ff;
+  background-color: #14559a79;
   /* background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjgwZjJmOTU5MTEwZjQ4OTAwNTdlMmI4ZmFkYTM3ODYzMTYyYzE2NiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/UC8DbMqXvkpd6/giphy.gif'); */
-  background-image: url('../img/firecamp.png');
+  /* background-image: url('../img/firecamp.png'); */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -624,7 +624,7 @@ section {
   display: block;
   width: 50px;
   height: 3px;
-  background: rgb(255, 162, 47);
+  background: #184375;
   bottom: 0;
   left: calc(50% - 25px);
 }
@@ -1560,9 +1560,9 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  color: #d8972d;
+  color: white;
   font-size: 14px;
-  background: #262626 !important;
+  background: #0d3662 !important;
   background:  url("../img/hero-bg.jpg") center center no-repeat;
 }
 
@@ -1702,7 +1702,7 @@ section {
   font-size: 18px;
   display: inline-block;
   background: rgba(255, 255, 255, 0.1);
-  color: rgb(196, 138, 44);
+  color: white;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
@@ -1732,5 +1732,5 @@ section {
 
 .table > thead {
   vertical-align: bottom;
-  background: #262626ba;
+  background: #18437586;
 }

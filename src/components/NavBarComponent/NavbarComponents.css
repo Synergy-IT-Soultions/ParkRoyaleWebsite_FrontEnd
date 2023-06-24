@@ -19,11 +19,11 @@
   }
 
   .scrolled .navbar ul li a:not(.getstarted){
-    color: rgb(255, 162, 47)  !important;
+    color: white  !important;
   }
 
   .scrolled .navbar>ul>li>a:before:not(.getstarted){
-    background-color: rgb(255, 162, 47);
+    background-color: white;
   }
   .linkscolor{
     color: #fff  !important;
@@ -32,7 +32,7 @@
 .navbar .getstarted:focus:hover:not(.getstarted) {
   color: #262626;
   border-color: #262626;
-  background: rgb(255, 162, 47);
+  background: white;
 }
 
 .navbar_padding{
