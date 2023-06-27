@@ -1770,3 +1770,14 @@ background: rgba( 255, 255, 255, 0.05 );
     background-size: auto !important;
   }
 }
+.btn-close {
+  box-sizing: content-box;
+  width: 3em;
+  height: 3em;
+  padding: .25em .25em;
+  color: #000;
+  background: transparent url("https://www.pngkit.com/png/full/183-1838416_x-theme-tips-delete-icon-orange-png.png") center/1em auto no-repeat;
+  border: 0;
+  border-radius: .375rem;
+  opacity: .5;
+}
