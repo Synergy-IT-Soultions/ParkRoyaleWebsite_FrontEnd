@@ -1723,14 +1723,50 @@ section {
   height: 10px;
   border-radius:50%;
 }
-.carousel.slide{
+/* .carousel.slide{
   border: 15px solid #184375;
   /* box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
 -webkit-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
 -moz-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66); */
+
+.btn_edit{
+  background: none !important;
+  border:none !important;
 }
 
-.table > thead {
-  vertical-align: bottom;
-  background: #262626ba;
+.btn_edit i{
+  color: #d2932d;
+}
+
+.modal-content{
+background-color: unset !important;
+background: rgba( 255, 255, 255, 0.05 );
+    box-shadow: 0 8px 32px 0 rgb(240 238 241 / 0%);
+    backdrop-filter: blur( 3.5px );
+    -webkit-backdrop-filter: blur( 3.5px );
+    border-radius: 10px;
+}
+.modalHeader{
+  background-color: #262626 !important;
+  border-bottom: 1px solid #d2932d;
+}
+.modal-title{
+  color: #d2932d;
+}
+.cardFooter {
+  background-color: #262626 !important;
+}
+.cardFooter small, .cardHeader,  i, .form-label{
+  color: #d2932d !important;
+}
+.btn_orange, .modal-footer button{
+  background: #262626 !important;
+  border: none !important;
+  color:#d2932d !important;
+}
+
+@media only screen and (max-width:940px){
+  .section-bg{
+    background-size: auto !important;
+  }
 }

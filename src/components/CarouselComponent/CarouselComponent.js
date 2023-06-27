@@ -163,7 +163,7 @@ class CarouselComponent extends Component {
                 {
                     isAdmin ?
 
-                        <Button variant="primary" size="sm" className="over-parent " onClick={this.handleShow}>
+                        <Button variant="primary" size="sm" className="over-parent btn_edit" onClick={this.handleShow}>
                             <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
 
                         </Button>
@@ -192,7 +192,7 @@ class CarouselComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
 
-                        <Button type="text" onClick={this.handleShowUpload}>Add Image</Button>
+                        <Button className="btn_orange" type="text" onClick={this.handleShowUpload}>Add Image</Button>
 
                     </Modal.Footer>
                 </Modal>

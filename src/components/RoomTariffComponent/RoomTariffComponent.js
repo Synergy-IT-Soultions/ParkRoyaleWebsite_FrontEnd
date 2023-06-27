@@ -146,11 +146,11 @@ class RoomTariffComponent extends Component {
         let tableEditOption;
         let contentEditOption;
         if (isAdmin) {
-            tableEditOption = <Button size="sm" onClick={this.toggleTableEditable}>
+            tableEditOption = <Button className="btn_edit" size="sm" onClick={this.toggleTableEditable}>
                 <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
             </Button>;
 
-            contentEditOption = <Button size="sm" onClick={this.toggleTableEditable}>
+            contentEditOption = <Button className="btn_edit" size="sm" onClick={this.toggleTableEditable}>
             <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
         </Button>;
         }

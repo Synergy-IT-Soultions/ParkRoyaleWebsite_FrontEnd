@@ -328,7 +328,7 @@ class GallerySwiperDetailsComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
 
-                        <Button type="text" onClick={this.handleShowUpload}>Add Image</Button>
+                        <Button className="btn_orange" type="text" onClick={this.handleShowUpload}>Add Image</Button>
 
                     </Modal.Footer>
                 </Modal>
