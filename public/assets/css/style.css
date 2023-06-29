@@ -358,7 +358,7 @@ h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(28, 47, 65, 0.9);
+  background: #272727e6;
   transition: 0.3s;
   z-index: 999;
 }
@@ -377,7 +377,7 @@ h6 {
   bottom: 15px;
   left: 15px;
   padding: 10px 0;
-  background-color: #fff;
+  background-color: #262626;
   overflow-y: auto;
   transition: 0.3s;
 }
@@ -390,7 +390,7 @@ h6 {
 .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #2c4964;
+  color: #c48a2c;
 }
 
 .navbar-mobile a:hover:before,
@@ -402,7 +402,7 @@ h6 {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #5846f9;
+  color: #c48a2c;
 }
 
 .navbar-mobile .getstarted,
@@ -1763,6 +1763,14 @@ background: rgba( 255, 255, 255, 0.05 );
   background: #262626 !important;
   border: none !important;
   color:#d2932d !important;
+  border: 1px solid #d2932d !important;
+}
+.modal-footer{
+  border: 1px solid #d2932d;
+}
+.modal-body{
+  border-left: 1px solid #d2932d;
+  border-right: 1px solid #d2932d;
 }
 
 @media only screen and (max-width:940px){
@@ -1780,4 +1788,26 @@ background: rgba( 255, 255, 255, 0.05 );
   border: 0;
   border-radius: .375rem;
   opacity: .5;
+}
+.address_info tbody, .address_info td, .address_info tfoot, .address_info th, .address_info thead, .address_info tr{
+  padding:10px;
+  color: #d2932d;
+}
+.address_info tbody tr:first-child{
+  border-bottom: 1px solid #d2932d !important;
+}
+.map_style{
+  border-radius:10px;
+}
+.address_section{
+  border: 1px solid #404040;
+  border-radius: 10px !important;
+}
+@media only screen and (max-width: 1200px){
+  .mapsize{
+    width:100%;
+  }
+  .address_info{
+    margin-top:20px;
+  }
 }

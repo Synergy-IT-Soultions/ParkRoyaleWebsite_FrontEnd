@@ -201,7 +201,7 @@ class RoomTariffComponent extends Component {
                     
                     </div>
                     <p className="price-table-bottom-text">{containertextLabelValue}</p>
-                    {editable ? <Button type="text" onClick={this.handleShow}>Add Row</Button> : ""}
+                    {editable ? <Button className="btn_orange" type="text" onClick={this.handleShow}><i class="fa fa-plus pe-2"></i>Add Row</Button> : ""}
                     
                     <Modal size="md" show={show} onHide={this.handleClose}>
                         <Modal.Header className="modalHeader text-white" closeButton>
@@ -215,7 +215,7 @@ class RoomTariffComponent extends Component {
                             <InputComponent label="Week End Without Breakfast" id="week_end_without_breakfast_new_rate" />
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button type="submit" onClick={this.handleSaveTableData}>Save</Button>
+                            <Button type="submit" onClick={this.handleSaveTableData}><i class="fa fa-save pe-2"></i>Save</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

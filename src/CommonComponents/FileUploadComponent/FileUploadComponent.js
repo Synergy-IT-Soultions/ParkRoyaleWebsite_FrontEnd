@@ -152,7 +152,7 @@ function FileUploadComponent(props ) {
                 {uploadForm()}
             </Modal.Body>
             <Modal.Footer>
-            <Button type="submit" onClick={handleSubmit}>Save</Button>
+            <Button type="submit" onClick={handleSubmit}><i class="fas fa-save pe-2"></i>Save</Button>
             </Modal.Footer>
         </Modal></>
     );

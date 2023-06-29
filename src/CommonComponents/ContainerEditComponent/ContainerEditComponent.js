@@ -141,7 +141,7 @@ class ContainerEditComponent extends Component {
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button type="submit" disabled={formChanged} onClick={this.handlSave}>Save</Button>
+                    <Button type="submit" disabled={formChanged} onClick={this.handlSave}><i class="fa fa-save pe-2"></i>Save</Button>
                     </Modal.Footer>
                 </Modal>
         </span> );

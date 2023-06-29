@@ -99,12 +99,12 @@ class ContactUsMapComponent extends Component {
                          <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                     </div>
                 <div className="d-flex">
-                <Card className="mx-auto my-3 text-white mb-2 rounded">
+                <Card className="mx-auto my-3 text-white mb-2 rounded address_section">
                     <Card.Body>
                         <Row lg={2}>  
                             <div className="mapsize">
 
-                            <iframe 
+                            <iframe className="map_style"
                                 src= {containerMapURL}
                                 width="600"
                                 height="450"
@@ -116,7 +116,7 @@ class ContactUsMapComponent extends Component {
 
                            
                            </div>
-                           <div className="card-content ">
+                           <div className="card-content address_info ">
                                     <div dangerouslySetInnerHTML={{ __html: containerAddress }} /> 
                             </div>
                         </Row>            

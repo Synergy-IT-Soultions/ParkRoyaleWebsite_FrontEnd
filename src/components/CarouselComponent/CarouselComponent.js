@@ -192,7 +192,7 @@ class CarouselComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
 
-                        <Button className="btn_orange" type="text" onClick={this.handleShowUpload}>Add Image</Button>
+                        <Button className="btn_orange" type="text" onClick={this.handleShowUpload}><i class="fa fa-plus pe-2"></i>Add Image</Button>
 
                     </Modal.Footer>
                 </Modal>
