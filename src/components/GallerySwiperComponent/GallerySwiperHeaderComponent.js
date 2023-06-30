@@ -57,7 +57,7 @@ class GallerySwiperHeaderComponent extends Component {
 
         return (
             <div className="section-title">
-                <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
+                <h2 style={{color:'rgb(255 162 47)'}}>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                 {/* <p>{containertextLabelValue}</p> */}
             </div>
         );

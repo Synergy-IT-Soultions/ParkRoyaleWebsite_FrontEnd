@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import logoImage from '../../assets/ParkRoyale_Logo.png'
+import logoImage from '../../assets/img/parkroyallogo.png'
 import LoginComponent from '../LoginComponent/LoginComponent';
+import './NavbarComponents.css'
 
 class NavBarComponent extends Component {
     constructor(props) {
@@ -16,7 +17,29 @@ class NavBarComponent extends Component {
 
     componentDidMount(){
         //alert(window.location.pathname);
+        window.addEventListener('scroll', this.handleScroll);
     }
+
+    // componentWillUnmount() {
+    //     window.removeEventListener('scroll', this.handleScroll);
+    //   }
+
+    handleScroll = () => {
+        const element = document.querySelector('.fixed-top');
+        const colorlink = document.querySelectorAll('.colorlink');
+        const navbarmobile= document.querySelector('.navbar-mobile')
+        if (window.scrollY > 200) {
+          element.classList.add('scrolled');
+          colorlink.classList.add('linkscolor');
+          navbarmobile.classList.add('d-none')
+          
+        } else {
+          element.classList.remove('scrolled');
+          colorlink.classList.remove('linkscolor');
+          
+        }
+      };
+    
 
     mobileToggleClicked() {
 
@@ -42,14 +65,14 @@ class NavBarComponent extends Component {
     render() {
         return (
             <header id="header" className="fixed-top">
-                <div className="menu-padding d-flex align-items-center ">
+
+                <div className="container-fluid d-flex align-items-center justify-content-between navbar_padding">
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
                     {/* <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a> */}
-                   
-                    <NavLink className="nav-link logo" to="/"> <img src={logoImage} alt=""  /></NavLink>
-                    
-                    <div align="center" className="menu-align-center"></div>
+                    <NavLink className="nav-link logo" to="/"><img src={logoImage} style={{width: '100%',height:'82px'}} alt=""  /></NavLink>
+
+
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>
                             <li><NavLink className="nav-link scrollto" to="/" activeclassname="active" onClick={this.closeMobileToggleDropDown}>Home</NavLink></li>

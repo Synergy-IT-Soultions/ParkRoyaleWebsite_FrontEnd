@@ -12,6 +12,7 @@ import { Button, Modal } from "react-bootstrap";
 import ImageGalleryComponent from "../../CommonComponents/ImageGalleryComponent/ImageGalleryComponent";
 import  CarouselCardComponent  from "../CarouselComponent/CarouselCardComponent";
 import FileUploadComponent from "../../CommonComponents/FileUploadComponent/FileUploadComponent";
+import './GallerySwiperstyle.css'
 
 class GallerySwiperDetailsComponent extends Component {
     constructor(props) {
@@ -303,7 +304,7 @@ class GallerySwiperDetailsComponent extends Component {
 
                         : ""
                 }</p> */}
-            <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            <div className="testimonials-slider swiper img_carousal_pad" data-aos="fade-up" data-aos-delay="100">
                 
                 <Modal show={this.state.show} onHide={this.handleClose} >
                     <Modal.Header className="modalHeader text-white" closeButton>
@@ -327,7 +328,7 @@ class GallerySwiperDetailsComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
 
-                        <Button type="text" onClick={this.handleShowUpload}>Add Image</Button>
+                        <Button className="btn_orange" type="text" onClick={this.handleShowUpload}><i class="fa fa-plus pe-2"></i>Add Image</Button>
 
                     </Modal.Footer>
                 </Modal>

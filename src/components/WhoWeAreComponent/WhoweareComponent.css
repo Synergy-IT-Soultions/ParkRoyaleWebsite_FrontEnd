@@ -1,0 +1,19 @@
+.glasseffectcard{
+    background: rgba( 255, 255, 255, 0.05 );
+    box-shadow: 0 8px 32px 0 rgb(240 238 241 / 0%);
+    backdrop-filter: blur( 3.5px );
+    -webkit-backdrop-filter: blur( 3.5px );
+    border-radius: 10px;
+    border: 1px solid gray; 
+    /* #0d3662;#14549a;#184375 */
+
+    /* box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
+-webkit-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66);
+-moz-box-shadow: -1px 1px 49px 30px rgba(0,0,0,0.66); */
+}
+.card-content h1{
+    color: rgb(255 162 47);
+}
+.glasseffectcard h1 span{
+    color: rgb(255 162 47) !important;
+}

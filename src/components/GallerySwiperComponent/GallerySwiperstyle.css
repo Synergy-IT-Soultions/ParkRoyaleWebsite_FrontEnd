@@ -1,0 +1,42 @@
+.img_carousal_pad{
+    padding-inline: 10px;
+}
+.card-img-top{
+    border-radius:6px;
+    filter: brightness(0.5);
+}
+
+.rounded.card:hover .card-img-top{
+    filter: brightness(1);
+}
+.card{
+    background: unset !important;
+    box-shadow: unset !important;
+}
+.swiper-button-prev:after{
+    content: 'prev';
+    font-size: 18px;
+    font-weight: bolder;
+    color: #ffac2d;
+    background: #262626;
+    padding: 8px 11px;
+    border-radius: 60%;
+}
+.swiper-button-next:after{
+    content: 'next';
+    font-size: 18px;
+    font-weight: bolder;
+    color: #ffac2d;
+    background: #262626;
+    padding: 8px 11px;
+    border-radius: 60%;
+}
+.swiper-button-prev{
+    padding-left: 30px;
+}
+.swiper-button-next{
+    padding-right:30px;
+}
+.carouselimagesize{
+    filter: brightness(0.5);
+}

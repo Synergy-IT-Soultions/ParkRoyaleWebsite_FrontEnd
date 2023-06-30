@@ -10,6 +10,7 @@ import { hidePageLoader, showPageLoader } from '../../utils/ReduxActions';
 import cmClient from '../../clients/ContentManagementClient';
 import { displayErrors } from '../../utils/CommonUtils';
 import { NavLink } from 'react-router-dom';
+import './LoginComponent.css'
 
 class LoginComponent extends React.Component {
     constructor(props) {

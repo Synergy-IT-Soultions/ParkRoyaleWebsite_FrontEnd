@@ -127,8 +127,8 @@ class ContainerEditComponent extends Component {
         console.log('isLoading : '+ isLoading);
         return ( <span className="editor">
             
-            <Button  size="sm" onClick={this.handleShow}>
-                <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+            <Button  className="btn_edit" size="sm " onClick={this.handleShow}>
+                <i className="fa fa-pencil-square-o fa-2x " aria-hidden="true"></i>
             </Button>
 
             <Modal size="md"  show={show} onHide={this.handleClose}>
@@ -141,7 +141,7 @@ class ContainerEditComponent extends Component {
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button type="submit" disabled={formChanged} onClick={this.handlSave}>Save</Button>
+                    <Button type="submit" disabled={formChanged} onClick={this.handlSave}><i class="fa fa-save pe-2"></i>Save</Button>
                     </Modal.Footer>
                 </Modal>
         </span> );
