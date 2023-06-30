@@ -65,11 +65,13 @@ class NavBarComponent extends Component {
     render() {
         return (
             <header id="header" className="fixed-top">
+
                 <div className="container-fluid d-flex align-items-center justify-content-between navbar_padding">
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
                     {/* <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a> */}
                     <NavLink className="nav-link logo" to="/"><img src={logoImage} style={{width: '100%',height:'82px'}} alt=""  /></NavLink>
+
 
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
                         <ul>
@@ -85,8 +87,8 @@ class NavBarComponent extends Component {
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" ref={this.mobileToggleRef} onClick={this.mobileToggleClicked}></i>
                     </nav>
-
-                </div>
+                  </div>
+                
             </header>
 
         );
