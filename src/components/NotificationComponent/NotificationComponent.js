@@ -1,6 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import './NotificationComponent.css'
 //https://www.npmjs.com/package/react-toastify
 
 class NotificationComponent extends React.Component {
@@ -9,10 +10,10 @@ class NotificationComponent extends React.Component {
         return ( 
         <ToastContainer
             position="top-right"
-            autoClose={10000}
+            //autoClose={10000}
             hideProgressBar={false}
             newestOnTop={false}
-            closeOnClick
+            //closeOnClick
             rtl={false}
             pauseOnFocusLoss
             draggable
