@@ -10,10 +10,10 @@ class NotificationComponent extends React.Component {
         return ( 
         <ToastContainer
             position="top-right"
-            //autoClose={10000}
+            autoClose={10000}
             hideProgressBar={false}
             newestOnTop={false}
-            //closeOnClick
+            closeOnClick
             rtl={false}
             pauseOnFocusLoss
             draggable
