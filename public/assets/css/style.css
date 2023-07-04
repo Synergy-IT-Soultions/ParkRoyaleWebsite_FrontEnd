@@ -361,6 +361,8 @@ h6 {
   background: #272727e6;
   transition: 0.3s;
   z-index: 999;
+  height: 360px !important;
+  border-radius: 26px;
 }
 
 .navbar-mobile .mobile-nav-toggle {
