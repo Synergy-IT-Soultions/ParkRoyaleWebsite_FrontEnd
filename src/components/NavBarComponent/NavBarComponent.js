@@ -27,11 +27,9 @@ class NavBarComponent extends Component {
     handleScroll = () => {
         const element = document.querySelector('.fixed-top');
         const colorlink = document.querySelectorAll('.colorlink');
-        const navbarmobile= document.querySelector('.navbar-mobile')
         if (window.scrollY > 200) {
           element.classList.add('scrolled');
           colorlink.classList.add('linkscolor');
-          navbarmobile.classList.add('d-none')
           
         } else {
           element.classList.remove('scrolled');
