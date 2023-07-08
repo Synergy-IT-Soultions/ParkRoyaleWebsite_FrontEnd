@@ -159,3 +159,16 @@ tr:hover{
   .valign-middle {
     vertical-align: middle;
   }
+  
+  .form-check-input:checked {
+    background-color: #ed9933;
+    border-color: #ed9933;
+  }
+  .form-check-input:focus {
+    border-color: #ed9933a5 !important;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+  }
+  .form-switch .form-check-input:focus {
+    background-image: #ed9933a5 !important;
+  }
