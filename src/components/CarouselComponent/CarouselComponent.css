@@ -147,11 +147,13 @@
 .carousel-control-next-icon {
     background-image: url('../../assets/img/carousal-arrow-right.png');
     width: 3rem !important;
+    height: 3rem;
   }
   
 .carousel-control-prev-icon {
     background-image: url('../../assets/img/carousal-arrow-left.png');
     width: 3rem !important;
+    height: 3rem;
   }
 
   .carousel-item{
