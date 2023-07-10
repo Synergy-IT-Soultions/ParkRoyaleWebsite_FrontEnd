@@ -1813,3 +1813,11 @@ background: rgba( 255, 255, 255, 0.05 );
     margin-top:20px;
   }
 }
+
+::-webkit-scrollbar{
+  width:10px;
+}
+::-webkit-scrollbar-thumb{
+  background:#c48a2c;
+  border-radius: 10px;
+}
