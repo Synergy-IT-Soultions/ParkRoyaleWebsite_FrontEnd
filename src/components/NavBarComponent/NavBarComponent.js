@@ -24,19 +24,19 @@ class NavBarComponent extends Component {
     //     window.removeEventListener('scroll', this.handleScroll);
     //   }
 
-    handleScroll = () => {
-        const element = document.querySelector('.fixed-top');
-        const colorlink = document.querySelectorAll('.colorlink');
-        if (window.scrollY > 200) {
-          element.classList.add('scrolled');
-          colorlink.classList.add('linkscolor');
+    // handleScroll = () => {
+    //     const element = document.querySelector('.fixed-top');
+    //     const colorlink = document.querySelectorAll('.colorlink');
+    //     if (window.scrollY > 200) {
+    //       element.classList.add('scrolled');
+    //       colorlink.classList.add('linkscolor');
           
-        } else {
-          element.classList.remove('scrolled');
-          colorlink.classList.remove('linkscolor');
+    //     } else {
+    //       element.classList.remove('scrolled');
+    //       colorlink.classList.remove('linkscolor');
           
-        }
-      };
+    //     }
+    //   };
     
 
     mobileToggleClicked() {
