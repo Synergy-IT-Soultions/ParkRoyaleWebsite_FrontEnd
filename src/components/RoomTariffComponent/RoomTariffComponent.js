@@ -146,11 +146,11 @@ class RoomTariffComponent extends Component {
         let tableEditOption;
         let contentEditOption;
         if (isAdmin) {
-            tableEditOption = <Button size="sm" onClick={this.toggleTableEditable}>
+            tableEditOption = <Button className="btn_edit" size="sm" onClick={this.toggleTableEditable}>
                 <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
             </Button>;
 
-            contentEditOption = <Button size="sm" onClick={this.toggleTableEditable}>
+            contentEditOption = <Button className="btn_edit" size="sm" onClick={this.toggleTableEditable}>
             <i className="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
         </Button>;
         }
@@ -167,7 +167,7 @@ class RoomTariffComponent extends Component {
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
                         {/* <h2>{isAdmin ? contentEditOption : ""}Room Tariff</h2> */}
-                        <h2>{isAdmin && headerData ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={headerData} handleSave={this.handleSaveHeaderData} /> : ""}{containerHeader}</h2>
+                        <h2 style={{color:'rgb(255 162 47)'}}>{isAdmin && headerData ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={headerData} handleSave={this.handleSaveHeaderData} /> : ""}{containerHeader}</h2>
                 
 
                     </div>
@@ -201,7 +201,7 @@ class RoomTariffComponent extends Component {
                     
                     </div>
                     <p className="price-table-bottom-text">{containertextLabelValue}</p>
-                    {editable ? <Button type="text" onClick={this.handleShow}>Add Row</Button> : ""}
+                    {editable ? <Button className="btn_orange" type="text" onClick={this.handleShow}><i class="fa fa-plus pe-2"></i>Add Row</Button> : ""}
                     
                     <Modal size="md" show={show} onHide={this.handleClose}>
                         <Modal.Header className="modalHeader text-white" closeButton>
@@ -215,7 +215,7 @@ class RoomTariffComponent extends Component {
                             <InputComponent label="Week End Without Breakfast" id="week_end_without_breakfast_new_rate" />
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button type="submit" onClick={this.handleSaveTableData}>Save</Button>
+                            <Button type="submit" onClick={this.handleSaveTableData}><i class="fa fa-save pe-2"></i>Save</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

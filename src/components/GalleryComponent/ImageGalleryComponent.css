@@ -30,3 +30,11 @@
 .show-pointer input{
     cursor: pointer;
 }
+.section-title h2{
+    color: rgb(255, 162, 47);
+}
+
+.form-check-input:checked {
+    background-color: rgb(255 162 47);
+    border-color: rgb(255 162 47);
+}

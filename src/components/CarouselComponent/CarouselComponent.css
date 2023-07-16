@@ -143,14 +143,38 @@
         min-height: 175px;
     }
 }
-
+.carousel-control-prev{
+    padding-right: 80px;
+}
+.carousel-control-next{
+    padding-left: 80px;
+}
+@media only screen and (max-width:900px){
+    .carousel-control-prev{
+        padding-right: 0px;
+    }
+    .carousel-control-next{
+        padding-left: 0px;
+    }
+}
+.carousel-control-prev, .carousel-control-next{
+    opacity: 1;
+}
 .carousel-control-next-icon {
-    background-image: url('../../assets/next-svgrepo-com.svg');
+    background-image: url('../../assets/img/carousal-arrow-right.png');
+    width: 3rem !important;
+    height: 3rem;
+    
   }
   
 .carousel-control-prev-icon {
-    background-image: url('../../assets/previous-return-svgrepo-com.svg');
+    background-image: url('../../assets/img/carousal-arrow-left.png');
+    width: 3rem !important;
+    height: 3rem;
+    
   }
 
-
+  .carousel-item{
+    /* filter: brightness(0.5); */
+  }
 

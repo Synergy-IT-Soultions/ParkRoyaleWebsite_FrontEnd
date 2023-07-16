@@ -1,6 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import './NotificationComponent.css'
 //https://www.npmjs.com/package/react-toastify
 
 class NotificationComponent extends React.Component {

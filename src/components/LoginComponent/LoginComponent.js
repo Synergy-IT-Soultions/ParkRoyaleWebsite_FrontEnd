@@ -10,6 +10,7 @@ import { hidePageLoader, showPageLoader } from '../../utils/ReduxActions';
 import cmClient from '../../clients/ContentManagementClient';
 import { displayErrors } from '../../utils/CommonUtils';
 import { NavLink } from 'react-router-dom';
+import './LoginComponent.css'
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -146,9 +147,10 @@ class LoginComponent extends React.Component {
             <React.Fragment>
 
 
-
+                <div align="right">
                 {!this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.handleShow}> Admin Login </NavLink></li>}
                 {this.state.loggedin && <li><NavLink className="getstarted scrollto" onClick={this.logoutUser}> Logout </NavLink></li>}
+                </div>
                 <Modal show={showLoginModal} onHide={this.handleClose} onKeyDown={this.handleKeyPress}>
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>

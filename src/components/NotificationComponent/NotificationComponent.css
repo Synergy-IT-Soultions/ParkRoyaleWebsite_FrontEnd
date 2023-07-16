@@ -1,0 +1,4 @@
+.Toastify__toast-theme--colored.Toastify__toast--success {
+    --toastify-text-color-success: #fff;
+    background: rgb(255 162 47);
+}
