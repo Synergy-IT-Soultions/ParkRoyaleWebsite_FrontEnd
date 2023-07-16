@@ -46,7 +46,7 @@ class GallerySwiperComponent extends Component {
 
         return (
             isLoading?<SpinnerComponent/>:
-                <section id="pricing" className="pricing section-bg">
+                <section id="pricing" className="pricing">
                 <div className="container" data-aos="fade-up">
                 <GallerySwiperHeaderComponent id={this.props.id} data={headerObject} loadData={this.loadData}/>
                 <GallerySwiperDetailsComponent id={this.props.id} data={swiperCards} loadData={this.loadData} imageType={imageType}/>
