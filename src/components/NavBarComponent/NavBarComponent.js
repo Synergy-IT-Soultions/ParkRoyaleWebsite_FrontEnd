@@ -24,19 +24,19 @@ class NavBarComponent extends Component {
     //     window.removeEventListener('scroll', this.handleScroll);
     //   }
 
-    handleScroll = () => {
-        const element = document.querySelector('.fixed-top');
-        const colorlink = document.querySelectorAll('.colorlink');
-        if (window.scrollY > 200) {
-          element.classList.add('scrolled');
-          colorlink.classList.add('linkscolor');
+    // handleScroll = () => {
+    //     const element = document.querySelector('.fixed-top');
+    //     const colorlink = document.querySelectorAll('.colorlink');
+    //     if (window.scrollY > 200) {
+    //       element.classList.add('scrolled');
+    //       colorlink.classList.add('linkscolor');
           
-        } else {
-          element.classList.remove('scrolled');
-          colorlink.classList.remove('linkscolor');
+    //     } else {
+    //       element.classList.remove('scrolled');
+    //       colorlink.classList.remove('linkscolor');
           
-        }
-      };
+    //     }
+    //   };
     
 
     mobileToggleClicked() {
@@ -68,7 +68,7 @@ class NavBarComponent extends Component {
                     {/* <h1 className="logo"><a href="index.html">Techie</a></h1> */}
                     {/* <!-- Uncomment below if you prefer to use an image logo -->*/}
                     {/* <a href="index.html" className="logo"><img src={logoImage} alt=""  /></a> */}
-                    <NavLink className="nav-link logo" to="/"><img src={logoImage} style={{width: '100%',height:'82px'}} alt=""  /></NavLink>
+                    <NavLink className="nav-link logo" to="/"><img src={logoImage} style={{width: '112px',height:'82px'}} alt=""  /></NavLink>
 
 
                     <nav id="navbar" className="navbar" ref={this.navBarRef}>
