@@ -96,7 +96,7 @@ class WhoWeAreComponent extends Component {
         return (
             
             isLoading?<SpinnerComponent/>:
-                <section id="who-we-are" className="pricing section-bg">
+                <section id="who-we-are" className="pricing">
                     
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">

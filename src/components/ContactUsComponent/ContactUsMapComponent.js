@@ -93,7 +93,7 @@ class ContactUsMapComponent extends Component {
         return (
             
             isLoading?<SpinnerComponent/>:
-                <section id="who-we-are" className="pricing section-bg">
+                <section id="who-we-are" className="pricing ">
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
                          <h2>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>

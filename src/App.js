@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App section-bg">
         <BrowserRouter >
           <Routes>
             <Route path="/" element={<LayoutComponent />}>

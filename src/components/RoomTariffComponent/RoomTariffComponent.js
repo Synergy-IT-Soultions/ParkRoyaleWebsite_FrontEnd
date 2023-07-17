@@ -163,7 +163,7 @@ class RoomTariffComponent extends Component {
         
 
         return (
-            <section id="pricing" className="pricing section-bg">
+            <section id="pricing" className="pricing">
                 <div className="container" data-aos="fade-up">
                     <div className="section-title">
                         {/* <h2>{isAdmin ? contentEditOption : ""}Room Tariff</h2> */}
