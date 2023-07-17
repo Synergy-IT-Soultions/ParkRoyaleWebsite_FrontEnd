@@ -15,6 +15,7 @@ body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
   background: #a7a7a7;
+  /* height:100vh; */
 }
 
 a {
@@ -584,28 +585,38 @@ section {
   padding: 50px 0;
   overflow: hidden;
 }
-.portfolio{
-  background-color: #f9f8ff;
-  /* background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjgwZjJmOTU5MTEwZjQ4OTAwNTdlMmI4ZmFkYTM3ODYzMTYyYzE2NiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/UC8DbMqXvkpd6/giphy.gif'); */
-  background-image: url('../img/firecamp.png');
+/* .portfolio{
+  background-color: #171717;
+  background-image: url('../img/firecamp.png') ;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   filter: brightness(0.8);
-}
+} */
 
 .section-bg {
-  background-color: #f9f8ff;
-  /* background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjgwZjJmOTU5MTEwZjQ4OTAwNTdlMmI4ZmFkYTM3ODYzMTYyYzE2NiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/UC8DbMqXvkpd6/giphy.gif'); */
-  background-image: url('../img/firecamp.png');
+  background-color: #171717;
+  background-image: url('../img/firecamp.png') ;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   filter: brightness(0.8);
+  height: 100% !important;
+  
 }
-
+@supports (-webkit-touch-callout: none) {
+  .section-bg {
+    background-color: #171717;
+    background-image: url('../img/firecamp.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(0.8);
+  }
+}
 .section-title {
   text-align: center;
   padding-bottom: 20px;
@@ -1775,11 +1786,11 @@ background: rgba( 255, 255, 255, 0.05 );
   border-right: 1px solid #d2932d;
 }
 
-@media only screen and (max-width:940px){
+/* @media only screen and (max-width:940px){
   .section-bg{
     background-size: auto !important;
   }
-}
+} */
 .btn-close {
   box-sizing: content-box;
   width: 3em;
