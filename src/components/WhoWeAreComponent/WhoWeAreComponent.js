@@ -102,17 +102,20 @@ class WhoWeAreComponent extends Component {
                     <div className="section-title">
                          <h2 style={{ color: 'rgb(255 162 47)'}}>{isAdmin ? <ContainerEditComponent showEditPage={ this.state.showEditPage} data={data} handleSave={this.handleSave} /> : ""}{containerHeader}</h2>
                     </div>
-                <div className="d-flex">
+                <div >
+                           
                 <Card className="mx-auto my-3 text-white mb-2 rounded glasseffectcard" style={{}}>
                     <Card.Body>
-                        <Row lg={2}>  
-                            <div className="videosize">
-                            <iframe style={{overflow : 'hidden', height : '100%', width : '100%' } }
+                        <Row>
+                            <div class="videoWrapper">
+                                <iframe
                                     src={containerVideoURL} 
                                     title="YouTube video player" 
                                     // frameBorder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                    allow="accelerometer;autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                            </div>
+                        </Row>
+                        <Row>
                            <div className="card-content">
                                     <div align="left" dangerouslySetInnerHTML={{ __html: containertextLabelValue }} />
                             </div>
